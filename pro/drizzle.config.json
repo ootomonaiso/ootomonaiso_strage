@@ -1,0 +1,6 @@
+{
+    "schema": "./src/db/schema.ts",
+    "driver": "pg",
+    "out": "./migrations"
+  }
+  
