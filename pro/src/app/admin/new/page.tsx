@@ -1,12 +1,9 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { useRouter, useParams } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function EditPostPage() {
+export default function NewPostPage() {
   const router = useRouter();
-  const params = useParams();
-  const { id } = params; // URL パラメータから記事 ID を取得
-
   const [form, setForm] = useState({
     title: '',
     slug: '',
@@ -17,31 +14,15 @@ export default function EditPostPage() {
     thumbnail: '',
   });
 
-  useEffect(() => {
-    // 既存記事の情報を取得
-    fetch(`/api/posts/${id}`)
-      .then(res => res.json())
-      .then(data => {
-        setForm({
-          title: data.title,
-          slug: data.slug,
-          content: data.content,
-          summary: data.summary,
-          tags: data.tags.join(','),
-          series: data.series,
-          thumbnail: data.thumbnail,
-        });
-      });
-  }, [id]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch(`/api/posts/${id}`, {
-      method: 'PUT',
+    // 必要であればシークレットキーの検証ロジックを追加
+    const res = await fetch('/api/posts', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
     });
@@ -52,7 +33,7 @@ export default function EditPostPage() {
 
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold">記事編集</h1>
+      <h1 className="text-3xl font-bold">新規記事作成</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>タイトル:</label>
@@ -82,7 +63,7 @@ export default function EditPostPage() {
           <label>サムネイルURL:</label>
           <input type="text" name="thumbnail" value={form.thumbnail} onChange={handleChange} />
         </div>
-        <button type="submit">更新する</button>
+        <button type="submit">投稿する</button>
       </form>
     </main>
   );

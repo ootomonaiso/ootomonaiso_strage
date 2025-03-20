@@ -1,22 +1,37 @@
-import { db } from "@/lib/db";
-import { posts } from "@/lib/schema";
-import Link from "next/link";
+'use client';
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-export default async function BlogPage() {
-  const data = await db.select().from(posts);
+interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  summary?: string;
+  createdAt: string;
+}
+
+export default function BlogPage() {
+  const [posts, setPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    fetch('/api/posts')
+      .then(res => res.json())
+      .then(data => setPosts(data));
+  }, []);
 
   return (
-    <div className="max-w-3xl mx-auto p-6">
-      <h1 className="text-3xl font-bold">ブログ一覧</h1>
-      <ul className="mt-4 space-y-4">
-        {data.map((post) => (
-          <li key={post.id}>
-            <Link href={`/blog/${post.slug}`} className="text-xl text-blue-500 hover:underline">
-              {post.title}
+    <main className="container mx-auto p-4">
+      <h1 className="text-3xl font-bold">ブログ記事一覧</h1>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id} className="mb-4">
+            <Link href={`/blog/${post.slug}`}>
+              <span className="text-xl font-semibold cursor-pointer">{post.title}</span>
             </Link>
+            <p>{post.summary}</p>
           </li>
         ))}
       </ul>
-    </div>
+    </main>
   );
 }

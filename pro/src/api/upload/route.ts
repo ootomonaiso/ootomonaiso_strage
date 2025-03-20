@@ -1,21 +1,19 @@
+import { NextResponse } from 'next/server';
+import sharp from 'sharp';
+
 export async function POST(req: Request) {
-    const formData = new FormData();
-    const { image } = await req.json();
-    formData.append("file", image);
-    formData.append("requireSignedURLs", "false");
-  
-    const response = await fetch(
-      `https://api.cloudflare.com/client/v4/accounts/${process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGES_ACCOUNT_ID}/images/v1`,
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_CLOUDFLARE_IMAGES_KEY}`,
-        },
-        body: formData,
-      }
-    );
-  
-    const data = await response.json();
-    return new Response(JSON.stringify(data), { status: response.status });
+  const formData = await req.formData();
+  const file = formData.get('file') as Blob;
+  if (!file) {
+    return NextResponse.json({ error: 'File not provided' }, { status: 400 });
   }
-  
+  // 画像のリサイズ処理（例：300x300 のサムネイル）
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const resizedImage = await sharp(buffer)
+    .resize(300, 300)
+    .toBuffer();
+
+  // Cloudflare Images へのアップロード処理は API キー等を利用して実装してください
+  // 下記はダミーの URL を返す例
+  return NextResponse.json({ thumbnailUrl: 'https://example.com/path/to/thumbnail.jpg' });
+}

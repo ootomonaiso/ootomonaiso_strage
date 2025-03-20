@@ -1,23 +1,22 @@
-import { db } from "@/lib/db";
-import { posts } from "@/lib/schema";
-import { eq } from "drizzle-orm";
+import { NextResponse } from 'next/server';
+import { db } from '../../db/client';
+import { posts } from '../../db/schema';
 
-export async function GET(req: Request) {
-  const data = await db.select().from(posts);
-  return new Response(JSON.stringify(data), { status: 200 });
+export async function GET() {
+  const allPosts = await db.select().from(posts);
+  return NextResponse.json(allPosts);
 }
 
 export async function POST(req: Request) {
-  const { title, slug, content, tags, series, thumbnail } = await req.json();
-
-  await db.insert(posts).values({
-    title,
-    slug,
-    content,
-    tags,
-    series,
-    thumbnail,
-  });
-
-  return new Response(JSON.stringify({ message: "投稿成功" }), { status: 201 });
+  const body = await req.json();
+  const newPost = await db.insert(posts).values({
+    title: body.title,
+    slug: body.slug,
+    content: body.content,
+    summary: body.summary || null,
+    tags: body.tags || [],
+    series: body.series || null,
+    thumbnail: body.thumbnail || null,
+  }).returning();
+  return NextResponse.json(newPost);
 }
