@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   }
   // 画像のリサイズ処理（例：300x300 のサムネイル）
   const buffer = Buffer.from(await file.arrayBuffer());
-  const resizedImage = await sharp(buffer)
+  await sharp(buffer)
     .resize(300, 300)
     .toBuffer();
 

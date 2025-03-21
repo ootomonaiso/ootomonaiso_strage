@@ -22,7 +22,7 @@ export async function PUT(request: Request, { params }: { params: { id: string }
       tags: body.tags ? body.tags.split(',').map((s: string) => s.trim()) : [],
       series: body.series || null,
       thumbnail: body.thumbnail || null,
-      updatedAt: new Date().toISOString(),
+      updatedAt: new Date(),
     })
     .where(eq(posts.id, params.id))
     .returning();
