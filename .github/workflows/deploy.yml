@@ -23,7 +23,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.11.0'
-          # キャッシュ機能は使用しない設定
 
       # プロジェクトのある pro ディレクトリに移動し、依存関係をインストールする
       - name: Install dependencies
