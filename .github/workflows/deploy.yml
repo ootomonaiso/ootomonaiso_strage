@@ -23,8 +23,8 @@ jobs:
 
       # 依存関係をインストール
       - name: Install dependencies
-        run: npm ci
         working-directory: pro
+        run: npm ci
 
       # アプリケーションをビルド
       - name: Build application
