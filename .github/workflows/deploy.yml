@@ -1,7 +1,7 @@
 # GitHub Actions ワークフローファイル: Deploy to GitHub Pages
 name: Deploy to GitHub Pages
 
-# main ブランチへの push がトリガーとなります
+# main ブランチへの push をトリガーに実行
 on:
   push:
     branches:
@@ -23,6 +23,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.11.0'
+          # キャッシュ機能は使用しない設定
 
       # プロジェクトのある pro ディレクトリに移動し、依存関係をインストールする
       - name: Install dependencies
@@ -42,7 +43,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: build  # build ジョブの完了後に実行する
+    needs: build  # build ジョブの完了後に実行
     permissions:
       pages: write   # GitHub Pages への書き込み権限を付与
       id-token: write
