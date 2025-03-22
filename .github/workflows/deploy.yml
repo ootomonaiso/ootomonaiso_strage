@@ -4,49 +4,51 @@ on:
   push:
     branches:
       - master
-    # 詳細なトリガー設定やパスの指定は
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on を参照
 
 jobs:
   build:
-    name: Build Docusaurus
+    name: Build Node.js Application
     runs-on: ubuntu-latest
     steps:
+      # リポジトリをチェックアウト
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      # Node.js 環境を設定
       - uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: npm
 
+      # 依存関係をインストール
       - name: Install dependencies
         run: npm ci
+        working-directory: pro
 
-      - name: Build website
+      # アプリケーションをビルド
+      - name: Build application
         run: npm run build
+        working-directory: pro
 
+      # ビルド成果物をアップロード
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: pro
+          path: pro/build
 
   deploy:
     name: Deploy to GitHub Pages
     needs: build
-
-    # GITHUB_TOKEN に Pages デプロイに必要な権限を付与
     permissions:
       pages: write
       id-token: write
-
-    # github-pages 環境へのデプロイ設定
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     runs-on: ubuntu-latest
     steps:
+      # GitHub Pages にデプロイ
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
