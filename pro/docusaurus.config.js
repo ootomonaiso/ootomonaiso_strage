@@ -15,8 +15,8 @@ const config = {
   baseUrl: '/ootomonaiso_strage/',
 
 
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'ootomonaiso',
+  projectName: 'ootomonaiso_strage',  
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
