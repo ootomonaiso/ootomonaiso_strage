@@ -28,7 +28,7 @@ jobs:
       # プロジェクトのある pro ディレクトリに移動し、依存関係をインストールする
       - name: Install dependencies
         working-directory: pro
-        run: npm install
+        run: npm ci
 
       # プロジェクトのある pro ディレクトリでアプリケーションをビルドする
       - name: Build application
