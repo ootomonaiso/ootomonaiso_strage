@@ -19,7 +19,6 @@ export default function HomePage() {
       </section>
       <section>
         <h2 className="text-2xl font-semibold">プロジェクト一覧</h2>
-        {/* プロジェクト情報は JSON などで管理 */}
       </section>
     </main>
   );
