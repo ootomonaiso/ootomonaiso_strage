@@ -44,10 +44,9 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
-        defaultMode: 'dark'//デフォルトのカラーテーマ
+        defaultMode: 'dark'
       },
       navbar: {
         title: 'ootomonaiso blog',
@@ -74,7 +73,7 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'ドキュメント',
             items: [
               {
                 label: 'Tutorial',
@@ -83,24 +82,20 @@ const config = {
             ],
           },
           {
-            title: 'Community',
+            title: 'SNSアカウント',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://x.com/ootomonaiso',
+              },
+              {
+                label: 'Bluesky',
+                href: 'https://bsky.app/profile/ootomonaiso.bsky.social',
               },
             ],
           },
           {
-            title: 'More',
+            title: 'その他',
             items: [
               {
                 label: 'Blog',
@@ -108,12 +103,12 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/ootomonaiso',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: ` © ${new Date().getFullYear()} 大友内装(粒)`,
       },
       prism: {
         theme: prismThemes.github,
