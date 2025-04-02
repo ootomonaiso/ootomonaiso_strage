@@ -1,11 +1,14 @@
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
+import { fileURLToPath } from 'url';
 import matter from 'gray-matter';
 import fetch from 'node-fetch';
 import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
