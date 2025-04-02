@@ -68,7 +68,7 @@ jobs:
       # ビルド成果物に候補リンク用 JSON を生成（generate_candidate_links.js を実行）
       - name: Generate candidate links
         working-directory: pro
-        run: node generate_candidate_links.js
+        run: node generate_candidate_links.mjs
 
       # ビルド成果物をアップロード
       - name: Upload Build Artifact
