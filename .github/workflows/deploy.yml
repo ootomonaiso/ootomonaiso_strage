@@ -1,66 +1,51 @@
-name: Deploy RAG-enhanced Docusaurus to GitHub Pages
+# GitHub Actions ワークフローファイル: Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
+# master ブランチへの push をトリガーに実行
 on:
   push:
     branches:
       - master
-  workflow_dispatch:
 
 jobs:
-  update-embeddings:
-    name: Generate Article Embeddings
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.11.0'
-
-      - name: Install dependencies
-        working-directory: pro
-        run: npm ci
-
-      - name: Generate article embeddings
-        working-directory: pro
-        env:
-          REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
-        run: node scripts/vectorize_articles.mjs
-
   build:
-    name: Build Docusaurus Site and Generate Candidate Links
-    needs: update-embeddings
+    name: Build Node.js Application
     runs-on: ubuntu-latest
     steps:
+      # 1. リポジトリからコードをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
+      # 2. Node.js 環境をセットアップ
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.11.0'
 
+      # 3. 依存関係をインストール（pro ディレクトリ内）
       - name: Install dependencies
         working-directory: pro
         run: npm ci
 
+      # 4. Gemini API キーを .env ファイルとして注入
       - name: Inject env vars for frontend
         working-directory: pro
         run: |
           echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
 
-      - name: Build Docusaurus site
+      # 5. 記事ベクトル化スクリプトを実行（scripts/vectorize_articles.mjs）
+      - name: Generate article embeddings
+        working-directory: pro
+        run: node scripts/vectorize_articles.mjs
+
+      # 6. アプリケーションをビルド
+      - name: Build application
         working-directory: pro
         run: npm run build
 
-      - name: Generate candidate links
-        working-directory: pro
-        run: node generate_candidate_links.mjs
-
+      # 7. ビルド成果物をアップロード
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -69,14 +54,14 @@ jobs:
   deploy:
     name: Deploy to GitHub Pages
     needs: build
-    runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Deploy GitHub Pages site
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
