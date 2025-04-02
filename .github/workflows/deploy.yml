@@ -59,7 +59,7 @@ jobs:
         working-directory: pro
         run: npm ci
 
-        - name: Inject env vars for frontend
+      - name: Inject env vars for frontend
         working-directory: pro
         run: |
           echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
