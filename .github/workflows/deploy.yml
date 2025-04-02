@@ -1,51 +1,81 @@
-# GitHub Actions ワークフローファイル: Deploy to GitHub Pages
 name: Deploy to GitHub Pages
 
-# master ブランチへの push をトリガーに実行
 on:
   push:
     branches:
       - master
 
 jobs:
-  build:
-    name: Build Node.js Application
+  update-embeddings:
+    name: Update Article Embeddings
     runs-on: ubuntu-latest
     steps:
-      # 1. リポジトリからコードをチェックアウト
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      # 2. Node.js 環境をセットアップ
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.11.0'
 
-      # 3. 依存関係をインストール（pro ディレクトリ内）
+      # pro ディレクトリで依存関係をインストール
+      - name: Install pro dependencies
+        working-directory: pro
+        run: npm ci
+
+      # script ディレクトリで依存関係をインストール
+      - name: Install script dependencies
+        working-directory: script
+        run: npm ci
+
+      # Markdown 記事のベクトル化と DB の upsert／削除処理を実行（script フォルダ内の vectorize_articles.mjs を実行）
+      - name: Run vectorization script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
+        working-directory: script
+        run: node vectorize_articles.mjs
+
+  build:
+    name: Build Docusaurus Site and Generate Candidate Links
+    needs: update-embeddings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+
+      # pro ディレクトリで依存関係のインストール
       - name: Install dependencies
         working-directory: pro
         run: npm ci
 
-      # 4. Gemini API キーを .env ファイルとして注入
-      - name: Inject env vars for frontend
+        - name: Inject env vars for frontend
         working-directory: pro
         run: |
           echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
 
-      # 5. 記事ベクトル化スクリプトを実行（scripts/vectorize_articles.mjs）
-      - name: Generate article embeddings
-        working-directory: pro
-        run: node scripts/vectorize_articles.mjs
-
-      # 6. アプリケーションをビルド
-      - name: Build application
+      # Docusaurus サイトのビルド（pro/build に成果物が出力されるように設定）
+      - name: Build Docusaurus site
         working-directory: pro
         run: npm run build
 
-      # 7. ビルド成果物をアップロード
+      # ビルド成果物に候補リンク用 JSON を生成（generate_candidate_links.js を実行）
+      - name: Generate candidate links
+        working-directory: pro
+        run: node generate_candidate_links.mjs
+
+      # ビルド成果物をアップロード
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
