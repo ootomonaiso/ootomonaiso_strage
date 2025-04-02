@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { JSDOM } from 'jsdom';
 import { promisify } from 'util';
-import glob from 'glob';
+import { glob } from 'glob';
 
 const globPromise = promisify(glob);
 
