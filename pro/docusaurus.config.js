@@ -115,6 +115,9 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
+  clientModules: [
+    require.resolve('./src/clientModules/chatWidget.js'),
+  ],
 };
 
 export default config;
