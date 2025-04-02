@@ -1,45 +1,44 @@
-// vectorize_articles.js
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
 import matter from 'gray-matter';
 import fetch from 'node-fetch';
 import crypto from 'crypto';
-
-// 例: DB クライアントのインポート（Supabase の場合）
 import { createClient } from '@supabase/supabase-js';
+
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Gemini API のエンドポイント（例）
-const GEMINI_EMBEDDING_URL = 'https://api.gemini.example.com/embeddings';
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_EMBEDDING_URL = `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedText?key=${GEMINI_API_KEY}`;
 
-// ファイル内容からハッシュを計算する関数
 function computeHash(text) {
   return crypto.createHash('sha256').update(text).digest('hex');
 }
 
-// Gemini API を呼び出して埋め込みを取得する関数
 async function getEmbedding(text) {
   const response = await fetch(GEMINI_EMBEDDING_URL, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.GEMINI_API_KEY}`
-    },
-    body: JSON.stringify({ text })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'models/embedding-001',
+      content: {
+        parts: [{ text }]
+      }
+    })
   });
+
   if (!response.ok) {
-    throw new Error(`Gemini API error: ${response.statusText}`);
+    const errorBody = await response.text();
+    throw new Error(`Gemini API error: ${response.status} ${response.statusText} - ${errorBody}`);
   }
+
   const data = await response.json();
-  return data.embedding; // API のレスポンス形式に合わせて調整
+  return data.embedding || data.embeddings?.[0]?.values;
 }
 
-// Markdown ファイルの処理
 async function processMarkdownFiles() {
-  // pro ディレクトリ以下の Markdown ファイルを再帰的に取得
   const files = glob.sync('pro/**/*.{md,mdx}');
   const processedFiles = [];
 
@@ -49,47 +48,43 @@ async function processMarkdownFiles() {
     const { data: meta, content } = matter(raw);
     const cleanedContent = content.trim();
     const hash = computeHash(cleanedContent);
-    
-    // ここで、DB から既存レコードをチェック（file_path をキーに）
+
     const { data: existing, error } = await supabase
       .from('documents')
       .select('hash')
       .eq('file_path', filePath)
       .single();
 
-    // 更新が不要な場合はスキップ
-    if (!error && existing && existing.hash === hash) {
-      console.log(`Skipping unchanged file: ${filePath}`);
-      processedFiles.push(filePath);
-      continue;
-    }
+    const needsInsert = error || !existing || existing.hash !== hash;
 
-    // Gemini API で埋め込み生成
-    const embedding = await getEmbedding(cleanedContent);
+    if (needsInsert) {
+      const embedding = await getEmbedding(cleanedContent);
 
-    // DB に upsert（新規作成または更新）
-    const payload = {
-      file_path: filePath,
-      meta,                // YAML フロントマター全体
-      content: cleanedContent,
-      embedding,           // 取得したベクトル
-      hash,
-    };
-    const { error: upsertError } = await supabase
-      .from('documents')
-      .upsert(payload, { onConflict: 'file_path' });
-    if (upsertError) {
-      console.error(`DB upsert error for ${filePath}:`, upsertError);
+      const payload = {
+        file_path: filePath,
+        meta,
+        content: cleanedContent,
+        embedding,
+        hash,
+      };
+
+      const { error: upsertError } = await supabase
+        .from('documents')
+        .upsert(payload, { onConflict: 'file_path' });
+
+      if (upsertError) {
+        console.error(`DB upsert error for ${filePath}:`, upsertError);
+      } else {
+        console.log(`Processed file: ${filePath}`);
+      }
     } else {
-      console.log(`Processed file: ${filePath}`);
+      console.log(`Skipping unchanged file: ${filePath}`);
     }
+
     processedFiles.push(filePath);
   }
 
-  // DB に存在するが、現ファイル一覧に含まれないレコードを削除
-  const { data: dbFiles } = await supabase
-    .from('documents')
-    .select('file_path');
+  const { data: dbFiles } = await supabase.from('documents').select('file_path');
   const dbFilePaths = dbFiles.map((item) => item.file_path);
   const toDelete = dbFilePaths.filter((dbPath) => !processedFiles.includes(dbPath));
 
