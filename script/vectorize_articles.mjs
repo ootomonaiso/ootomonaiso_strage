@@ -1,4 +1,3 @@
-// vectorize_articles.js
 import fs from 'fs';
 import path from 'path';
 import { glob } from 'glob';
@@ -11,7 +10,8 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const GEMINI_EMBEDDING_URL = `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedText?key=${process.env.GEMINI_API_KEY}`;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_EMBEDDING_URL = `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedText?key=${GEMINI_API_KEY}`;
 
 function computeHash(text) {
   return crypto.createHash('sha256').update(text).digest('hex');
@@ -21,13 +21,21 @@ async function getEmbedding(text) {
   const response = await fetch(GEMINI_EMBEDDING_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text })
+    body: JSON.stringify({
+      model: 'models/embedding-001',
+      content: {
+        parts: [{ text }]
+      }
+    })
   });
+
   if (!response.ok) {
-    throw new Error(`Gemini API error: ${response.statusText}`);
+    const errorBody = await response.text();
+    throw new Error(`Gemini API error: ${response.status} ${response.statusText} - ${errorBody}`);
   }
+
   const data = await response.json();
-  return data.embedding;
+  return data.embedding || data.embeddings?.[0]?.values; // どちらかに入っているケースがある
 }
 
 async function processMarkdownFiles() {
