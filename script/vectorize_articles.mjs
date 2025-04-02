@@ -1,7 +1,7 @@
 // vectorize_articles.js
 import fs from 'fs';
 import path from 'path';
-import glob from 'glob';
+import { glob } from 'glob';
 import matter from 'gray-matter';
 import fetch from 'node-fetch';
 import crypto from 'crypto';
