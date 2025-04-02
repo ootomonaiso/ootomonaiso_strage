@@ -115,6 +115,9 @@ const config = {
         darkTheme: prismThemes.dracula,
       },
     }),
+  customFields: {
+    geminiApiKey: process.env.REACT_APP_GEMINI_API_KEY,
+  },
   clientModules: [
     require.resolve('./src/clientModules/chatWidget.js'),
   ],
