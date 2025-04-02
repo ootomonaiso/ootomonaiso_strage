@@ -22,6 +22,7 @@ jobs:
 
       # ルートで依存関係をインストール（vectorize_articles.js がルートにある場合）
       - name: Install dependencies
+        working-directory: pro
         run: npm ci
 
       # Markdown 記事のベクトル化と DB の upsert／削除処理を実行
