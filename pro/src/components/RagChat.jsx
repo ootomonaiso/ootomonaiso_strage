@@ -8,7 +8,6 @@ function RagChat() {
   const [loading, setLoading] = useState(false);
   const [candidates, setCandidates] = useState([]);
 
-  // Docusaurus のコンテキストからカスタムフィールド（API キー）を取得
   const {
     siteConfig: { customFields },
   } = useDocusaurusContext();
@@ -19,12 +18,9 @@ function RagChat() {
     setLoading(true);
     setResponseText('');
     try {
-      // 1. クエリをベクトル化
       const queryEmbedding = await getQueryEmbedding(query);
-      // 2. 候補記事のリンク情報を取得
       const candidateLinks = await fetchCandidateLinks(queryEmbedding);
       setCandidates(candidateLinks);
-      // 3. 候補を元に回答を生成
       const ragResponse = await generateRagResponse(query, candidateLinks);
       setResponseText(ragResponse);
     } catch (error) {
@@ -35,14 +31,10 @@ function RagChat() {
     }
   };
 
-  // Gemini API を用いてクエリの埋め込み（ベクトル）を取得する関数
   async function getQueryEmbedding(query) {
-    const response = await fetch('https://api.gemini.example.com/embeddings', {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedText?key=${GEMINI_API_KEY}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${GEMINI_API_KEY}`,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text: query }),
     });
     if (!response.ok) throw new Error('Failed to get query embedding');
@@ -50,7 +42,6 @@ function RagChat() {
     return data.embedding;
   }
 
-  // 候補記事情報を取得するための API 呼び出し関数
   async function fetchCandidateLinks(queryEmbedding) {
     const response = await fetch('https://your-api.example.com/search', {
       method: 'POST',
@@ -62,19 +53,23 @@ function RagChat() {
     return data.candidates;
   }
 
-  // Gemini API を使用して候補情報を元に最終回答を生成する関数
   async function generateRagResponse(query, candidates) {
-    const response = await fetch('https://api.gemini.example.com/generate', {
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${GEMINI_API_KEY}`,
-      },
-      body: JSON.stringify({ query, context: candidates }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [
+          {
+            parts: [
+              { text: `質問: ${query}\n候補文献:\n${candidates.map((c, i) => `${i + 1}. ${c.title} - ${c.url}`).join('\n')}` }
+            ]
+          }
+        ]
+      }),
     });
     if (!response.ok) throw new Error('Response generation failed');
     const data = await response.json();
-    return data.response;
+    return data.candidates?.[0]?.content?.parts?.[0]?.text || '回答なし';
   }
 
   return (
