@@ -35,7 +35,7 @@ async function getEmbedding(text) {
   }
 
   const data = await response.json();
-  return data.embedding || data.embeddings?.[0]?.values; // どちらかに入っているケースがある
+  return data.embedding || data.embeddings?.[0]?.values;
 }
 
 async function processMarkdownFiles() {
@@ -55,29 +55,32 @@ async function processMarkdownFiles() {
       .eq('file_path', filePath)
       .single();
 
-    if (!error && existing && existing.hash === hash) {
-      console.log(`Skipping unchanged file: ${filePath}`);
-      processedFiles.push(filePath);
-      continue;
-    }
+    const needsInsert = error || !existing || existing.hash !== hash;
 
-    const embedding = await getEmbedding(cleanedContent);
+    if (needsInsert) {
+      const embedding = await getEmbedding(cleanedContent);
 
-    const payload = {
-      file_path: filePath,
-      meta,
-      content: cleanedContent,
-      embedding,
-      hash,
-    };
-    const { error: upsertError } = await supabase
-      .from('documents')
-      .upsert(payload, { onConflict: 'file_path' });
-    if (upsertError) {
-      console.error(`DB upsert error for ${filePath}:`, upsertError);
+      const payload = {
+        file_path: filePath,
+        meta,
+        content: cleanedContent,
+        embedding,
+        hash,
+      };
+
+      const { error: upsertError } = await supabase
+        .from('documents')
+        .upsert(payload, { onConflict: 'file_path' });
+
+      if (upsertError) {
+        console.error(`DB upsert error for ${filePath}:`, upsertError);
+      } else {
+        console.log(`Processed file: ${filePath}`);
+      }
     } else {
-      console.log(`Processed file: ${filePath}`);
+      console.log(`Skipping unchanged file: ${filePath}`);
     }
+
     processedFiles.push(filePath);
   }
 
