@@ -20,19 +20,19 @@ jobs:
         with:
           node-version: '20.11.0'
 
-      # ルートで依存関係をインストール（vectorize_articles.js がルートにある場合）
+      # pro ディレクトリで依存関係をインストール
       - name: Install dependencies
         working-directory: pro
         run: npm ci
 
-      # Markdown 記事のベクトル化と DB の upsert／削除処理を実行
+      # Markdown 記事のベクトル化と DB の upsert／削除処理を実行（script フォルダ内の vectorize_articles.mjs を実行）
       - name: Run vectorization script
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
-        run: vectorize_articles.mjs
+        run: node script/vectorize_articles.mjs
 
   build:
     name: Build Docusaurus Site and Generate Candidate Links
