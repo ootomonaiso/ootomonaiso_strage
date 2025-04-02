@@ -39,11 +39,14 @@ async function getEmbedding(text) {
 }
 
 async function processMarkdownFiles() {
-  const files = glob.sync('pro/**/*.{md,mdx}');
+  const files = glob.sync('../pro/**/*.{md,mdx}');
+  console.log('Matched Markdown files:', files);
+
   const processedFiles = [];
 
   for (const filePath of files) {
     const fullPath = path.resolve(filePath);
+    const relativePath = path.relative(path.resolve(__dirname, '..'), fullPath);
     const raw = fs.readFileSync(fullPath, 'utf8');
     const { data: meta, content } = matter(raw);
     const cleanedContent = content.trim();
@@ -52,7 +55,7 @@ async function processMarkdownFiles() {
     const { data: existing, error } = await supabase
       .from('documents')
       .select('hash')
-      .eq('file_path', filePath)
+      .eq('file_path', relativePath)
       .single();
 
     const needsInsert = error || !existing || existing.hash !== hash;
@@ -61,7 +64,7 @@ async function processMarkdownFiles() {
       const embedding = await getEmbedding(cleanedContent);
 
       const payload = {
-        file_path: filePath,
+        file_path: relativePath,
         meta,
         content: cleanedContent,
         embedding,
@@ -73,15 +76,15 @@ async function processMarkdownFiles() {
         .upsert(payload, { onConflict: 'file_path' });
 
       if (upsertError) {
-        console.error(`DB upsert error for ${filePath}:`, upsertError);
+        console.error(`DB upsert error for ${relativePath}:`, upsertError);
       } else {
-        console.log(`Processed file: ${filePath}`);
+        console.log(`Processed file: ${relativePath}`);
       }
     } else {
-      console.log(`Skipping unchanged file: ${filePath}`);
+      console.log(`Skipping unchanged file: ${relativePath}`);
     }
 
-    processedFiles.push(filePath);
+    processedFiles.push(relativePath);
   }
 
   const { data: dbFiles } = await supabase.from('documents').select('file_path');
