@@ -40,6 +40,8 @@ async function getEmbedding(text) {
 
 async function processMarkdownFiles() {
   const files = glob.sync('pro/**/*.{md,mdx}');
+  console.log('Matched Markdown files:', files); // ← ログ追加
+
   const processedFiles = [];
 
   for (const filePath of files) {
