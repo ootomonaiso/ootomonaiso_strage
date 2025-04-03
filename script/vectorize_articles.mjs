@@ -30,7 +30,7 @@ async function getEmbedding(text) {
     pooling: 'mean',
     normalize: true,
   });
-  return output.data[0];
+  return output.data[0]; // ← float[] が返る
 }
 
 // Markdown 処理
@@ -65,7 +65,7 @@ async function processMarkdownFiles() {
         file_path: relativePath,
         meta,
         content: cleanedContent,
-        embedding,
+        embedding: JSON.stringify(embedding), // ✅ ← ここが重要！
         hash,
       };
 
