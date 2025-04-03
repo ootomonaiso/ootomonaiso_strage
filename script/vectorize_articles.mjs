@@ -7,7 +7,6 @@ import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 import { pipeline } from '@xenova/transformers';
 
-// __dirname for ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -30,13 +29,14 @@ async function getEmbedding(text) {
     pooling: 'mean',
     normalize: true,
   });
-  return output.data.flat(2); // ← flattenして float[] にする
+  const array = await output.data.tolist(); // Tensor → JavaScript array
+  return array[0]; // [float, float, ...]
 }
 
 // Markdown 処理
 async function processMarkdownFiles() {
   const files = glob.sync('../pro/**/*.{md,mdx}', {
-    ignore: ['../pro/node_modules/**']
+    ignore: ['../pro/node_modules/**'],
   });
 
   console.log('Matched Markdown files:', files);
@@ -60,7 +60,7 @@ async function processMarkdownFiles() {
 
     if (needsInsert) {
       const embeddingArray = await getEmbedding(cleanedContent);
-      const embedding = `[${embeddingArray.map(v => Number(v.toFixed(8))).join(', ')}]`; // ← 文字列形式でpgvectorに渡す
+      const embedding = `[${embeddingArray.map(v => Number(v.toFixed(8))).join(', ')}]`; // pgvector 用文字列
 
       const payload = {
         file_path: relativePath,
