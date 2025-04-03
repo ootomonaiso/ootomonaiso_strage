@@ -26,27 +26,18 @@ function computeHash(text) {
 
 // ベクトル生成（BERT）
 async function getEmbedding(text) {
-  try {
-    const output = await embedder(text, {
-      pooling: 'mean',
-      normalize: true,
-    });
+  const output = await embedder(text, {
+    pooling: 'mean',
+    normalize: true,
+  });
 
-    console.log('📦 Raw output from embedder:', output);
+  console.log('📦 Raw output from embedder:', output);
 
-    if (!Array.isArray(output)) {
-      throw new Error('❌ output is not an array');
-    }
-
-    if (!Array.isArray(output[0])) {
-      throw new Error('❌ output[0] is not an array');
-    }
-
-    return output[0]; // 正常な float[] 配列
-  } catch (err) {
-    console.error('❌ Failed to get embedding:', err);
-    throw err;
+  if (!output || !output.data || !output.data.length) {
+    throw new Error('❌ Invalid embedding tensor structure');
   }
+
+  return Array.from(output.data); // Float32Array → JS Array
 }
 
 // Markdown 処理
@@ -77,12 +68,6 @@ async function processMarkdownFiles() {
 
       if (needsInsert) {
         const embeddingArray = await getEmbedding(cleanedContent);
-
-        if (!Array.isArray(embeddingArray)) {
-          console.error('❌ embeddingArray is not an array:', embeddingArray);
-          throw new Error('embeddingArray is not an array');
-        }
-
         const embedding = `[${embeddingArray.map(v => Number(v.toFixed(8))).join(', ')}]`;
 
         const payload = {
