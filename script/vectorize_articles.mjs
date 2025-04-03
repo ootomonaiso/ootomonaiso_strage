@@ -1,34 +1,38 @@
 import fs from 'fs';
 import path from 'path';
-import { glob } from 'glob';
 import { fileURLToPath } from 'url';
+import { glob } from 'glob';
 import matter from 'gray-matter';
 import fetch from 'node-fetch';
 import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 
+// __dirname を ESM で使う
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Supabase クライアント
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+// Gemini API の設定
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_EMBEDDING_URL = `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedText?key=${GEMINI_API_KEY}`;
 
+// SHA256 ハッシュ関数
 function computeHash(text) {
   return crypto.createHash('sha256').update(text).digest('hex');
 }
 
+// Gemini 埋め込み取得
 async function getEmbedding(text) {
   const response = await fetch(GEMINI_EMBEDDING_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       model: 'models/embedding-001',
-      content: {
-        parts: [{ text }]
-      }
+      text: text // ✅ text フィールドのみ
     })
   });
 
@@ -41,10 +45,13 @@ async function getEmbedding(text) {
   return data.embedding || data.embeddings?.[0]?.values;
 }
 
+// Markdown ファイル処理メイン関数
 async function processMarkdownFiles() {
-  const files = glob.sync('../pro/**/*.{md,mdx}');
-  console.log('Matched Markdown files:', files);
+  const files = glob.sync('../pro/**/*.{md,mdx}', {
+    ignore: ['../pro/node_modules/**'] // ✅ node_modules を除外
+  });
 
+  console.log('Matched Markdown files:', files);
   const processedFiles = [];
 
   for (const filePath of files) {
