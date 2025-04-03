@@ -30,7 +30,7 @@ async function getEmbedding(text) {
     pooling: 'mean',
     normalize: true,
   });
-  return output.data[0]; // ← float[] が返る
+  return output.data[0]; // float[] が返る
 }
 
 // Markdown 処理
@@ -59,13 +59,14 @@ async function processMarkdownFiles() {
     const needsInsert = error || !existing || existing.hash !== hash;
 
     if (needsInsert) {
-      const embedding = await getEmbedding(cleanedContent);
+      const embeddingArray = await getEmbedding(cleanedContent);
+      const embedding = `[${embeddingArray.map(v => Number(v.toFixed(8))).join(', ')}]`; // ✅ 形式調整済み
 
       const payload = {
         file_path: relativePath,
         meta,
         content: cleanedContent,
-        embedding: JSON.stringify(embedding), // ✅ ← ここが重要！
+        embedding,
         hash,
       };
 
