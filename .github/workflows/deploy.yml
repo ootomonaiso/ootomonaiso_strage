@@ -36,6 +36,7 @@ jobs:
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
+          HUGGINGFACE_TOKEN: ${{ secrets.HF_TOKEN }}
         working-directory: script
         run: node vectorize_articles.mjs
 
