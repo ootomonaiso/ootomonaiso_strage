@@ -3,52 +3,40 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { glob } from 'glob';
 import matter from 'gray-matter';
-import fetch from 'node-fetch';
 import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
+import { pipeline } from '@xenova/transformers';
 
-// __dirname を ESM で使う
+// __dirname for ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Supabase クライアント
+// Supabase setup
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// Gemini API の設定
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_EMBEDDING_URL = `https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedText?key=${GEMINI_API_KEY}`;
+// BERT embedder init
+const embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
 
-// SHA256 ハッシュ関数
+// SHA256 hash
 function computeHash(text) {
   return crypto.createHash('sha256').update(text).digest('hex');
 }
 
-// Gemini 埋め込み取得
+// ベクトル生成（BERT）
 async function getEmbedding(text) {
-  const response = await fetch(GEMINI_EMBEDDING_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'models/embedding-001',
-      text: text // ✅ text フィールドのみ
-    })
+  const output = await embedder(text, {
+    pooling: 'mean',
+    normalize: true,
   });
-
-  if (!response.ok) {
-    const errorBody = await response.text();
-    throw new Error(`Gemini API error: ${response.status} ${response.statusText} - ${errorBody}`);
-  }
-
-  const data = await response.json();
-  return data.embedding || data.embeddings?.[0]?.values;
+  return output.data[0];
 }
 
-// Markdown ファイル処理メイン関数
+// Markdown 処理
 async function processMarkdownFiles() {
   const files = glob.sync('../pro/**/*.{md,mdx}', {
-    ignore: ['../pro/node_modules/**'] // ✅ node_modules を除外
+    ignore: ['../pro/node_modules/**']
   });
 
   console.log('Matched Markdown files:', files);
