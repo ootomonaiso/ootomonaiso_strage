@@ -7,7 +7,6 @@ import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 import { pipeline } from '@xenova/transformers';
 
-// __dirname for ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
