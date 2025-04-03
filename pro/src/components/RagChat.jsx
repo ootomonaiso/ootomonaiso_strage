@@ -1,6 +1,5 @@
-// RagChat.jsx
 import React, { useState } from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'; // Docusaurus の設定情報を取得
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 function RagChat() {
   const [query, setQuery] = useState('');
@@ -18,9 +17,11 @@ function RagChat() {
     setLoading(true);
     setResponseText('');
     try {
-      const queryEmbedding = await getQueryEmbedding(query);
-      const candidateLinks = await fetchCandidateLinks(queryEmbedding);
+      // 🔁 サーバー側で BERT によりベクトル化 → 類似検索
+      const candidateLinks = await fetchCandidateLinks(query);
       setCandidates(candidateLinks);
+
+      // 🤖 Gemini に質問と文献候補を渡して回答生成
       const ragResponse = await generateRagResponse(query, candidateLinks);
       setResponseText(ragResponse);
     } catch (error) {
@@ -31,42 +32,40 @@ function RagChat() {
     }
   };
 
-  async function getQueryEmbedding(query) {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/embedding-001:embedText?key=${GEMINI_API_KEY}`, {
+  // 🔎 ベクトル検索 API 呼び出し（サーバー側で BERT を使ってる前提）
+  async function fetchCandidateLinks(query) {
+    const response = await fetch('/api/search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: query }),
-    });
-    if (!response.ok) throw new Error('Failed to get query embedding');
-    const data = await response.json();
-    return data.embedding;
-  }
-
-  async function fetchCandidateLinks(queryEmbedding) {
-    const response = await fetch('https://your-api.example.com/search', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ queryEmbedding }),
+      body: JSON.stringify({ query }),
     });
     if (!response.ok) throw new Error('Candidate search failed');
     const data = await response.json();
     return data.candidates;
   }
 
+  // 🧠 Gemini API による回答生成
   async function generateRagResponse(query, candidates) {
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              { text: `質問: ${query}\n候補文献:\n${candidates.map((c, i) => `${i + 1}. ${c.title} - ${c.url}`).join('\n')}` }
-            ]
-          }
-        ]
-      }),
-    });
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [
+            {
+              parts: [
+                {
+                  text: `質問: ${query}\n候補文献:\n${candidates
+                    .map((c, i) => `${i + 1}. ${c.title} - ${c.url}`)
+                    .join('\n')}`,
+                },
+              ],
+            },
+          ],
+        }),
+      }
+    );
     if (!response.ok) throw new Error('Response generation failed');
     const data = await response.json();
     return data.candidates?.[0]?.content?.parts?.[0]?.text || '回答なし';
@@ -87,7 +86,7 @@ function RagChat() {
           送信
         </button>
       </form>
-      {loading ? <p>回答を生成中...</p> : null}
+      {loading && <p>回答を生成中...</p>}
       {responseText && (
         <div style={{ marginTop: '1em', padding: '1em', background: '#f0f0f0' }}>
           <strong>回答:</strong>

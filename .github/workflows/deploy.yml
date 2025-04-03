@@ -63,6 +63,8 @@ jobs:
         working-directory: pro
         run: |
           echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
+          echo "REACT_APP_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
 
       # Docusaurus サイトのビルド（pro/build に成果物が出力されるように設定）
       - name: Build Docusaurus site

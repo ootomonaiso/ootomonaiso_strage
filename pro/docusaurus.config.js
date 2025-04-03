@@ -117,6 +117,8 @@ const config = {
     }),
   customFields: {
     geminiApiKey: process.env.REACT_APP_GEMINI_API_KEY,
+    supabaseUrl: process.env.REACT_APP_SUPABASE_URL,       // ← 追加
+    supabaseAnonKey: process.env.REACT_APP_SUPABASE_ANON_KEY, // ← 追加
   },
   clientModules: [
     require.resolve('./src/clientModules/chatWidget.js'),
