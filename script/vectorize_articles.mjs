@@ -7,6 +7,7 @@ import crypto from 'crypto';
 import { createClient } from '@supabase/supabase-js';
 import { pipeline } from '@xenova/transformers';
 
+// __dirname for ESM
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -29,14 +30,13 @@ async function getEmbedding(text) {
     pooling: 'mean',
     normalize: true,
   });
-  const array = await output.data.tolist(); // Tensor → JavaScript array
-  return array[0]; // [float, float, ...]
+  return output[0]; // ← 配列として取得
 }
 
 // Markdown 処理
 async function processMarkdownFiles() {
   const files = glob.sync('../pro/**/*.{md,mdx}', {
-    ignore: ['../pro/node_modules/**'],
+    ignore: ['../pro/node_modules/**']
   });
 
   console.log('Matched Markdown files:', files);
