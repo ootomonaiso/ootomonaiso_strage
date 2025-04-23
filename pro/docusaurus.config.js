@@ -40,6 +40,18 @@ const config = {
       }),
     ],
   ],
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'NetWork',
+        path: 'NetWork',
+        routeBasePath: 'NetWork',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -61,7 +73,16 @@ const config = {
             position: 'left',
             label: '自己紹介',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            to: '/blog',
+            label: 'Blog', 
+            position: 'left'
+          },
+          {
+            to: "/NetWork/intro",
+            position: 'left',
+            label: 'NetWork',
+          },
           {
             href: 'https://github.com/ootomonaiso',
             label: 'GitHub',
