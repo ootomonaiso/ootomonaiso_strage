@@ -68,8 +68,7 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            to: '/docs/intro',
             position: 'left',
             label: '自己紹介',
           },
@@ -79,7 +78,7 @@ const config = {
             position: 'left'
           },
           {
-            to: "/NetWork/intro",
+            to: '/NetWork/intro',
             position: 'left',
             label: 'NetWork',
           },
@@ -99,6 +98,10 @@ const config = {
               {
                 label: '自己紹介',
                 to: '/docs/intro',
+              },
+              {
+                label: 'NetWork',
+                to: '/NetWork/intro',
               },
             ],
           },
