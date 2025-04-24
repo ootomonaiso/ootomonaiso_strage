@@ -40,6 +40,18 @@ const config = {
       }),
     ],
   ],
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'NetWork',
+        path: 'NetWork',
+        routeBasePath: 'NetWork',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
+  ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
@@ -56,12 +68,20 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            to: '/docs/intro',
             position: 'left',
-            label: 'Tutorial',
+            label: '自己紹介',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {
+            to: '/blog',
+            label: 'Blog', 
+            position: 'left'
+          },
+          {
+            to: '/NetWork/intro',
+            position: 'left',
+            label: 'NetWork',
+          },
           {
             href: 'https://github.com/ootomonaiso',
             label: 'GitHub',
@@ -76,8 +96,12 @@ const config = {
             title: 'ドキュメント',
             items: [
               {
-                label: 'Tutorial',
+                label: '自己紹介',
                 to: '/docs/intro',
+              },
+              {
+                label: 'NetWork',
+                to: '/NetWork/intro',
               },
             ],
           },
@@ -117,8 +141,8 @@ const config = {
     }),
   customFields: {
     geminiApiKey: process.env.REACT_APP_GEMINI_API_KEY,
-    supabaseUrl: process.env.REACT_APP_SUPABASE_URL,       // ← 追加
-    supabaseAnonKey: process.env.REACT_APP_SUPABASE_ANON_KEY, // ← 追加
+    supabaseUrl: process.env.REACT_APP_SUPABASE_URL,
+    supabaseAnonKey: process.env.REACT_APP_SUPABASE_ANON_KEY,
   },
   clientModules: [
     require.resolve('./src/clientModules/chatWidget.js'),

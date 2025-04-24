@@ -1,42 +1,55 @@
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import React from 'react';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
-import Heading from '@theme/Heading';
 import styles from './index.module.css';
-
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+import Link from '@docusaurus/Link';
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
+      title="ポートフォリオ"
+      description="エンジニアのポートフォリオ兼技術ブログです。"
+    >
+      <header className="hero hero--primary">
+        <div className="container">
+          <h1 className="hero__title">大友内装(粒)</h1>
+          <p className="hero__subtitle">フルスタックエンジニアになりたかったエンジニア / やっぱWebなんすわ</p>
+          <div style={{ marginTop: '1.5rem' }}>
+            <Link className="button button--secondary button--lg" to="/docs">
+              技術記事を見る
+            </Link>
+          </div>
+          <div style={{ marginTop: '1rem' }}>
+            <a href="https://github.com/your-github" target="_blank" style={{ marginRight: '1rem' }}>
+              GitHub
+            </a>
+            <a href="https://x.com/your-x" target="_blank">
+              X (旧Twitter)
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main className="container margin-vert--lg">
+        <h2>主なスキル</h2>
+        <ul>
+          <li>React / TypeScript</li>
+          <li>Python / 機械学習</li>
+          <li>Proxmox / サーバー構築</li>
+        </ul>
+
+        <h2 style={{ marginTop: '2rem' }}>プロジェクト紹介</h2>
+        <div className="row">
+          <div className="col col--6">
+            <div className="card">
+              <div className="card__header">
+                <h3>Rocket Simulator</h3>
+              </div>
+              <div className="card__body">
+                <p>物理エンジンを使ったロケット飛行シミュレーション。3D描画と風の影響も反映。</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </main>
     </Layout>
   );
