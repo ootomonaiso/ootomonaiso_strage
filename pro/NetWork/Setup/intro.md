@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
-description: VMWareのセットアップ
+description: はじめに
 ---
-# VMWare
+
+# はじめに
+この章では環境構築について触れていきます
