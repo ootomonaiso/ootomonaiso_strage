@@ -19,7 +19,7 @@ export default function Home() {
             </Link>
           </div>
           <div style={{ marginTop: '1rem' }}>
-            <a href="https://github.com/your-github" target="_blank" style={{ marginRight: '1rem' }}>
+            <a href="https://github.com/ootomonaiso" target="_blank" style={{ marginRight: '1rem' }}>
               GitHub
             </a>
             <a href="https://x.com/your-x" target="_blank">
