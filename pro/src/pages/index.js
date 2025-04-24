@@ -14,15 +14,15 @@ export default function Home() {
           <h1 className="hero__title">大友内装(粒)</h1>
           <p className="hero__subtitle">フルスタックエンジニアになりたかったエンジニア / やっぱWebなんすわ</p>
           <div style={{ marginTop: '1.5rem' }}>
-            <Link className="button button--secondary button--lg" to="/docs">
+            <Link className="button button--secondary button--lg" to="/docs/intro">
               技術記事を見る
             </Link>
           </div>
           <div style={{ marginTop: '1rem' }}>
-            <a href="https://github.com/your-github" target="_blank" style={{ marginRight: '1rem' }}>
+            <a href="https://github.com/ootomonaiso" target="_blank" style={{ marginRight: '1rem' }}>
               GitHub
             </a>
-            <a href="https://x.com/your-x" target="_blank">
+            <a href="https://x.com/ootomonaiso" target="_blank">
               X (旧Twitter)
             </a>
           </div>
