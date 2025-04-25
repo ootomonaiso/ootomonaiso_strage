@@ -1,0 +1,8 @@
+{
+    "label": "SQL関連操作",
+    "position": 1,
+    "link": {
+      "type": "generated-index",
+      "description": "接続確認から操作"
+    }
+}

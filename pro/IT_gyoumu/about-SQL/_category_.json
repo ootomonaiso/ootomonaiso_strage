@@ -1,0 +1,8 @@
+{
+    "label": "SQL関連",
+    "position": 4,
+    "link": {
+      "type": "generated-index",
+      "description": "SQLを用いてデータベースを操作するためにある程度クエリの書き方を覚える必要があったりなかったりします。命令文やSQLの基本を解説していきます。"
+    }
+}
