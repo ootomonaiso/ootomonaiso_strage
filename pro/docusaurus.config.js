@@ -51,6 +51,16 @@ const config = {
         editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'IT_gyoumu',
+        path: 'IT_gyoumu',
+        routeBasePath: 'IT_gyoumu',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
   ],
 
   themeConfig:
@@ -83,6 +93,11 @@ const config = {
             label: 'NetWork',
           },
           {
+            to: '/IT_gyoumu/intro',
+            position: 'left',
+            label: '業務用ITソフトウェア',
+          },
+          {
             href: 'https://github.com/ootomonaiso',
             label: 'GitHub',
             position: 'right',
@@ -102,6 +117,10 @@ const config = {
               {
                 label: 'NetWork',
                 to: '/NetWork/intro',
+              },
+              {
+                label: '業務用ITソフトウェア',
+                to: '/IT_gyoumu/intro',
               },
             ],
           },
