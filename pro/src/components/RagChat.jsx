@@ -34,7 +34,7 @@ function RagChat() {
 
   // 🔎 ベクトル検索 API 呼び出し（サーバー側で BERT を使ってる前提）
   async function fetchCandidateLinks(query) {
-    const response = await fetch('/api/search', {
+    const response = await fetch('https:/ootomo39.xsrv.jp/api/search.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
