@@ -17,11 +17,8 @@ function RagChat() {
     setLoading(true);
     setResponseText('');
     try {
-      // 🔁 サーバー側で BERT によりベクトル化 → 類似検索
       const candidateLinks = await fetchCandidateLinks(query);
       setCandidates(candidateLinks);
-
-      // 🤖 Gemini に質問と文献候補を渡して回答生成
       const ragResponse = await generateRagResponse(query, candidateLinks);
       setResponseText(ragResponse);
     } catch (error) {
@@ -32,9 +29,8 @@ function RagChat() {
     }
   };
 
-  // 🔎 ベクトル検索 API 呼び出し（サーバー側で BERT を使ってる前提）
   async function fetchCandidateLinks(query) {
-    const response = await fetch('https:/ootomo39.xsrv.jp/api/search.php', {
+    const response = await fetch('https://ootomo39.xsrv.jp/api/search.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
@@ -44,7 +40,6 @@ function RagChat() {
     return data.candidates;
   }
 
-  // 🧠 Gemini API による回答生成
   async function generateRagResponse(query, candidates) {
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
@@ -57,8 +52,8 @@ function RagChat() {
               parts: [
                 {
                   text: `質問: ${query}\n候補文献:\n${candidates
-                    .map((c, i) => `${i + 1}. ${c.title} - ${c.url}`)
-                    .join('\n')}`,
+                    .map((c, i) => `${i + 1}. ${c.file_path}\n---\n${c.content.substring(0, 200)}...`)
+                    .join('\n\n')}`,
                 },
               ],
             },
@@ -99,8 +94,12 @@ function RagChat() {
           <ul>
             {candidates.map((item, idx) => (
               <li key={idx}>
-                <a href={item.url} target="_blank" rel="noopener noreferrer">
-                  {item.title}
+                <a
+                  href={`https://ootomo39.xsrv.jp/storage/${item.file_path}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.file_path}
                 </a>
               </li>
             ))}
