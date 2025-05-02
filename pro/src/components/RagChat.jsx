@@ -30,7 +30,7 @@ function RagChat() {
   };
 
   async function fetchCandidateLinks(query) {
-    const response = await fetch('https://ootomo39.xsrv.jp/api/search.php', {
+    const response = await fetch('http://ootomo39.xsrv.jp/api/search.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
@@ -95,7 +95,7 @@ function RagChat() {
             {candidates.map((item, idx) => (
               <li key={idx}>
                 <a
-                  href={`https://ootomo39.xsrv.jp/storage/${item.file_path}`}
+                  href={`http://ootomo39.xsrv.jp/storage/${item.file_path}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
