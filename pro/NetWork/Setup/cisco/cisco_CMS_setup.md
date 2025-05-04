@@ -187,5 +187,12 @@ VMware Remote Consoleから左上の **VMRC** をクリック
 sysadminはともかくadminのほうのパスワードは忘れるとCMLのGUIに入れなくなって詰みます(1敗)
 :::
 
-####
+#### IPv4のアドレス取得設定
 
+![IPv4](.\img\1-18.png)
+
+**DHCP** を指定してContinue
+
+#### できあがりしばらく待てば動きます
+
+![おわり](.\img\1-19.png)
