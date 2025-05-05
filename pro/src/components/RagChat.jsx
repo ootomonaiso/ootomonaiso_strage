@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import { pipeline } from '@xenova/transformers';
 
 function RagChat() {
   const [query, setQuery] = useState('');
@@ -17,6 +16,7 @@ function RagChat() {
 
   useEffect(() => {
     async function loadModel() {
+      const { pipeline } = await import('@xenova/transformers');
       const embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
       embedderRef.current = embedder;
       setModelLoaded(true);
