@@ -30,7 +30,7 @@ function RagChat() {
   };
 
   async function fetchCandidateLinks(query) {
-    const response = await fetch('http://ootomo39.xsrv.jp/api/search.php', {
+    const response = await fetch('/api/vector_search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query }),
