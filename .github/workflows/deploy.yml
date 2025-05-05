@@ -20,9 +20,13 @@ jobs:
         with:
           node-version: '20.11.0'
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+  
       - name: Install pro dependencies
         working-directory: pro
         run: npm ci
+        
 
       - name: Install script dependencies
         working-directory: script
