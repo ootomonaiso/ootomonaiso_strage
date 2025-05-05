@@ -6,7 +6,7 @@ const config = {
   tagline: '大友内装(粒)の技術ブログ',
   favicon: 'img/favicon.ico',
   url: 'https://ootomonaiso.github.io',
-  baseUrl: '/ootomonaiso_strage/',
+  baseUrl: '/',
 
   organizationName: 'ootomonaiso',
   projectName: 'ootomonaiso_strage',  
