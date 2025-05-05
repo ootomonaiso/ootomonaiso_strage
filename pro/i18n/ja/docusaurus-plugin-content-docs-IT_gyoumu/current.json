@@ -1,0 +1,86 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.19回環境構築": {
+    "message": "19回環境構築",
+    "description": "The label for category 19回環境構築 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.19回環境構築.link.generated-index.description": {
+    "message": "第19回の大会のレギュレーションの環境を構築します。",
+    "description": "The generated-index page description for category 19回環境構築 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.18回環境構築": {
+    "message": "18回環境構築",
+    "description": "The label for category 18回環境構築 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.18回環境構築.link.generated-index.description": {
+    "message": "第18回の大会のレギュレーションの環境を構築します。",
+    "description": "The generated-index page description for category 18回環境構築 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.設計にかかわる図や書類の書き方講座": {
+    "message": "設計にかかわる図や書類の書き方講座",
+    "description": "The label for category 設計にかかわる図や書類の書き方講座 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.設計にかかわる図や書類の書き方講座.link.generated-index.description": {
+    "message": "きみも図の書き方を勉強しようぜ",
+    "description": "The generated-index page description for category 設計にかかわる図や書類の書き方講座 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SQL関連": {
+    "message": "SQL関連",
+    "description": "The label for category SQL関連 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SQL関連.link.generated-index.description": {
+    "message": "SQLを用いてデータベースを操作するためにある程度クエリの書き方を覚える必要があったりなかったりします。命令文やSQLの基本を解説していきます。",
+    "description": "The generated-index page description for category SQL関連 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.C#関連": {
+    "message": "C#関連",
+    "description": "The label for category C#関連 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.C#関連.link.generated-index.description": {
+    "message": "Javaから唐突にC#を書くのも楽しいよ",
+    "description": "The generated-index page description for category C#関連 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SQL関連操作": {
+    "message": "SQL関連操作",
+    "description": "The label for category SQL関連操作 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.SQL関連操作.link.generated-index.description": {
+    "message": "接続確認から操作",
+    "description": "The generated-index page description for category SQL関連操作 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.記述コードの解説": {
+    "message": "記述コードの解説",
+    "description": "The label for category 記述コードの解説 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.記述コードの解説.link.generated-index.description": {
+    "message": "実際のコードをもとに解説",
+    "description": "The generated-index page description for category 記述コードの解説 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Spring関連": {
+    "message": "Spring関連",
+    "description": "The label for category Spring関連 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Spring関連.link.generated-index.description": {
+    "message": "Springをいじくりまわすときに参考になるかもしれないドキュメント ぶっちゃけ公式ドキュメント読みに行った方が幸せになります",
+    "description": "The generated-index page description for category Spring関連 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.エラーとその解決": {
+    "message": "エラーとその解決",
+    "description": "The label for category エラーとその解決 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.エラーとその解決.link.generated-index.description": {
+    "message": "今まで遭遇したエラーとその解決方法",
+    "description": "The generated-index page description for category エラーとその解決 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.なんちゃって虎の巻": {
+    "message": "なんちゃって虎の巻",
+    "description": "The label for category なんちゃって虎の巻 in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.なんちゃって虎の巻.link.generated-index.description": {
+    "message": "デバッグするときの手順やら、バグの原因になってるかもしれない設定などを解説したりします。",
+    "description": "The generated-index page description for category なんちゃって虎の巻 in sidebar tutorialSidebar"
+  }
+}
