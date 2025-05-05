@@ -116,7 +116,7 @@ function RagChat() {
             {candidates.map((item, idx) => (
               <li key={idx}>
                 <a
-                  href={`http://ootomo39.xsrv.jp/storage/${item.file_path}`}
+                  href={`/${item.file_path.replace(/\.md$/, '').replace(/^docs\//, 'docs/')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
