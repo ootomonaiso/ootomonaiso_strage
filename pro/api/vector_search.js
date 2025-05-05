@@ -1,3 +1,4 @@
+// Description: ベクトル検索を行うAPIエンドポイント
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
