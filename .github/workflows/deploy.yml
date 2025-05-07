@@ -42,56 +42,56 @@ jobs:
         working-directory: script
         run: node vectorize_articles.mjs
 
-  # build:
-  #   name: Build Docusaurus Site and Generate Candidate Links
-  #   needs: update-embeddings
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v3
-  #       with:
-  #         fetch-depth: 0
+  build:
+    name: Build Docusaurus Site and Generate Candidate Links
+    needs: update-embeddings
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '20.11.0'
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
 
-  #     - name: Install dependencies
-  #       working-directory: pro
-  #       run: npm ci
+      - name: Install dependencies
+        working-directory: pro
+        run: npm ci
 
-  #     - name: Inject env vars for frontend
-  #       working-directory: pro
-  #       run: |
-  #         echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
-  #         echo "REACT_APP_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
-  #         echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
+      - name: Inject env vars for frontend
+        working-directory: pro
+        run: |
+          echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
+          echo "REACT_APP_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
 
-  #     - name: Build Docusaurus site
-  #       working-directory: pro
-  #       run: npm run build
+      - name: Build Docusaurus site
+        working-directory: pro
+        run: npm run build
 
-  #     - name: Generate candidate links
-  #       working-directory: pro
-  #       run: node generate_candidate_links.mjs
+      - name: Generate candidate links
+        working-directory: pro
+        run: node generate_candidate_links.mjs
 
-  #     - name: Upload Build Artifact
-  #       uses: actions/upload-pages-artifact@v3
-  #       with:
-  #         path: pro/build
+      - name: Upload Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: pro/build
 
-  # deploy:
-  #   name: Deploy to GitHub Pages
-  #   needs: build
-  #   permissions:
-  #     pages: write
-  #     id-token: write
-  #   environment:
-  #     name: github-pages
-  #     url: ${{ steps.deployment.outputs.page_url }}
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Deploy to GitHub Pages
-  #       id: deployment
-  #       uses: actions/deploy-pages@v4
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
