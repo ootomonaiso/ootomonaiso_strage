@@ -1,0 +1,30 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.tutorialSidebar.category.Setup": {
+    "message": "Setup",
+    "description": "The label for category Setup in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.Setup.link.generated-index.description": {
+    "message": "初期セットアップする",
+    "description": "The generated-index page description for category Setup in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ciscoのCMLを入れる": {
+    "message": "ciscoのCMLを入れる",
+    "description": "The label for category ciscoのCMLを入れる in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.ciscoのCMLを入れる.link.generated-index.description": {
+    "message": "ciscoのルーターとかさわる",
+    "description": "The generated-index page description for category ciscoのCMLを入れる in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VMware Workstationを入れる": {
+    "message": "VMware Workstationを入れる",
+    "description": "The label for category VMware Workstationを入れる in sidebar tutorialSidebar"
+  },
+  "sidebar.tutorialSidebar.category.VMware Workstationを入れる.link.generated-index.description": {
+    "message": "初期セットアップする",
+    "description": "The generated-index page description for category VMware Workstationを入れる in sidebar tutorialSidebar"
+  }
+}

@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
+/**
+ * @typedef {Object} Candidate
+ * @property {string} file_path
+ * @property {string} content
+ */
+
 function RagChat() {
   const [query, setQuery] = useState('');
   const [responseText, setResponseText] = useState('');
   const [loading, setLoading] = useState(false);
+  /** @type {[Candidate[], Function]} */
   const [candidates, setCandidates] = useState([]);
   const [modelLoaded, setModelLoaded] = useState(false);
+  /** @type {React.MutableRefObject<any>} */
   const embedderRef = useRef(null);
 
-  const {
-    siteConfig: { customFields },
-  } = useDocusaurusContext();
-  const GEMINI_API_KEY = customFields.geminiApiKey;
+  const ctx = useDocusaurusContext();
+  const GEMINI_API_KEY = ctx?.siteConfig?.customFields?.geminiApiKey ?? '';
 
   useEffect(() => {
     async function loadModel() {
@@ -45,6 +51,7 @@ function RagChat() {
     }
   };
 
+  /** @param {string} query */
   async function fetchCandidateLinks(query) {
     if (!embedderRef.current) throw new Error('BERTモデルがまだ読み込まれていません');
 
@@ -60,6 +67,10 @@ function RagChat() {
     return data.candidates;
   }
 
+  /**
+   * @param {string} query
+   * @param {Candidate[]} candidates
+   */
   async function generateRagResponse(query, candidates) {
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
