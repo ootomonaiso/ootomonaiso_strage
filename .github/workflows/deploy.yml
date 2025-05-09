@@ -20,29 +20,29 @@ jobs:
         with:
           node-version: '20.11.0'
 
+      - name: Clear npm cache
+        run: npm cache clean --force
+
       - name: Install pro dependencies
         working-directory: pro
         run: npm ci
 
-      # script ディレクトリで依存関係をインストール
       - name: Install script dependencies
         working-directory: script
         run: npm ci
 
-      # Markdown 記事のベクトル化と DB の upsert／削除処理を実行（script フォルダ内の vectorize_articles.mjs を実行）
       - name: Run vectorization script
+        working-directory: script
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
           HUGGINGFACE_TOKEN: ${{ secrets.HF_TOKEN }}
-        working-directory: script
         run: node vectorize_articles.mjs
 
   build:
     name: Build Docusaurus Site and Generate Candidate Links
-    needs: update-embeddings
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -55,29 +55,37 @@ jobs:
         with:
           node-version: '20.11.0'
 
-      # pro ディレクトリで依存関係のインストール
+      - name: Clear npm cache
+        working-directory: pro
+        run: npm cache clean --force
+
+      - name: Remove Docusaurus cache
+        working-directory: pro
+        run: rm -rf .docusaurus
+
       - name: Install dependencies
         working-directory: pro
         run: npm ci
+
+      - name: Clear Docusaurus cache
+        working-directory: pro
+        run: npm run clear
 
       - name: Inject env vars for frontend
         working-directory: pro
         run: |
           echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
           echo "REACT_APP_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
-          echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
+          echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}" >> .env
 
-      # Docusaurus サイトのビルド（pro/build に成果物が出力されるように設定）
       - name: Build Docusaurus site
         working-directory: pro
         run: npm run build
 
-      # ビルド成果物に候補リンク用 JSON を生成（generate_candidate_links.js を実行）
       - name: Generate candidate links
         working-directory: pro
         run: node generate_candidate_links.mjs
 
-      # ビルド成果物をアップロード
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
