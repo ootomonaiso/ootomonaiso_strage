@@ -104,6 +104,13 @@ const config = {
           },
         ],
       },
+      algolia: {
+        appId: 'QPF52K20TS',
+        apiKey: 'b73b292f6ed85f81d965ae5633c3743d',
+        indexName: 'ootomonaisoio',
+        insights: true,
+        debug: false,
+      },
       footer: {
         style: 'dark',
         links: [
