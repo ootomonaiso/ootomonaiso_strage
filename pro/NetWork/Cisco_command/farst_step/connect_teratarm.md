@@ -9,3 +9,5 @@ description: TeratarmからCMLへアクセス
 **ホスト**にIPアドレスを入力
 
 ![ログイン](./img/1-2.png)
+
+CMLに入るのでここにはCMLのWebUIにログインするときのユーザー名とパスワードを使うこと。
