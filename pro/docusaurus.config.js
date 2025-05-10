@@ -105,12 +105,13 @@ const config = {
         ],
       },
       algolia: {
-        appId: 'QPF52K20TS',
-        apiKey: 'b73b292f6ed85f81d965ae5633c3743d',
-        indexName: 'ootomonaisoio',
+        appId: process.env.DOCSEARCH_APP_ID,
+        apiKey: process.env.DOCSEARCH_API_KEY,
+        indexName: process.env.DOCSEARCH_INDEX_NAME,
         insights: true,
         debug: false,
-      },
+      },  
+
       footer: {
         style: 'dark',
         links: [
