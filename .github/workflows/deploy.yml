@@ -77,6 +77,9 @@ jobs:
           echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
           echo "REACT_APP_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
           echo "REACT_APP_SUPABASE_ANON_KEY=${{ secrets.REACT_APP_SUPABASE_ANON_KEY }}" >> .env
+          echo "DOCSEARCH_APP_ID=${{ secrets.DOCSEARCH_APP_ID }}" >> .env
+          echo "DOCSEARCH_API_KEY=${{ secrets.DOCSEARCH_API_KEY }}" >> .env
+          echo "DOCSEARCH_INDEX_NAME=${{ secrets.DOCSEARCH_INDEX_NAME }}" >> .env
 
       - name: Build Docusaurus site
         working-directory: pro
