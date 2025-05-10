@@ -1,5 +1,4 @@
-import githubTheme from 'prism-react-renderer/themes/github';
-import draculaTheme from 'prism-react-renderer/themes/dracula';
+import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -14,6 +13,11 @@ const config = {
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+
+  i18n: {
+    defaultLocale: 'ja',
+    locales: ['ja'],
+  },
 
   presets: [
     [
@@ -150,10 +154,9 @@ const config = {
         copyright: ` © ${new Date().getFullYear()} 大友内装(粒)`,
       },
       prism: {
-        theme: githubTheme,
-        darkTheme: draculaTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
-
     }),
   customFields: {
     geminiApiKey: process.env.REACT_APP_GEMINI_API_KEY,

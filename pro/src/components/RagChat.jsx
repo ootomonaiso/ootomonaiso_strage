@@ -1,41 +1,19 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-
-/**
- * @typedef {Object} Candidate
- * @property {string} file_path
- * @property {string} content
- */
 
 function RagChat() {
   const [query, setQuery] = useState('');
   const [responseText, setResponseText] = useState('');
   const [loading, setLoading] = useState(false);
-  /** @type {[Candidate[], Function]} */
   const [candidates, setCandidates] = useState([]);
-  const [modelLoaded, setModelLoaded] = useState(false);
-  /** @type {React.MutableRefObject<any>} */
-  const embedderRef = useRef(null);
 
-  const ctx = useDocusaurusContext();
-  const GEMINI_API_KEY = ctx?.siteConfig?.customFields?.geminiApiKey ?? '';
-
-  useEffect(() => {
-    async function loadModel() {
-      const { pipeline } = await import('@xenova/transformers');
-      const embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-      embedderRef.current = embedder;
-      setModelLoaded(true);
-    }
-    loadModel();
-  }, []);
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext();
+  const GEMINI_API_KEY = customFields.geminiApiKey;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!modelLoaded) {
-      alert('モデルの読み込み中です。少しお待ちください…');
-      return;
-    }
     setLoading(true);
     setResponseText('');
     try {
@@ -51,26 +29,17 @@ function RagChat() {
     }
   };
 
-  /** @param {string} query */
   async function fetchCandidateLinks(query) {
-    if (!embedderRef.current) throw new Error('BERTモデルがまだ読み込まれていません');
-
-    const embedding = (await embedderRef.current(query))[0];
-
-    const response = await fetch('/api/vector_search', {
+    const response = await fetch('http://ootomo39.xsrv.jp/api/search.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ embedding }),
+      body: JSON.stringify({ query }),
     });
     if (!response.ok) throw new Error('Candidate search failed');
     const data = await response.json();
     return data.candidates;
   }
 
-  /**
-   * @param {string} query
-   * @param {Candidate[]} candidates
-   */
   async function generateRagResponse(query, candidates) {
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`,
@@ -112,7 +81,6 @@ function RagChat() {
           送信
         </button>
       </form>
-      {!modelLoaded && <p>🔄 モデル読み込み中...</p>}
       {loading && <p>回答を生成中...</p>}
       {responseText && (
         <div style={{ marginTop: '1em', padding: '1em', background: '#f0f0f0' }}>
@@ -127,7 +95,7 @@ function RagChat() {
             {candidates.map((item, idx) => (
               <li key={idx}>
                 <a
-                  href={`/${item.file_path.replace(/\.md$/, '').replace(/^docs\//, 'docs/')}`}
+                  href={`http://ootomo39.xsrv.jp/storage/${item.file_path}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
