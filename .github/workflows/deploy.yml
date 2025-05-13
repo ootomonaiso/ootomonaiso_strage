@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2  # 履歴を2つ前まで取得
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -48,7 +48,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
+          fetch-depth: 2  # 履歴を2つ前まで取得
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -135,7 +135,3 @@ jobs:
             curl -X POST -H "Content-Type: application/json" \
               -d '{"content": "'"$MESSAGE"'"}' \
               ${{ secrets.DISCORD_WEBHOOK_URL }}
-
-
-
-
