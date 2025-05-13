@@ -115,14 +115,18 @@ jobs:
           # 新規ページの公開通知
           UPDATED_FILES=$(git diff --name-only HEAD~1 HEAD)
           for FILE in $UPDATED_FILES; do
+            # 'pro/' 部分を削除して正しい URL を作成
+            CLEAN_FILE_PATH=${FILE#pro/}  # 'pro/' を取り除く
+
             # URLの作成
-            PAGE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/$FILE"
+            PAGE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/$CLEAN_FILE_PATH"
             
             # Markdown形式で通知メッセージを作成
-            MESSAGE=":tada: **新しいページが公開されました！** :tada:\n\n[${FILE}](${PAGE_URL})"
+            MESSAGE=":tada: **新しいページが公開されました！** :tada:\n\n[${CLEAN_FILE_PATH}](${PAGE_URL})"
 
             # Discord Webhook で通知
             curl -X POST -H "Content-Type: application/json" \
               -d '{"content": "'"$MESSAGE"'"}' \
               ${{ secrets.DISCORD_WEBHOOK_URL }}
+
 
