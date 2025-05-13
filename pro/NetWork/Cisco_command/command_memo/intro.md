@@ -16,7 +16,7 @@ hostname = '192.168.0.100' ;　CMLにアクセスするときのIPアドレス�
 lab_id = 'cf8f2e' ;　構築してるLabの名前をここに
 node_id = '3df10b' ; ノードというかルーターのおなまえをここに
 
-strconcat cmd "open /labs/"
+strconcat cmd "open /"
 strconcat cmd lab_id
 strconcat cmd "/"
 strconcat cmd node_id
