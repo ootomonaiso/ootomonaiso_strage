@@ -112,26 +112,22 @@ jobs:
       - name: Send Discord Notification
         if: success()
         run: |
-          # 作業ディレクトリが Git リポジトリであることを確認
           echo "Current directory: $(pwd)"
           ls -la
 
-          # リポジトリの履歴をフルに取得
-          git fetch --depth=2  # HEAD~1 を参照できるようにするために履歴を2つ前まで取得
+          UPDATED_FILES=$(git show --name-only --pretty="format:" HEAD)
 
-          # 新規ページの公開通知
-          UPDATED_FILES=$(git diff --name-only HEAD~1 HEAD)
+
           for FILE in $UPDATED_FILES; do
-            # 'pro/' 部分を削除して正しい URL を作成
-            CLEAN_FILE_PATH=${FILE#pro/}  # 'pro/' を取り除く
+            if [[ $FILE == pro/*.md ]]; then
+              CLEAN_FILE_PATH=${FILE#pro/}  # 'pro/' を取り除く
 
-            # URLの作成
-            PAGE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/$CLEAN_FILE_PATH"
-            
-            # Markdown形式で通知メッセージを作成
-            MESSAGE=":tada: **新しいページが公開されました！** :tada:\n\n[${CLEAN_FILE_PATH}](${PAGE_URL})"
+              PAGE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/$CLEAN_FILE_PATH"
+              
+              MESSAGE=":tada: **新しいページが公開されました！** :tada:\n\n[${CLEAN_FILE_PATH}](${PAGE_URL})"
 
-            # Discord Webhook で通知
-            curl -X POST -H "Content-Type: application/json" \
-              -d '{"content": "'"$MESSAGE"'"}' \
-              ${{ secrets.DISCORD_WEBHOOK_URL }}
+              curl -X POST -H "Content-Type: application/json" \
+                -d '{"content": "'"$MESSAGE"'"}' \
+                ${{ secrets.DISCORD_WEBHOOK_URL }}
+            fi
+          done
