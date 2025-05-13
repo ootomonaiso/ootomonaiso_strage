@@ -112,6 +112,10 @@ jobs:
       - name: Send Discord Notification
         if: success()
         run: |
+          # 作業ディレクトリが Git リポジトリであることを確認
+          echo "Current directory: $(pwd)"
+          ls -la
+
           # リポジトリの履歴をフルに取得
           git fetch --depth=2  # HEAD~1 を参照できるようにするために履歴を2つ前まで取得
 
@@ -131,6 +135,7 @@ jobs:
             curl -X POST -H "Content-Type: application/json" \
               -d '{"content": "'"$MESSAGE"'"}' \
               ${{ secrets.DISCORD_WEBHOOK_URL }}
+
 
 
 
