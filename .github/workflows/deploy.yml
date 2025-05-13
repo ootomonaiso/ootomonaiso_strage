@@ -47,8 +47,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 2  # 履歴を2つ前まで取得
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -112,22 +110,11 @@ jobs:
       - name: Send Discord Notification
         if: success()
         run: |
-          echo "Current directory: $(pwd)"
-          ls -la
+          # サイトのURLを通知するメッセージを作成
+          SITE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/"
+          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n最新のサイトはこちら: [$SITE_URL]($SITE_URL)"
 
-          UPDATED_FILES=$(git show --name-only --pretty="format:" HEAD)
-
-
-          for FILE in $UPDATED_FILES; do
-            if [[ $FILE == pro/*.md ]]; then
-              CLEAN_FILE_PATH=${FILE#pro/}  # 'pro/' を取り除く
-
-              PAGE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/$CLEAN_FILE_PATH"
-              
-              MESSAGE=":tada: **新しいページが公開されました！** :tada:\n\n[${CLEAN_FILE_PATH}](${PAGE_URL})"
-
-              curl -X POST -H "Content-Type: application/json" \
-                -d '{"content": "'"$MESSAGE"'"}' \
-                ${{ secrets.DISCORD_WEBHOOK_URL }}
-            fi
-          done
+          # Discord Webhook で通知
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"content": "'"$MESSAGE"'"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
