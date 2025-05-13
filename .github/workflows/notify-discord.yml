@@ -1,0 +1,17 @@
+name: Notify Discord on Update
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  notify:
+    name: Notify Discord of Updates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Discord Notification
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"content": "Wiki が更新されました！"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}

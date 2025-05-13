@@ -28,7 +28,11 @@ IPを指定する
 
 ```bath
 ; IPアドレスを指定
-
-
+enable
+configure terminal
+interface eth0/0
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+exit
 
 ```

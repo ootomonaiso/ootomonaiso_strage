@@ -108,3 +108,10 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Send Discord Notification
+        if: success()
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"content": "デプロイが成功しました！最新の Docusaurus サイトが公開されました。"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
