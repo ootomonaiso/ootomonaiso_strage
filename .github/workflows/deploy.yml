@@ -112,6 +112,17 @@ jobs:
       - name: Send Discord Notification
         if: success()
         run: |
-          curl -X POST -H "Content-Type: application/json" \
-            -d '{"content": "デプロイが成功しました！最新の Docusaurus サイトが公開されました。"}' \
-            ${{ secrets.DISCORD_WEBHOOK_URL }}
+          # 新規ページの公開通知
+          UPDATED_FILES=$(git diff --name-only HEAD~1 HEAD)
+          for FILE in $UPDATED_FILES; do
+            # URLの作成
+            PAGE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/$FILE"
+            
+            # Markdown形式で通知メッセージを作成
+            MESSAGE=":tada: **新しいページが公開されました！** :tada:\n\n[${FILE}](${PAGE_URL})"
+
+            # Discord Webhook で通知
+            curl -X POST -H "Content-Type: application/json" \
+              -d '{"content": "'"$MESSAGE"'"}' \
+              ${{ secrets.DISCORD_WEBHOOK_URL }}
+
