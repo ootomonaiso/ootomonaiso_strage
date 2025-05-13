@@ -110,9 +110,8 @@ jobs:
       - name: Send Discord Notification
         if: success()
         run: |
-          # サイトのURLを通知するメッセージを作成
           SITE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/"
-          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n最新のサイトはこちら: [$SITE_URL]($SITE_URL)"
+          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n最新のサイトはこちら: <${SITE_URL}>"
 
           # Discord Webhook で通知
           curl -X POST -H "Content-Type: application/json" \
