@@ -1,11 +1,9 @@
 ---
 sidebar_position: 1
-description: 環境について
+description: はじめにteratarmでルーターにワンタッチ接続しようぜって
 ---
 
-# 便利情報雑記
-
-## TeraTermでCML上にあるルーターへアクセスできるようにする
+# TeraTermでCML上にあるルーターへアクセスできるようにする
 
 まずこのコードを`任意の名前.ttl` として保存
 
