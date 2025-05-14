@@ -8,15 +8,13 @@ description: はじめにteratarmでルーターにワンタッチ接続しよ�
 まずこのコードを`任意の名前.ttl` として保存
 
 ```bash
-;=====================================================================
 ; 接続情報
-HOSTADDR = 'CMLのWeb上でのIPアドレス'
+HOSTADDR = '192.168.40.132'
 USERNAME = 'admin'
-PASSWORD = 'パスワード'
-LABPATH = '/Lab名/ノード名/0'
-;=====================================================================
+PASSWORD = 'Ootomonaiso39'
+LABPATH = '/obenkyo/R1/0'  
 
-; コマンドオプション組立て
+; SSHコマンド作成
 COMMAND = HOSTADDR
 strconcat COMMAND ':22 /ssh /2 /auth=password /user='
 strconcat COMMAND USERNAME
