@@ -13,6 +13,7 @@ description: はじめにteratarmでルーターにワンタッチ接続しよ�
 HOSTADDR = 'CMLのWeb上でのIPアドレス'
 USERNAME = 'admin'
 PASSWORD = 'パスワード'
+LABPATH = '/Lab名/ノード名/0'
 ;=====================================================================
 
 ; コマンドオプション組立て
@@ -25,7 +26,12 @@ strconcat COMMAND PASSWORD
 ; 接続
 connect COMMAND
 
-end
+wait '>'
+
+LABPATH_CMD = ''
+strconcat LABPATH_CMD 'open '
+strconcat LABPATH_CMD LABPATH
+sendln LABPATH_CMD
 
 ```
 
