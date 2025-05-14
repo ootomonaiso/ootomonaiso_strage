@@ -23,16 +23,35 @@ Static Natの構築について触れていきます
 
 - インターフェースは無料版だとGi0/0とかにリネームできないことが判明したためイーサネットじゃないけどEthを採用する羽目になりました。かなしい
 
-### IPの設定
-IPを指定する
+## IPの設定
+### R1ルーターにIPv4のアドレスを指定
 
-```bath
-; IPアドレスを指定
+```bash
+; R1ルーターのIPアドレスを指定
 enable
 configure terminal
 interface eth0/0
- ip address 192.168.1.1 255.255.255.0
+ ip address 192.168.1.1 255.255.255.0 ;
  no shutdown
 exit
 
 ```
+
+### R2ルーターにIPv4のアドレスを指定
+
+
+```bash
+; R2ルーターのIPアドレスを指定
+enable
+configure terminal
+
+; eth0/0側の設定
+interface eth0/0
+ ip address 192.168.1.254 255.255.255.0
+ no shutdown
+ ip nat inside
+exit
+
+
+```
+
