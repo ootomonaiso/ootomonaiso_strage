@@ -52,6 +52,5 @@ interface eth0/0
  ip nat inside
 exit
 
-
 ```
 
