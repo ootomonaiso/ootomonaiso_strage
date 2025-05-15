@@ -4,7 +4,7 @@ description: Static NATの構築
 ---
 
 # はじめに
-Static Natの構築について触れていきます
+Static NATの構築について触れていきます
 
 ## Static Natとは?
 
@@ -50,8 +50,6 @@ interface eth0/0
 exit
 
 ```
-
-
 
 ### R2ルーターにIPv4のアドレスを指定
 
