@@ -63,6 +63,16 @@ const config = {
         editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
       },
     ],
+        [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'yoshinashi',
+        path: 'yoshinashi',
+        routeBasePath: 'yoshinashi',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
   ],
 
   themeConfig:
@@ -98,6 +108,11 @@ const config = {
             to: '/IT_gyoumu/intro',
             position: 'left',
             label: '業務用ITソフトウェア',
+          },
+          {
+            to: '/yoshinashi/intro',
+            position: 'left',
+            label: 'よしなしこと',
           },
           {
             href: 'https://github.com/ootomonaiso',
