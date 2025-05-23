@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 description: Static NATの構築
 ---
 
@@ -7,6 +7,9 @@ description: Static NATの構築
 Static NATの構築について触れていきます
 
 ## Static Natとは?
+
+Static NAT（スタティックNAT）は、内部ネットワークの特定のIPアドレスと外部ネットワークの特定のIPアドレスを1対1で固定的に対応付けるNAT（Network Address Translation）の方式です。  
+これにより、内部の特定の端末が常に同じグローバルIPアドレスで外部と通信できるようになります。主にサーバー公開や外部からのアクセスが必要な機器に利用されます。
 
 ## 設定方法
 
@@ -31,7 +34,7 @@ Static NATの構築について触れていきます
 enable
 configure terminal
 interface eth0/0
- ip address 192.168.1.1 255.255.255.0 ;
+ ip address 192.168.1.1 255.255.255.0 
  no shutdown
 exit
 
@@ -45,7 +48,7 @@ ip route 0.0.0.0 0.0.0.0 192.168.1.2
 enable
 configure terminal
 interface eth0/0
- ip address 100.1.1.254 255.255.255.0 ;
+ ip address 100.1.1.254 255.255.255.0 
  no shutdown
 exit
 
@@ -74,7 +77,7 @@ interface eth0/1
  ip nat outside
  exit
 
-no ip htto server
+no ip http server
 no ip http secure-server
 
 ip nat inside source static 192.168.1.1  100.1.1.1
