@@ -7,6 +7,8 @@ description: はじめにteratarmでルーターにワンタッチ接続しよ�
 
 まずこのコードを`任意の名前.ttl` として保存
 
+- ttlはTeraTarmの接続設定ファイル
+
 ```bash
 ; 接続情報
 HOSTADDR = '192.168.40.132'
