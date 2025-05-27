@@ -35,3 +35,21 @@ ip nat inside source static <inside-local> <inside-global>
 | `inside-local`  | 192.168.1.1 | 実際の機器のアドレス（LAN側） |
 | `inside-global` | 100.1.1.10  | 外部に見せるアドレス（WAN側） |
 
+## コンフィグを見る
+```bash
+show running-config
+```
+
+これは今実行してるコンフィグを見るやつです。
+
+## ファイル見る
+```bash
+show file system
+```
+
+システムファイル見るやつです
+
+```bash
+dir "名前"
+```
+
