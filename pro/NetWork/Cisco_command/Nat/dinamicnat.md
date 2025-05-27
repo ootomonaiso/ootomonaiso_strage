@@ -21,13 +21,12 @@ description: dinamic NATの構築
 enable
 configure terminal
 interface eth0/0
- ip address 192.168.1.1 255.255.255.0 ;
+ ip address 192.168.1.1 255.255.255.0
  no shutdown
 exit
 
 ; デフォルトルートの設定
 ip route 0.0.0.0 0.0.0.0 192.168.1.2
-
 ```
 
 ```bash
@@ -35,8 +34,28 @@ ip route 0.0.0.0 0.0.0.0 192.168.1.2
 enable
 configure terminal
 interface eth0/0
- ip address 100.1.1.254 255.255.255.0 ;
+ ip address 100.1.1.254 255.255.255.0
  no shutdown
 exit
 
+```
+
+## R2ルーター
+```bash
+enable
+configure terminal
+interface eth0/0
+ ip address 192.168.1.254 255.255.255.0
+ ip nat inside
+interface eth0/1
+ ip address 100.1.1.10 255.255.255.0
+ ip nat outside
+```
+
+## dinamicNAT
+```bash
+enable 
+configre terminal
+ip nat pool dynamic1 100.1.1.10 100.1.1.20 netmask 255.255.255.0
+ip nat inside source list 1 pool dynamic1
 ```
