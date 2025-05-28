@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
-description: Natの構築
+description: ネットワーク構築
 ---
 
 # はじめに
-この章ではNatの構築について触れていきます
+この章でCiscoルーターのコマンドについて触れます
