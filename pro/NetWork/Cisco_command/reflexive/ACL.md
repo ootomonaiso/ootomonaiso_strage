@@ -23,7 +23,7 @@ enable
 configre terminal
 
 interface eth0/0
-    ip route 192.168.23.3 255.255.255.0
+    ip address 192.168.23.3 255.255.255.0
     no shutdown
 exit
 ip route 192.168.12.0 255.255.255.0 192.168.23.2
@@ -35,5 +35,14 @@ ip route 192.168.12.0 255.255.255.0 192.168.23.2
 
 ### R2の設定(ゲートウェイのルーター)
 ```bash
+
+```
+
+```bash
+;eth0/0の設定
+
+interface eth0/0
+
+
 
 ```
