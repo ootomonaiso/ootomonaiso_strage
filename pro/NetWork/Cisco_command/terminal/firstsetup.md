@@ -11,9 +11,13 @@ Router> enable
 Router# configure terminal
 Router(config)#
 ```
+## ルーターのお名前変える
+```bash
+hostname (おこのみのおなまえ)
+```
 
 ## タイムゾーンをJSTに
-- 
+- 日本のタイムゾーンに大抵合わせる
 
 ```bash
 clock timezone JST +9
@@ -24,6 +28,6 @@ clock timezone JST +9
 - パスワードは暗号化して保存されていること
 
 ```bash
-
+enable secret cisco
 ```
 
