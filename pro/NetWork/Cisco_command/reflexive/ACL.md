@@ -11,7 +11,7 @@ enable
 configre terminal
 
 interface eth0/0
-    ip route 192.168.12.1 255.255.255.0
+    ip address 192.168.12.1 255.255.255.0
     no shutdown
 exit
 ip route 0.0.0.0 0.0.0.0 192.168.12.2
@@ -23,7 +23,7 @@ enable
 configre terminal
 
 interface eth0/0
-    ip route 192.168.23.3 255.255.255.0
+    ip address 192.168.23.3 255.255.255.0
     no shutdown
 exit
 ip route 192.168.12.0 255.255.255.0 192.168.23.2
@@ -35,5 +35,24 @@ ip route 192.168.12.0 255.255.255.0 192.168.23.2
 
 ### R2の設定(ゲートウェイのルーター)
 ```bash
+enable
+configre terminal
 
+ip access-list extended go_in 
+    evaluate from_R1
+ip access-list extended go_out
+    permit ip host 192.168.12.1 any reflect from_R1 timeout 300
+
+interface eth0/1
+    ip address 192.168.12.2 255.255.255.0
+    no shutdown
+```
+
+```bash
+;eth0/0の設定
+
+interface eth0/1
+    ip address 192.168.23.3 255.255.255.0
+exit
+ip route 192.168.12.0 255.255.255.0 192.168.23.2
 ```
