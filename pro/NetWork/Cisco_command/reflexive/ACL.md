@@ -56,3 +56,38 @@ interface eth0/1
 exit
 ip route 192.168.12.0 255.255.255.0 192.168.23.2
 ```
+
+## IPv6つける
+### R1の設定
+```bash
+interface eth0/0
+    ipv6 address 2001:DB8:3:100::1/64
+exit
+ipv6 route ::/0 2001:DB8:3:100::FF
+```
+### R3の設定
+```bash
+interface eth0/1
+    ipv6 address 2001:DB8:3:1::1/64
+exit
+ipv6 route ::/0 2001:DB8:3:100::FF
+```
+
+### R2の設定
+インターフェースにv6アドレスを割り当てる
+```bash
+interface eth0/0
+    ipv6 address 2001:DB3:3:100::FF/64
+    ipv6 traffic-filter from_R3 in
+    ipv6 traffic-filter to_R3 out
+exit
+```
+アクセスリストつくるよ
+```bash
+ipv6 access-list from_R3
+    evaluate from_OS
+exit
+ipv6 access-list to_R3
+    permit ipv6 host 2001:DB3:3:100::1 any reflect from_OSV
+exit
+```
