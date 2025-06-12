@@ -56,7 +56,7 @@ description: ルーター設定をやるぞ
 ## コマンド
 ### 日本時間に合わせる
 ```bash
-timezone JST +9
+clock timezone JST +9
 ```
 
 ### ホストネームをルーターに合わせる
@@ -64,10 +64,13 @@ timezone JST +9
 hostname "ここにホストネームを指定"
 ```
 
-### More表示を止める
+## 常にenabke
 ```bash
-
+line console 0
+privilege level 15
 ```
 
-### 
+:::info
+レベル15が所謂Admin権限
+:::
 
