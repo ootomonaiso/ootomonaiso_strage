@@ -41,7 +41,7 @@ privilege level 15
 ```bash
 no ip domain-lookup
 ```
-##　自動ログアウトがうざいから止める
+## 自動ログアウトがうざいから止める
 ```bash
 line console 0
 exec-timeout 0 0
