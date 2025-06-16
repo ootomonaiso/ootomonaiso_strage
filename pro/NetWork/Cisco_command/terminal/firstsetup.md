@@ -18,7 +18,6 @@ hostname (おこのみのおなまえ)
 
 ## タイムゾーンをJSTに
 - 日本のタイムゾーンに大抵合わせる
-
 ```bash
 clock timezone JST +9
 ```
@@ -31,3 +30,29 @@ clock timezone JST +9
 enable secret cisco
 ```
 
+## 常に特権モードでアクセス(たすかる)
+```bash
+line console 0
+privilege level 15
+```
+
+
+## コマンド誤入力によるDNS検索をしない
+```bash
+no ip domain-lookup
+```
+## 自動ログアウトがうざいから止める
+```bash
+line console 0
+exec-timeout 0 0
+```
+## 内容表示に--More--が出るのはめんどい
+```bash
+line console 0
+length 0
+```
+
+## 書いたコンフィグの保存(いるかどうか忘れた)
+```bash
+copy running-config startup-config
+```
