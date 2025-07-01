@@ -56,3 +56,8 @@ description:
 ## 
 
 ```
+
+### docusaurusで使えるmarkdownの記法
+- 基本的にはGithGubのmarkdownと同じですが、Docusaurusでは以下の記法も使用できます。
+- :::info や :::tip などのコンポーネントを使用して、情報を強調することができます。
+- 詳細は[Docusaurusの公式ドキュメント](https://docusaurus.io/docs/markdown-features)を参照してください。
