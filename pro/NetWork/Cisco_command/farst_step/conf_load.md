@@ -8,3 +8,4 @@ description: コンフィグをロードする
 ![Teratarmの起動](./img/41.png)
 
 コンフィグ見たいルーター押してCONFIGからFETCH
+
