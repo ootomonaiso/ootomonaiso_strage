@@ -12,7 +12,7 @@ description: ルーター設定をやるぞ
 - R-Tky1とR-tky2の間にスイッチを配置してtsvを配置している
 
 ### ターミナル環境
-- コマンドご入力によるDNS検索をしない
+- コマンド誤入力によるDNS検索をしない
 - timezoneをJSTに
 - more表示の無効化
 - 表示割込みに対する入力文字列補完
@@ -54,5 +54,24 @@ description: ルーター設定をやるぞ
 :::
 
 ## コマンド
-### 各ルーターの基本設定をする
+### 日本時間に合わせる
+```bash
+clock timezone JST +9
+```
+
+### ホストネームをルーターに合わせる
+```bash
+hostname "ここにホストネームを指定"
+```
+
+## 常にenabke
+```bash
+line console 0
+privilege level 15
+```
+
+:::info
+レベル15が所謂Admin権限
+他のは知らぬ
+:::
 
