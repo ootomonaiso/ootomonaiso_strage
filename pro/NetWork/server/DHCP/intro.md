@@ -10,5 +10,7 @@ sudo apt install isc-dhcp-server
 ```
 
 ## 設定
+設定ファイルは"/etc/default"配下
+
 ```
 ```

@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2 
-description: 外のネットワーク
+description: りふれくしぶACL
 ---
 # インターネット側からLAN内に通信させないぞ
 
