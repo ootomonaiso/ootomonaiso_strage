@@ -1,10 +1,7 @@
 ---
 sidebar_position: 2
-description: DHCPサーバーの偉大さを感じる
+description: opensshの偉大さを感じる
 ---
 
-# isc-dhcp-serverを設定するよ
-```bash title="isc-dhcp-serverのインストール"
-apt install isc-dhcp-server 
-```
-
+# OpenSSHで公開鍵と秘密鍵を使った通信をしたいしたい
+## 
