@@ -128,7 +128,8 @@ jobs:
         run: node list-updated-docs.mjs
 
       - name: Generate docs update message
-        run: node script/generate-updated-docs.js
+        working-directory: script  # ✅ 修正ポイント
+        run: node generate-updated-docs.js
         env:
           SITE_URL: "https://ootomonaiso.github.io/ootomonaiso_strage/"
 
@@ -136,7 +137,7 @@ jobs:
         id: read_msg
         run: |
           echo "DOC_MSG<<EOF" >> $GITHUB_ENV
-          cat docs_diff_message.txt >> $GITHUB_ENV
+          cat script/docs_diff_message.txt >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Notify to Discord
