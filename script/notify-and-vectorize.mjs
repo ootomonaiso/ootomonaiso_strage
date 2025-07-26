@@ -36,6 +36,30 @@ async function getEmbedding(text) {
   return Array.from(output.data);
 }
 
+function extractTitle(content) {
+  const match = content.match(/^#\s+(.+)$/m);
+  return match ? match[1] : '(no title)';
+}
+
+function findCategoryLabels(filePath) {
+  const parts = filePath.split(path.sep);
+  const categories = [];
+
+  for (let i = 1; i < parts.length - 1; i++) {
+    const categoryPath = path.resolve(__dirname, '..', ...parts.slice(0, i + 1), '_category_.json');
+    if (fs.existsSync(categoryPath)) {
+      try {
+        const data = JSON.parse(fs.readFileSync(categoryPath, 'utf8'));
+        if (data.label) categories.push(data.label);
+      } catch (_) {
+        continue;
+      }
+    }
+  }
+
+  return categories.join(' / ');
+}
+
 async function main() {
   const files = glob.sync('../pro/**/*.{md,mdx}', {
     ignore: ['../pro/node_modules/**']
@@ -115,13 +139,11 @@ async function main() {
     message = '更新されたドキュメントはありません。';
   } else {
     message = updatedFiles.map(filePath => {
-      const trimmed = filePath
-        .replace(/^pro\//, '')
-        .replace(/\.(md|mdx)$/, '')
-        .replace(/\/?index$/, '');
-      const name = path.basename(trimmed) || 'index';
+      const trimmed = filePath.replace(/^pro\//, '').replace(/\.(md|mdx)$/, '').replace(/\/?index$/, '');
+      const name = extractTitle(fs.readFileSync(path.resolve(__dirname, '..', filePath), 'utf8'));
+      const category = findCategoryLabels(filePath);
       const url = baseUrl + trimmed;
-      return `- [${name}](${url})`;
+      return `- [${category ? category + ' / ' : ''}${name}](${url})`;
     }).join('\n');
   }
 
