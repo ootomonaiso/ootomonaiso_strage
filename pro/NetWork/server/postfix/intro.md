@@ -10,9 +10,25 @@ sudo apt install postfix
 sudo apt install mailutils
 ```
 
-## 共通設定
+## 設定
 設定ファイルは`/etc/postfix`配下の`main.cf`
 - ユーザー認証はしません
 - osaka-skills.jpドメインのSMTPです(POP3じゃないよごめんね)
 
-### osv1
+### osv2
+```bash title=""
+# 上のほうのsmtp-tlsほにゃららはそのまま
+
+smtpd_rekat_restrictions =　そのまま
+myhostname = osv2.osaka-skills.jp
+alias_maps = そのまま
+alias_database = そのまま
+# myorigin　いらんのでコメントアウト
+relayhost = 
+# 環境に合わせて変えてね
+mynetworks = 192.168.1.0    
+
+inetたちは初期のまま?
+home_mailbox = Maildir/
+```
+
