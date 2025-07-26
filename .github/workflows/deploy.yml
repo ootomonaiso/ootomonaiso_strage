@@ -112,9 +112,20 @@ jobs:
         working-directory: pro
         run: npm ci
 
+      - name: Install script dependencies
+        working-directory: script
+        run: npm ci
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Detect updated files from Supabase
+        working-directory: script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: node list-updated-docs.mjs
 
       - name: Generate docs update message
         run: node script/generate-updated-docs.js
