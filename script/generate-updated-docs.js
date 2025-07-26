@@ -1,15 +1,21 @@
-// script/generate-updated-docs.js
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// __dirname for ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const baseUrl = process.env.SITE_URL || 'https://ootomonaiso.github.io/ootomonaiso_strage/';
-const lines = fs.readFileSync('updated_docs.txt', 'utf-8').trim().split('\\n');
+const updatedDocsPath = path.join(__dirname, 'updated_docs.txt');
+const raw = fs.readFileSync(updatedDocsPath, 'utf-8');
+const lines = raw.trim().split('\n');
 
 const format = (filePath) => {
   const name = filePath.split('/').pop().replace(/\.(md|mdx)$/, '');
   const url = baseUrl + filePath.replace(/\.(md|mdx)$/, '').replace(/\/index$/, '');
-
   return `- [${name}](${url})`;
 };
 
-const messages = lines.map(format).filter(Boolean).join('\\n');
-fs.writeFileSync('docs_diff_message.txt', messages + '\\n');
+const messages = lines.map(format).filter(Boolean).join('\n');
+fs.writeFileSync(path.join(__dirname, 'docs_diff_message.txt'), messages + '\n');
