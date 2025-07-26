@@ -120,25 +120,14 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Detect updated files from Supabase
+      - name: Notify updated docs to Discord
         working-directory: script
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-        run: node list-updated-docs.mjs
-
-      - name: Generate docs update message
-        working-directory: script  # ✅ 修正ポイント
-        run: node generate-updated-docs.js
-        env:
           SITE_URL: "https://ootomonaiso.github.io/ootomonaiso_strage/"
-
-      - name: Read message to env
-        id: read_msg
-        run: |
-          echo "DOC_MSG<<EOF" >> $GITHUB_ENV
-          cat script/docs_diff_message.txt >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+          GITHUB_ENV: ${{ env.GITHUB_ENV }}
+        run: node notify-doc-updates.mjs
 
       - name: Notify to Discord
         if: success()
