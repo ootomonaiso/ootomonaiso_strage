@@ -116,25 +116,6 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Detect updated files
-        run: git diff --name-status HEAD~1 HEAD > changed_files.txt
-
-      - name: Show changed files
-        run: |
-          echo "=== changed_files.txt ==="
-          cat changed_files.txt || echo "No changes detected."
-
-      - name: Load doc directories config
-        run: cp script/docusaurus-docs-paths.json .
-
-      - name: Filter updated docs based on config
-        run: node script/filter-docusaurus-docs.js
-
-      - name: Show filtered docs
-        run: |
-          echo "=== filtered_docs.txt ==="
-          cat filtered_docs.txt || echo "No docs matched."
-
       - name: Generate docs update message
         run: node script/generate-updated-docs.js
         env:
