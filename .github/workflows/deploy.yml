@@ -108,15 +108,24 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+
+      - name: Install script dependencies
+        working-directory: script
+        run: npm ci
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Detect updated files
-        run: git diff --name-status HEAD~1 HEAD > changed_files.txt
-
-      - name: Filter updated docs based on config
-        run: node script/filter-docusaurus-docs.js
+      - name: Detect updated docs
+        id: detect_changes
+        run: |
+          git diff --name-status HEAD~1 HEAD > changed_files.txt
+          awk '/^(A|M)\s+(docs|NetWork|IT_gyoumu|yoshinashi)\/.*\.mdx?$/' changed_files.txt > filtered_docs.txt
 
       - name: Generate docs update message
         run: node script/generate-updated-docs.js
@@ -134,8 +143,7 @@ jobs:
         if: success()
         run: |
           SITE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/"
-          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n\U0001F4D8 更新されたページ:\n\n${DOC_MSG}\n\n\U0001F517 サイト: <${SITE_URL}>"
-
+          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n📘 更新されたページ:\n\n${DOC_MSG}\n\n🔗 サイト: <${SITE_URL}>"
           curl -X POST -H "Content-Type: application/json" \
             -d '{"content": "'"$MESSAGE"'"}' \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
