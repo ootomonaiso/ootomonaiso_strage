@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import docusaurusConfig from '../docusaurus.config.js';
+import docusaurusConfig from '../pro/docusaurus.config.js';
 
 /**
  * git diff --name-status の出力ファイルから、
