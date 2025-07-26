@@ -73,3 +73,24 @@ ipv6 access-list OUTSIDE_IN
  !
  sequence 110 deny ipv6 any any log                                   ! その他すべてのIPv6トラフィックを拒否し、ログ出力
 ```
+
+## icmpに使わなきゃいけない方々の説明
+- こいつらまとめてNDP(近接探索プロトコル)と呼ばれてる
+    - 機器同士をそもそも見つけるのに必要
+    - IPv6で使われている(v4は別々)
+    - RAとRSでDHCPと同じ挙動をする
+- sequence110で明示的に宣言したもの以外のIPv6トラフィックは拒否してるので非明示的に使えたはずのNDPまで殺しちゃった
+
+### Router Solicitation
+ルーターがどこにあるかを見つける
+
+### Router Advertisement
+ルーターがネットワーク内で自分の存在とサービスについての内容を広告する
+IPアドレスなどを含む設定も教えてくれる
+
+### Neighbor Solicitation(nd-ns)
+ホストが通信したい相手のMACアドレスを教えてもらうのに使う
+
+### Neighbor Advertisement(nd-na)
+nd-nsで聞かれたルーターが自分のMACアドレスを教えるのに使う
+

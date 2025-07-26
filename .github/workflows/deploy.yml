@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2  # 履歴を2つ前まで取得
+          fetch-depth: 2
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -103,17 +103,39 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Send Discord Notification
+      - name: Detect updated files
+        run: git diff --name-status HEAD~1 HEAD > changed_files.txt
+
+      - name: Filter updated docs based on config
+        run: node script/filter-docusaurus-docs.js
+
+      - name: Generate docs update message
+        run: node script/generate-updated-docs.js
+        env:
+          SITE_URL: "https://ootomonaiso.github.io/ootomonaiso_strage/"
+
+      - name: Read message to env
+        id: read_msg
+        run: |
+          echo "DOC_MSG<<EOF" >> $GITHUB_ENV
+          cat docs_diff_message.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Notify to Discord
         if: success()
         run: |
           SITE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/"
-          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n最新のサイトはこちら: <${SITE_URL}>"
+          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n\U0001F4D8 更新されたページ:\n\n${DOC_MSG}\n\n\U0001F517 サイト: <${SITE_URL}>"
 
-          # Discord Webhook で通知
           curl -X POST -H "Content-Type: application/json" \
             -d '{"content": "'"$MESSAGE"'"}' \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
