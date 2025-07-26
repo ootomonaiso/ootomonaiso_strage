@@ -94,7 +94,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: build
+    needs: [build, update-embeddings]  # ✅ 両ジョブの完了を待つ
     permissions:
       pages: write
       id-token: write
