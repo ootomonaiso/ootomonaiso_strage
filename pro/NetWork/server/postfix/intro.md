@@ -29,7 +29,16 @@ mynetworks = 192.168.1.0/24
 transport_map = hash:/etc/postfix/transport
 ```
 #### transport_mapのつくりかた
+```bash title=""
+nano /etc/postfix/transport
+```
 
+```bash title="transport"
+osaka-skills.jp     smtp:[192.168.1.1]
+```
+```bash title=""
+postmap /etc/postfix/transport
+```
 
 ### osv2
 ```bash title=""
