@@ -1,0 +1,8 @@
+{
+  "label": "apache2",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "apache2サーバー設定"
+  }
+}
