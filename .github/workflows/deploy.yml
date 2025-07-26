@@ -119,6 +119,9 @@ jobs:
       - name: Detect updated files
         run: git diff --name-status HEAD~1 HEAD > changed_files.txt
 
+      - name: Load doc directories config
+        run: cp script/docusaurus-docs-paths.json .
+
       - name: Filter updated docs based on config
         run: node script/filter-docusaurus-docs.js
 
@@ -141,5 +144,5 @@ jobs:
           MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n\U0001F4D8 更新されたページ:\n\n${DOC_MSG}\n\n\U0001F517 サイト: <${SITE_URL}>"
 
           curl -X POST -H "Content-Type: application/json" \
-            -d '{"content": "'"$MESSAGE"'"}' \
+            -d '{"content": "'$MESSAGE'"}' \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
