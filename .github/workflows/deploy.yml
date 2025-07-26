@@ -30,7 +30,7 @@ jobs:
         working-directory: pro
         run: npm ci
 
-      - name: Clear Docusaurus cache
+      - name: Clear Docusaurus cache again
         working-directory: pro
         run: npm run clear
 
@@ -72,10 +72,11 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  update-embeddings:
-    name: Update Article Embeddings
+  notify-and-vectorize:
+    name: Notify Discord & Vectorize Docs
     needs: deploy
     runs-on: ubuntu-latest
+    if: success()
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -87,18 +88,11 @@ jobs:
         with:
           node-version: '20.11.0'
 
-      - name: Clear npm cache
-        run: npm cache clean --force
-
-      - name: Install pro dependencies
-        working-directory: pro
-        run: npm ci
-
-      - name: Install script dependencies
+      - name: Install dependencies
         working-directory: script
         run: npm ci
 
-      - name: Run vectorization script
+      - name: Run notify and vectorize script
         working-directory: script
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -106,47 +100,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
           HUGGINGFACE_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: node vectorize_articles.mjs
-
-  notify:
-    name: Notify Discord
-    needs: update-embeddings
-    runs-on: ubuntu-latest
-    if: success()
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      - name: Install pro dependencies
-        working-directory: pro
-        run: npm ci
-
-      - name: Install script dependencies
-        working-directory: script
-        run: npm ci
-
-      - name: Detect updated files
-        run: git diff --name-status HEAD~1 HEAD > changed_files.txt
-
-      - name: Load doc directories config
-        run: cp script/docusaurus-docs-paths.json .
-
-      - name: Filter updated docs based on config
-        run: node script/filter-docusaurus-docs.js
-
-      - name: Generate docs update message
-        run: node script/generate-updated-docs.js
-        env:
           SITE_URL: "https://ootomonaiso.github.io/ootomonaiso_strage/"
-
-      - name: Read message to env
-        id: read_msg
-        run: |
-          echo "DOC_MSG<<EOF" >> $GITHUB_ENV
-          cat docs_diff_message.txt >> $GITHUB_ENV
-          echo "EOF" >> $GITHUB_ENV
+        run: node notify-and-vectorize.mjs
 
       - name: Send Discord notification
         run: |
