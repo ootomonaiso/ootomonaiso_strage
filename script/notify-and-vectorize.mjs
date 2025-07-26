@@ -115,7 +115,10 @@ async function main() {
     message = '更新されたドキュメントはありません。';
   } else {
     message = updatedFiles.map(filePath => {
-      const trimmed = filePath.replace(/\.(md|mdx)$/, '').replace(/\/?index$/, '');
+      const trimmed = filePath
+        .replace(/^pro\//, '')
+        .replace(/\.(md|mdx)$/, '')
+        .replace(/\/?index$/, '');
       const name = path.basename(trimmed) || 'index';
       const url = baseUrl + trimmed;
       return `- [${name}](${url})`;
@@ -124,7 +127,7 @@ async function main() {
 
   fs.writeFileSync('docs_diff_message.txt', message + '\n');
 
-  console.log('📝 Discord通知内容:');
+  console.log(`📝 Discord通知内容:\n`);
   console.log(message);
   console.log('\n✅ docs_diff_message.txt 書き出し完了');
 
