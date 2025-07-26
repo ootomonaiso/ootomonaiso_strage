@@ -32,3 +32,11 @@ inetたちは初期のまま?
 home_mailbox = Maildir/
 ```
 
+#### エイリアスの設定
+```bash title=""
+sudo nano /etc/aliases
+```
+
+```bash title=""
+ユーザー名: 実際の配送先
+```

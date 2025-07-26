@@ -6,41 +6,6 @@ on:
       - master
 
 jobs:
-  update-embeddings:
-    name: Update Article Embeddings
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20.11.0'
-
-      - name: Clear npm cache
-        run: npm cache clean --force
-
-      - name: Install pro dependencies
-        working-directory: pro
-        run: npm ci
-
-      - name: Install script dependencies
-        working-directory: script
-        run: npm ci
-
-      - name: Run vectorization script
-        working-directory: script
-        env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
-          HUGGINGFACE_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: node vectorize_articles.mjs
-
   build:
     name: Build Docusaurus Site and Generate Candidate Links
     runs-on: ubuntu-latest
@@ -94,7 +59,7 @@ jobs:
 
   deploy:
     name: Deploy to GitHub Pages
-    needs: [build, update-embeddings]  # ✅ 両ジョブの完了を待つ
+    needs: build
     permissions:
       pages: write
       id-token: write
@@ -102,6 +67,52 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  update-embeddings:
+    name: Update Article Embeddings
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.11.0'
+
+      - name: Clear npm cache
+        run: npm cache clean --force
+
+      - name: Install pro dependencies
+        working-directory: pro
+        run: npm ci
+
+      - name: Install script dependencies
+        working-directory: script
+        run: npm ci
+
+      - name: Run vectorization script
+        working-directory: script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
+          HUGGINGFACE_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: node vectorize_articles.mjs
+
+  notify:
+    name: Notify Discord
+    needs: update-embeddings
+    runs-on: ubuntu-latest
+    if: success()
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -116,21 +127,28 @@ jobs:
         working-directory: script
         run: npm ci
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Detect updated files
+        run: git diff --name-status HEAD~1 HEAD > changed_files.txt
 
-      - name: Notify updated docs to Discord
-        working-directory: script
+      - name: Load doc directories config
+        run: cp script/docusaurus-docs-paths.json .
+
+      - name: Filter updated docs based on config
+        run: node script/filter-docusaurus-docs.js
+
+      - name: Generate docs update message
+        run: node script/generate-updated-docs.js
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
           SITE_URL: "https://ootomonaiso.github.io/ootomonaiso_strage/"
-          GITHUB_ENV: ${{ env.GITHUB_ENV }}
-        run: node notify-doc-updates.mjs
 
-      - name: Notify to Discord
-        if: success()
+      - name: Read message to env
+        id: read_msg
+        run: |
+          echo "DOC_MSG<<EOF" >> $GITHUB_ENV
+          cat docs_diff_message.txt >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+
+      - name: Send Discord notification
         run: |
           SITE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/"
           MESSAGE=$(echo -e ":tada: **サイトが更新されました！** :tada:\n\n 更新されたページ:\n\n${DOC_MSG}\n\n サイト: <${SITE_URL}>" | jq -Rs .)
