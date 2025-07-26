@@ -1,3 +1,4 @@
+// script/vectorize_articles.mjs
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -31,8 +32,6 @@ async function getEmbedding(text) {
     normalize: true,
   });
 
-  console.log('📦 Raw output from embedder:', output);
-
   if (!output || !output.data || !output.data.length) {
     throw new Error('❌ Invalid embedding tensor structure');
   }
@@ -46,8 +45,8 @@ async function processMarkdownFiles() {
     ignore: ['../pro/node_modules/**']
   });
 
-  console.log('📄 Matched Markdown files:', files);
   const processedFiles = [];
+  const updatedFiles = [];
 
   for (const filePath of files) {
     try {
@@ -86,6 +85,7 @@ async function processMarkdownFiles() {
           console.error(`❌ DB upsert error for ${relativePath}:`, upsertError);
         } else {
           console.log(`✅ Processed file: ${relativePath}`);
+          updatedFiles.push(relativePath); // 更新記録
         }
       } else {
         console.log(`🔁 Skipping unchanged file: ${relativePath}`);
@@ -97,6 +97,7 @@ async function processMarkdownFiles() {
     }
   }
 
+  // 不要レコード削除
   const { data: dbFiles } = await supabase.from('documents').select('file_path');
   const dbFilePaths = dbFiles.map((item) => item.file_path);
   const toDelete = dbFilePaths.filter((dbPath) => !processedFiles.includes(dbPath));
@@ -112,6 +113,9 @@ async function processMarkdownFiles() {
       console.log(`🗑️ Deleted record for file: ${delPath}`);
     }
   }
+
+  // 変更されたファイルを記録
+  fs.writeFileSync('updated_docs.txt', updatedFiles.join('\\n') + '\\n');
 }
 
 processMarkdownFiles()
