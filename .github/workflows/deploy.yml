@@ -119,11 +119,21 @@ jobs:
       - name: Detect updated files
         run: git diff --name-status HEAD~1 HEAD > changed_files.txt
 
+      - name: Show changed files
+        run: |
+          echo "=== changed_files.txt ==="
+          cat changed_files.txt || echo "No changes detected."
+
       - name: Load doc directories config
         run: cp script/docusaurus-docs-paths.json .
 
       - name: Filter updated docs based on config
         run: node script/filter-docusaurus-docs.js
+
+      - name: Show filtered docs
+        run: |
+          echo "=== filtered_docs.txt ==="
+          cat filtered_docs.txt || echo "No docs matched."
 
       - name: Generate docs update message
         run: node script/generate-updated-docs.js
@@ -141,16 +151,8 @@ jobs:
         if: success()
         run: |
           SITE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/"
-          MESSAGE=":tada: サイトが更新されました！ :tada:
-
-          📘 更新されたページ:
-
-          ${DOC_MSG}
-
-          🔗 サイト: ${SITE_URL}"
-
-          echo "$MESSAGE" | jq -Rs '{content: .}' > payload.json
+          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n\U0001F4D8 更新されたページ:\n\n${DOC_MSG}\n\n\U0001F517 サイト: <${SITE_URL}>"
 
           curl -X POST -H "Content-Type: application/json" \
-            -d @payload.json \
+            -d '{"content": "'$MESSAGE'"}' \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
