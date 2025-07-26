@@ -53,7 +53,7 @@ relayhost =
 # 環境に合わせて変えてね
 mynetworks = 192.168.1.0/24  
 
-inetたちは初期のまま?
+inetたちは初期のまま?(要検証)
 home_mailbox = Maildir/
 ```
 
