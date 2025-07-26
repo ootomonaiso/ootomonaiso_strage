@@ -151,8 +151,7 @@ jobs:
         if: success()
         run: |
           SITE_URL="https://ootomonaiso.github.io/ootomonaiso_strage/"
-          MESSAGE=":tada: **サイトが更新されました！** :tada:\n\n\U0001F4D8 更新されたページ:\n\n${DOC_MSG}\n\n\U0001F517 サイト: <${SITE_URL}>"
-
+          MESSAGE=$(echo -e ":tada: **サイトが更新されました！** :tada:\n\n📘 更新されたページ:\n\n${DOC_MSG}\n\n🔗 サイト: <${SITE_URL}>" | jq -Rs .)
           curl -X POST -H "Content-Type: application/json" \
-            -d '{"content": "'$MESSAGE'"}' \
+            -d "{\"content\": $MESSAGE}" \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
