@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-description: 
+description: postfixさんの愛に触れる
 ---
 
 # メールサーバーの設定
