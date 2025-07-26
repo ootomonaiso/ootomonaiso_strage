@@ -12,9 +12,10 @@ const raw = fs.readFileSync(updatedDocsPath, 'utf-8');
 const lines = raw.trim().split('\n');
 
 const format = (filePath) => {
-  const name = filePath.split('/').pop().replace(/\.(md|mdx)$/, '');
-  const url = baseUrl + filePath.replace(/\.(md|mdx)$/, '').replace(/\/index$/, '');
-  return `- [${name}](${url})`;
+  const pagePath = filePath.replace(/\.(md|mdx)$/, '').replace(/\/?index$/, '');
+  const url = baseUrl + pagePath;
+  const name = decodeURIComponent(pagePath.split('/').pop());
+  return `- [${name || pagePath}](${url})`;
 };
 
 const messages = lines.map(format).filter(Boolean).join('\n');

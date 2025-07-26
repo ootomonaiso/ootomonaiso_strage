@@ -45,12 +45,10 @@ subnet 192.168.2.0 netmask 255.255.255.0 {
     range 192.168.2.101 192.168.2.110;
     
     # デフォルトゲートウェイ（ルーター）
-    option routers 192.168.2.1;
+    option routers 192.168.2.1;　# 254(最後のアドレス)でもいいよ
 
     # DNSサーバー（osv2のIPアドレス）
     option domain-name-servers 192.168.2.1;
-    # ブロードキャストアドレス
-    option broadcast-address 192.168.2.255;
 }
 ```
 
