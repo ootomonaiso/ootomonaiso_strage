@@ -1,6 +1,6 @@
 ---
 sidebar_position: 2
-description: PPPoEさん
+description: Cisco PPPoE設定の解説
 ---
 
 # PPPoEクライアント設定
@@ -8,32 +8,32 @@ description: PPPoEさん
 ## 物理インターフェース設定（Ethernet0/0）
 ```cisco
 interface Ethernet0/0
- no ip address
- pppoe enable group global
- pppoe-client dial-pool-number 1
+ no ip address                      # 物理インターフェースにはIPアドレスを設定しない
+ pppoe enable group global          # PPPoEセッションをグローバルグループで有効化
+ pppoe-client dial-pool-number 1    # ダイアルプール1と関連付け
 ```
 
 ## ダイアラーインターフェース設定（Dialer1）
 ```cisco
 interface Dialer1
- mtu 1492
- ip address negotiated
- encapsulation ppp
- dialer pool 1
- dialer-group 1
- ppp authentication chap callin
- ppp chap hostname ppp-user
- ppp chap password 0 R6pass
+ mtu 1492                           # PPPoEヘッダ(8バイト)分を考慮したMTU値
+ ip address negotiated              # ISPからDHCPでIPアドレスを取得
+ encapsulation ppp                  # PPPプロトコルでカプセル化
+ dialer pool 1                      # 物理インターフェースと同じダイアルプール番号
+ dialer-group 1                     # ダイアラーリスト1を参照
+ ppp authentication chap callin     # 着信時のみCHAP認証を使用
+ ppp chap hostname ppp-user         # ISPに提示するユーザー名
+ ppp chap password 0 R6pass         # ISPに提示するパスワード(0は平文を示す)
 ```
 
 ## ルーティング設定
 ```cisco
-ip route 0.0.0.0 0.0.0.0 Dialer1
+ip route 0.0.0.0 0.0.0.0 Dialer1    # デフォルトルートをPPPoEインターフェースに向ける
 ```
 
 ## ダイアラーリスト設定
 ```cisco
-dialer-list 1 protocol ip permit
+dialer-list 1 protocol ip permit     # すべてのIPトラフィックを発信として許可
 ```
 
 ## 設定のポイント
@@ -57,3 +57,11 @@ dialer-list 1 protocol ip permit
 4. ルーティング設定を行い、デフォルトルートをダイアラーインターフェースに設定
 5. ダイアラーリストを使用して、IPプロトコルのトラフィックを許可
 :::
+
+:::tip PPPoEのデバッグ
+問題が発生した場合は以下のコマンドでデバッグできます：
+```cisco
+debug pppoe events
+debug ppp negotiation
+debug ppp authentication
+```
