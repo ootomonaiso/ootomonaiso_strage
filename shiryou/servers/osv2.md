@@ -25,11 +25,8 @@
 
 ### 基本設定
 ```bash
-# パッケージ更新
-sudo apt update && sudo apt upgrade -y
-
 # 必要パッケージインストール
-sudo apt install bind9 apache2 postfix dovecot-imapd isc-dhcp-server samba openssh-server quota -y
+sudo apt install bind9 apache2 postfix dovecot-imapd isc-dhcp-server samba openssh-server quota
 
 # タイムゾーン設定
 sudo timedatectl set-timezone Asia/Tokyo

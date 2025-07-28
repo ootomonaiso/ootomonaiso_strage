@@ -12,11 +12,8 @@
 
 ### 基本設定
 ```bash
-# パッケージ更新
-sudo apt update && sudo apt upgrade -y
-
 # 必要パッケージインストール
-sudo apt install bind9 bind9utils nginx postfix -y
+sudo apt install bind9 bind9utils nginx postfix 
 
 # タイムゾーン設定
 sudo timedatectl set-timezone Asia/Tokyo
