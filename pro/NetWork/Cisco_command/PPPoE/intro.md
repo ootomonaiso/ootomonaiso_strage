@@ -57,11 +57,3 @@ dialer-list 1 protocol ip permit     # すべてのIPトラフィックを発信
 4. ルーティング設定を行い、デフォルトルートをダイアラーインターフェースに設定
 5. ダイアラーリストを使用して、IPプロトコルのトラフィックを許可
 :::
-
-:::tip PPPoEのデバッグ
-問題が発生した場合は以下のコマンドでデバッグできます：
-```cisco
-debug pppoe events
-debug ppp negotiation
-debug ppp authentication
-```
