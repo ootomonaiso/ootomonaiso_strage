@@ -6,6 +6,102 @@ sidebar_position: 1
 今回は仮想環境でやりますが実機環境と大して変わらないのでそのまま参照できます
 
 # 必須コマンド・設定チートシート(完全版)
+[manコマンドで参照できる主なマニュアル一覧]
+
+```
+man smb.conf        # Sambaの設定ファイル全般
+man testparm        # Samba設定ファイルの検証
+man smbd            # Sambaデーモン
+man smbpasswd       # Sambaユーザー管理
+man net             # Samba管理コマンド
+man share           # 共有設定キーワード
+man sshd            # SSHデーモン
+man sshd_config     # SSH設定ファイル
+man ssh-keygen      # SSH鍵生成
+man systemctl       # サービス管理
+man useradd         # ユーザー追加
+man groupadd        # グループ追加
+man chpasswd        # パスワード一括設定
+man chage           # アカウント有効期限
+man quota           # ディスククオータ
+man setquota        # クオータ設定
+man fstab           # マウント設定
+man nano            # テキストエディタ
+man dig             # DNS問い合わせ
+man host            # 名前解決
+man ping            # 疎通確認
+man ping6           # IPv6疎通確認
+man traceroute      # 経路確認
+man tcpdump         # パケットキャプチャ
+man ss              # ソケット状態
+man netstat         # ポート状態
+man journalctl      # ログ確認
+```
+[主要サービスの基本設定例]
+
+---
+### Squid（Webプロキシサーバー）
+インストール：
+```
+apt install squid
+```
+設定ファイル：
+```
+nano /etc/squid/squid.conf
+```
+基本設定例：
+```
+http_port 3128
+acl localnet src 192.168.0.0/16
+http_access allow localnet
+http_access deny all
+cache_mem 128 MB
+maximum_object_size_in_memory 512 KB
+access_log /var/log/squid/access.log
+```
+サービス管理：
+```
+systemctl restart squid
+systemctl status squid
+```
+manコマンド：
+```
+man squid
+man squid.conf
+```
+
+---
+### tftpd-hpa（TFTPサーバー）
+インストール：
+```
+apt install tftpd-hpa
+```
+設定ファイル：
+```
+nano /etc/default/tftpd-hpa
+```
+基本設定例：
+```
+TFTP_USERNAME="tftp"
+TFTP_DIRECTORY="/srv/tftp"
+TFTP_ADDRESS="0.0.0.0:69"
+TFTP_OPTIONS="--secure"
+```
+ディレクトリ作成：
+```
+mkdir -p /srv/tftp
+chown tftp:tftp /srv/tftp
+```
+サービス管理：
+```
+systemctl restart tftpd-hpa
+systemctl status tftpd-hpa
+```
+manコマンド：
+```
+man tftpd-hpa
+man tftpd
+```
 
 ## ルータ設定 (Cisco IOS)
 
@@ -191,10 +287,13 @@ ipv6 access-list [名前]
  permit tcp any any eq 80
  
  # IPv6でのPing（ICMPv6 echo-request）を許可
- permit icmp any any echo-request
- 
+permit icmp any any echo-request           # ping (Echo Request)
+permit icmp any any echo-reply             # ping応答 (Echo Reply)
+permit icmp any any neighbor-solicitation  # 近接ノード要請 (Neighbor Solicitation)
+permit icmp any any neighbor-advertisement # 近接ノード広告 (Neighbor Advertisement)
+
  # IPv6の他のすべてのトラフィックを拒否
- deny ipv6 any any
+deny ipv6 any any
 
 # インターフェース適用
 interface GigabitEthernet0/0
@@ -556,6 +655,7 @@ nano /etc/samba/smb.conf
    hosts allow = 192.168.2.0/24
    hosts deny = all
 
+# マニュアルにはaprinterとして紹介　man から shareで調べてね
 [share]
    path = /home/share
    valid users = @g_osaka
@@ -564,7 +664,7 @@ nano /etc/samba/smb.conf
 
 # 共有ディレクトリ作成
 mkdir -p /home/share
-chmod 2770 /home/share
+chmod 277 /home/share
 chown root:g_osaka /home/share
 
 # Sambaユーザー追加
