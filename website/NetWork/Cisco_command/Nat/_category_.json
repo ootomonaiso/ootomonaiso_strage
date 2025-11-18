@@ -1,0 +1,8 @@
+{
+  "label": "NAT設定",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "NAT設定の手順まとめ"
+  }
+}
