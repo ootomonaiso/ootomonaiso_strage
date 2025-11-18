@@ -1,8 +1,8 @@
 {
-  "label": "server",
+  "label": "DNS",
   "position": 5,
   "link": {
     "type": "generated-index",
-    "description": "サーバー"
+    "description": "DNSサーバー設定"
   }
 }
