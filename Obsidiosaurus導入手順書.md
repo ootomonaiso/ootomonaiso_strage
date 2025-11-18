@@ -314,20 +314,23 @@ Obsidianで図形を描きたい場合：
 
 ---
 
-## 8. GitHub Pagesへのデプロイ（既存設定の確認）
+### 8. GitHub Pagesへのデプロイ（既存設定の確認）
 
 ### 8-1. GitHub Actionsの確認
 
 `.github/workflows/deploy.yml`が正しく設定されているか確認：
 
 ```yaml
-# ビルドディレクトリが "pro" → "website" に変更されている場合
-- name: Build website
-  run: |
-    cd website
-    npm install
-    npm run build
+            working-directory: website
+            run: npm ci
+
+            # ...
+
+            working-directory: website
+            run: npm run build
 ```
+
+ローカルで: `node generate_candidate_links.mjs` も `website` で実行するようにしてください。
 
 ### 8-2. docusaurus.config.jsの確認
 
