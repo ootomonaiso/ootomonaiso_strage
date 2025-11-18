@@ -121,13 +121,13 @@ const config = {
           },
         ],
       },
-      algolia: {
-        appId: process.env.DOCSEARCH_APP_ID,
-        apiKey: process.env.DOCSEARCH_API_KEY,
-        indexName: process.env.DOCSEARCH_INDEX_NAME,
-        insights: true,
-        debug: false,
-      },  
+      // algolia: {
+      //   appId: process.env.DOCSEARCH_APP_ID,
+      //   apiKey: process.env.DOCSEARCH_API_KEY,
+      //   indexName: process.env.DOCSEARCH_INDEX_NAME,
+      //   insights: true,
+      //   debug: false,
+      // },  
 
       footer: {
         style: 'dark',

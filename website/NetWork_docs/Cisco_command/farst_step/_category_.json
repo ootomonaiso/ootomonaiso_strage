@@ -1,0 +1,8 @@
+{
+  "label": "とりまよんで",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Teratarmを使ってコマンドを実行できる環境を整える"
+  }
+}
