@@ -19,23 +19,23 @@ jobs:
           node-version: '20.11.0'
 
       - name: Clear npm cache
-        working-directory: pro
+        working-directory: website
         run: npm cache clean --force
 
       - name: Remove Docusaurus cache
-        working-directory: pro
+        working-directory: website
         run: rm -rf .docusaurus
 
       - name: Install dependencies
-        working-directory: pro
+        working-directory: website
         run: npm ci
 
       - name: Clear Docusaurus cache again
-        working-directory: pro
+        working-directory: website
         run: npm run clear
 
       - name: Inject env vars for frontend
-        working-directory: pro
+        working-directory: website
         run: |
           echo "REACT_APP_GEMINI_API_KEY=${{ secrets.REACT_APP_GEMINI_API_KEY }}" > .env
           echo "REACT_APP_SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
@@ -45,17 +45,17 @@ jobs:
           echo "DOCSEARCH_INDEX_NAME=${{ secrets.DOCSEARCH_INDEX_NAME }}" >> .env
 
       - name: Build Docusaurus site
-        working-directory: pro
+        working-directory: website
         run: npm run build
 
       - name: Generate candidate links
-        working-directory: pro
+        working-directory: website
         run: node generate_candidate_links.mjs
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: pro/build
+          path: website/build
 
   deploy:
     name: Deploy to GitHub Pages

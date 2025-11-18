@@ -1,0 +1,8 @@
+{
+  "label": "DHCP",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "DHCPをルーター側に設定する方法を"
+  }
+}
