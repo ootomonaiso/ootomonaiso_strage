@@ -11,10 +11,14 @@
             "id": "7e39faf9bea016a9",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "グラフビュー"
+              "type": "markdown",
+              "state": {
+                "file": "blog/2025-05-13-sql.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-05-13-sql"
             }
           }
         ]
@@ -179,6 +183,8 @@
   },
   "active": "7e39faf9bea016a9",
   "lastOpenFiles": [
+    "docs/intro.md",
+    "yoshinashi_docs/intro.md",
     "assets/2025-05-23/1.png",
     "blog/yabamemo.md",
     "blog/2025-07-30.md"
