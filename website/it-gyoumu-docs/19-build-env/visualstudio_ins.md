@@ -1,26 +1,38 @@
 ---
 sidebar_position: 2
-description: VisualStudoをインスト�EルしよぁE---
+description: VisualStudoをインストールしよう
+---
 
-# VisualStudio 2022 CommunityのセチE��アチE�E
-今回はVisualStudioを使って開発を行います。絶妙にファイルサイズが大きいです。余裕をもって見積もってもだぁE��ぁE6GBくらぁE��ってかれます、E## VisualStudoのインスト�EラーをダウンロードすめE[VisualStudio 2022ダウンロード�Eージ](https://visualstudio.microsoft.com/ja/downloads/)にアクセスするとこうぁE��感じのペ�Eジが開きます、E![VisualStudio 2022インスト�Eラー](/img/it-gyoumu-docs/jpg)
-そうしたらコミュニティの無料ダウンロード�Eタンを押してください、EダウンロードフォルダにVisualStudioのセチE��アチE�Eexeがあれ�E成功でぁE![VisualStudio 2022インスト�Eラー](/img/it-gyoumu-docs/jpg)
+# VisualStudio 2022 Communityのセットアップ
+今回はVisualStudioを使って開発を行います。絶妙にファイルサイズが大きいです。余裕をもって見積もってもだいたい16GBくらい持ってかれます。
+## VisualStudoのインストーラーをダウンロードする
+[VisualStudio 2022ダウンロードページ](https://visualstudio.microsoft.com/ja/downloads/)にアクセスするとこういう感じのページが開きます。
+![VisualStudio 2022インストーラー](/img/it-gyoumu-docs/1.jpg)
+そうしたらコミュニティの無料ダウンロードボタンを押してください。
+ダウンロードフォルダにVisualStudioのセットアップexeがあれば成功です
+![VisualStudio 2022インストーラー](/img/it-gyoumu-docs/2.jpg)
 
-## VisualStudio 2022 Communityをインスト�Eルする
-### インスト�Eラーをインスト�Eルする
-VisualStudioはVisualStudoのインスト�Eラーをインスト�Eルしてからインスト�Eルするも�Eです。なので先ほどダウンロードしたVisualStudoSetup.exeを開きます、E#### ダブルクリチE��してインスト�Eラーを開ぁE![VisualStudio 2022インスト�Eラー](/img/it-gyoumu-docs/jpg)
+## VisualStudio 2022 Communityをインストールする
+### インストーラーをインストールする
+VisualStudioはVisualStudoのインストーラーをインストールしてからインストールするものです。なので先ほどダウンロードしたVisualStudoSetup.exeを開きます。
+#### ダブルクリックしてインストーラーを開く
+![VisualStudio 2022インストーラー](/img/it-gyoumu-docs/3.jpg)
 
-最初にダブルクリチE��してインスト�Eラーを開きます。そぁE��るとよくわからんダイヤログが�Eてくるので続行してください、E![VisualStudio 2022インスト�Eラー](/img/it-gyoumu-docs/jpg)
+最初にダブルクリックしてインストーラーを開きます。そうするとよくわからんダイヤログが出てくるので続行してください。
+![VisualStudio 2022インストーラー](/img/it-gyoumu-docs/4.jpg)
 
-こ�Eような画面が�Eてくるので征E��してください
-#### .NETチE��クトップ開発用のワークロードをインスト�Eルする
-![VisualStudio 2022インスト�Eラー](/img/it-gyoumu-docs/jpg)
+このような画面が出てくるので待機してください
+#### .NETデスクトップ開発用のワークロードをインストールする
+![VisualStudio 2022インストーラー](/img/it-gyoumu-docs/5.jpg)
 
-見ての通り7.1GBしっかり持ってぁE��れます。忁E��になれ�E後で追加もできるのでこ�E状態でインスト�Eルをします。チェチE��が�EってぁE��のを確認したら、「インスト�Eル」を押してください
-![VisualStudio 2022インスト�Eラー](/img/it-gyoumu-docs/jpg)
+見ての通り7.1GBしっかり持っていかれます。必要になれば後で追加もできるのでこの状態でインストールをします。チェックが入っているのを確認したら、「インストール」を押してください
+![VisualStudio 2022インストーラー](/img/it-gyoumu-docs/6.jpg)
 
-結構征E��される�Eで今�EぁE��にコーヒ�Eでも飲んでください。「インスト�Eル後に起動する」と書かれたチェチE��ボックスにチェチE��がデフォルトで入ってぁE��のでインスト�Eル終わったら勝手に起動します、E
-#### インスト�Eル完亁E![VisualStudio 2022インスト�Eラー](/img/it-gyoumu-docs/jpg)
+結構待たされるので今のうちにコーヒーでも飲んでください。「インストール後に起動する」と書かれたチェックボックスにチェックがデフォルトで入っているのでインストール終わったら勝手に起動します。
 
-筁E��E�E再インスト�Eルした環墁E��のでゴリゴリにファイル残ってますが、インスト�Eル終わるとこんな雰囲気�Eウインドウが開きます、EySQLWorkBenchのインスト�Eルは18回大会環墁E��参�Eしてください、E
-VisualStudioが開き次第タスクバ�Eにピン止めしておくと幸せになれまぁE
+#### インストール完了
+![VisualStudio 2022インストーラー](/img/it-gyoumu-docs/7.jpg)
+
+筆者は再インストールした環境なのでゴリゴリにファイル残ってますが、インストール終わるとこんな雰囲気のウインドウが開きます。MySQLWorkBenchのインストールは18回大会環境を参照してください。
+
+VisualStudioが開き次第タスクバーにピン止めしておくと幸せになれます

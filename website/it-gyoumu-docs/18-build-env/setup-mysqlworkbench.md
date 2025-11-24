@@ -1,38 +1,47 @@
 ---
 sidebar_position: 1
-description: MySQL Workbenchをインスト�EルしてチE�Eタベ�Eス管琁E�E一歩を踏み出そう
+description: MySQL Workbenchをインストールしてデータベース管理の一歩を踏み出そう
 ---
 
-# MySQL Workbenchのインスト�Eル
+# MySQL Workbenchのインストール
 
-MySQL WorkbenchはチE�Eタベ�Eス問い合わせ言語である`SQL`を用ぁE��管琁E��スチE��の一つで、現在はオラクル社が管琁E��てぁE��す、E
-YoutubeやTwitterなどの大規模サービスでも利用されてぁE��ソフトウェアです、E
-## インスト�EラーをダウンローチE
+MySQL Workbenchはデータベース問い合わせ言語である`SQL`を用いた管理システムの一つで、現在はオラクル社が管理しています。
+
+YoutubeやTwitterなどの大規模サービスでも利用されているソフトウェアです。
+
+## インストーラーをダウンロード
+
 ### MySQL Workbench Installer 8.0.35
 
-![MySQL Workbenchインスト�EラーダウンロードサイチE(/img/it-gyoumu-docs/png)
+![MySQL Workbenchインストーラーダウンロードサイト](/img/it-gyoumu-docs/11.png)
 
-[MySQL Workbench公式サイチE(https://dev.mysql.com/downloads/windows/installer/8.0.html)にアクセスし、表示されるインスト�Eラーのバ�Eジョンなどを確認し、インスト�Eラーをダウンロードしてください、E
-:::info 今回利用するバ�EジョンにつぁE��
+[MySQL Workbench公式サイト](https://dev.mysql.com/downloads/windows/installer/8.0.html)にアクセスし、表示されるインストーラーのバージョンなどを確認し、インストーラーをダウンロードしてください。
+
+:::info 今回利用するバージョンについて
 ver8.0.35
 OS:Microsoft Windows
-インスト�EラーぁEつ存在してぁE��すが下�Eインスト�Eラーの方を選んでください、E:::
+インストーラーが2つ存在していますが下のインストーラーの方を選んでください。
+:::
 
-![MySQL Workbenchインスト�Eラー Oracle](/img/it-gyoumu-docs/jpg)
+![MySQL Workbenchインストーラー Oracle](/img/it-gyoumu-docs/12.jpg)
 
-そうするとこ�EようにOracleのアカウントでログインするかサインアチE�Eさせようとするペ�Eジへ遷移します。Oracleのアカウントがなくてもインスト�Eラーをダウンロードすることができるので、下�E`No thanks,just start my download`を選択してください、E
-## MySQL WorkbenchをセチE��アチE�E
+そうするとこのようにOracleのアカウントでログインするかサインアップさせようとするページへ遷移します。Oracleのアカウントがなくてもインストーラーをダウンロードすることができるので、下の`No thanks,just start my download`を選択してください。
 
-ダウンロードフォルダにある`mysql-installer-community-8.0.35.0.msi`を起動してください。そぁE��るとMySQL Installerが開きます、E
+## MySQL Workbenchをセットアップ
+
+ダウンロードフォルダにある`mysql-installer-community-8.0.35.0.msi`を起動してください。そうするとMySQL Installerが開きます。
+
 ### タイプ設定をする
 
-![MySQL Workbenchインスト�Eラー open](/img/it-gyoumu-docs/jpg)
+![MySQL Workbenchインストーラー open](/img/it-gyoumu-docs/13.jpg)
 
-インスト�Eラーが起動するとこ�Eようなウィンドウが開きます。`Choosing a Setup Type`めE*Full**に刁E��替えてください、E
-### Installationの実衁E
-![MySQL Workbenchインスト�Eラー Installation](/img/it-gyoumu-docs/jpg)
+インストーラーが起動するとこのようなウィンドウが開きます。`Choosing a Setup Type`を**Full**に切り替えてください。
 
-インスト�EルされるパチE��ージは以下�E通り
+### Installationの実行
+
+![MySQL Workbenchインストーラー Installation](/img/it-gyoumu-docs/13.jpg)
+
+インストールされるパッケージは以下の通り
 
 - MySQL Server 8.0.35
 - MySQL Workbench 8.0.34
@@ -41,11 +50,15 @@ OS:Microsoft Windows
 - MySQL Documentation 8.0.35
 - Samples and Examples 8.0.35
 
-タイプ設定�E時に**Full**を指定してぁE��ぁE��これがすべてインスト�Eルされません、E
-以上�Eパッケージのインスト�EルがスケジュールされてぁE��ことを確認し、E*Execute**をクリチE��してインスト�Eルしてください、E
+タイプ設定の時に**Full**を指定していないとこれがすべてインストールされません。
+
+以上のパッケージのインストールがスケジュールされていることを確認し、**Execute**をクリックしてインストールしてください。
+
 :::warning
-インスト�Eルが失敗してしまぁE��インスト�Eルが中断されて次へ進めなくなってしまぁE��例があります。その場合左側に表示されるアイコンをクリチE��したら�E度インスト�Eルの試行ができたと思います、E:::
+インストールが失敗してしまい、インストールが中断されて次へ進めなくなってしまう事例があります。その場合左側に表示されるアイコンをクリックしたら再度インストールの試行ができたと思います。
+:::
 
 :::danger
-インスト�Eルが終わった後、Nextボタンを連打すると、�E、Eextボタンがあった�Eず�E場所にCancelボタンが�E現し、MySQL ServerのセチE��アチE�EがキャンセルされてしまぁE��す、EySQL ServerのセチE��アチE�EがされてぁE��ぁE��動きません、E:::
+インストールが終わった後、Nextボタンを連打すると、元々Nextボタンがあったはずの場所にCancelボタンが出現し、MySQL Serverのセットアップがキャンセルされてしまいます。MySQL Serverのセットアップがされていないと動きません。
+:::
 

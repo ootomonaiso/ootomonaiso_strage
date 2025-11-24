@@ -1,45 +1,64 @@
 ---
 sidebar_position: 2
-description: VisualStudoでプロジェクトを構築すめE---
+description: VisualStudoでプロジェクトを構築する
+---
 
 # VisualStudioで最低限使えるようにする
-## プロジェクト�E作�E
-![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+## プロジェクトの作成
+![VisualStudio 2022](/img/it-gyoumu-docs/10.jpg)
 
-新しいプロジェクトを作�EをクリチE��してください、E![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+新しいプロジェクトを作成をクリックしてください。
+![VisualStudio 2022](/img/it-gyoumu-docs/11.jpg)
 
-「Windowsフォームアプリケーション(.NET Framework)」とぁE��プロジェクトを選択し、次へを押します、E
-![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
-プロジェクト名にお好みのプロジェクト名を�Eれてください。最初�E1斁E��目は英語大斁E��が望ましいでぁEそうしたら「ソリューションとプロジェクトを同じチE��レクトリに配置する」を選択してください、E
+「Windowsフォームアプリケーション(.NET Framework)」というプロジェクトを選択し、次へを押します。
+
+![VisualStudio 2022](/img/it-gyoumu-docs/12.jpg)
+プロジェクト名にお好みのプロジェクト名を入れてください。最初の1文字目は英語大文字が望ましいです
+そうしたら「ソリューションとプロジェクトを同じディレクトリに配置する」を選択してください。
+
 :::info
-プロジェクト�E中に褁E��のソリューションを置くことができるのでこ�Eように刁E��られてぁE��すが、正直無駁E��フォルダマトリョーシカ化が加速する�Eで推奨しません、E:::
+プロジェクトの中に複数のソリューションを置くことができるのでこのように分けられていますが、正直無駄にフォルダマトリョーシカ化が加速するので推奨しません。
+:::
 
-これらを確認して「作�E」をクリチE��してください、Eそうしたらしばらく征E��とプロジェクトが作�EされまぁE
-## ※毎回めE��作業 NuGetパッケージをインスト�Eルする
-![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+これらを確認して「作成」をクリックしてください。
+そうしたらしばらく待つとプロジェクトが作成されます
 
-「参照」から「NuGetパッケージの管琁E��を選択してください、E
-### MySQL.Dataを�Eれる
-MySQL.DataはMySQLServerとコネクションをちめE��めE��のちめE��でめE��てくれる便利な外部パッケージです、E![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+## ※毎回やる作業 NuGetパッケージをインストールする
+![VisualStudio 2022](/img/it-gyoumu-docs/13.jpg)
 
-上�E検索窓に「MySQL.Data」と入力し、�EてくるおなじみのMySQLのロゴのパッケージをクリチE��し、「インスト�Eル」�EタンをクリチE��してください、E
-![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+「参照」から「NuGetパッケージの管理」を選択してください。
 
-そ�Eパッケージを動かすのにぁE��パッケージ一覧です。「適用」を押してください、E
-![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+### MySQL.Dataを入れる
+MySQL.DataはMySQLServerとコネクションをちょちょいのちょいでやってくれる便利な外部パッケージです。
+![VisualStudio 2022](/img/it-gyoumu-docs/14.jpg)
 
-同意するを押してください。そぁE��ると忁E��なパッケージを追加してくれます、E
-### BCrypt.Net-Nextを�Eれる
-BCryptはとりあえず使っとけな優秀なハッシュ化ライブラリです。eclipseでもお世話になった。これからも使ぁE��しょぁE��E
-![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
-先ほどと同じように参�Eから検索窓に「BCrypt」と入力してください、ECyの時点で有名なライブラリなので出てきます。�Eてくる「BCrypt.Net-Next」をクリチE��して、「インスト�Eル」を押します、E
-![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+上の検索窓に「MySQL.Data」と入力し、出てくるおなじみのMySQLのロゴのパッケージをクリックし、「インストール」ボタンをクリックしてください。
 
-同意するを押してください。そぁE��ると忁E��なパッケージを追加してくれます、E
-## GitHubへのチE�EタのバックアチE�E
-丁E��一ぁE��かりチE�Eタが吹き飛�Eのを防止するために、また、褁E��機�Eの開発をブランチごとに管琁E��きるようにGitを用ぁE��バ�Eジョン管琁E��しましょぁE![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+![VisualStudio 2022](/img/it-gyoumu-docs/15.jpg)
 
-「Git変更」から「Gitリポジトリの作�E」を選択します、E![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+そのパッケージを動かすのにいるパッケージ一覧です。「適用」を押してください。
 
-「アカウント」�E褁E��アカウントを登録できます。「所有老E���E個人のアカウントだけではなく、絁E���Eも�Eを選択することも可能です。「リポジトリ名」には英語でお好みのわかりやすいリポジトリ名を入れてください。忁E��な頁E��を埋めたら、「作�Eとプッシュ」をクリチE��してください、E
-VisualStudio上でGitの操作�Eできますが自刁E�EGitGraphを見たぁE�EでVSCodeで開いてコミットやプルリクエストも行ってぁE��す、E
+![VisualStudio 2022](/img/it-gyoumu-docs/16.jpg)
+
+同意するを押してください。そうすると必要なパッケージを追加してくれます。
+
+### BCrypt.Net-Nextを入れる
+BCryptはとりあえず使っとけな優秀なハッシュ化ライブラリです。eclipseでもお世話になった。これからも使うでしょう。
+
+![VisualStudio 2022](/img/it-gyoumu-docs/17.jpg)
+先ほどと同じように参照から検索窓に「BCrypt」と入力してください。BCyの時点で有名なライブラリなので出てきます。出てくる「BCrypt.Net-Next」をクリックして、「インストール」を押します。
+
+![VisualStudio 2022](./images/18.jpg)
+
+同意するを押してください。そうすると必要なパッケージを追加してくれます。
+
+## GitHubへのデータのバックアップ
+万が一うっかりデータが吹き飛ぶのを防止するために、また、複数機能の開発をブランチごとに管理できるようにGitを用いてバージョン管理をしましょう
+![VisualStudio 2022](./images/19.jpg)
+
+「Git変更」から「Gitリポジトリの作成」を選択します。
+![VisualStudio 2022](./images/20.jpg)
+
+「アカウント」は複数アカウントを登録できます。「所有者」は個人のアカウントだけではなく、組織のものを選択することも可能です。「リポジトリ名」には英語でお好みのわかりやすいリポジトリ名を入れてください。必要な項目を埋めたら、「作成とプッシュ」をクリックしてください。
+
+VisualStudio上でGitの操作はできますが自分はGitGraphを見たいのでVSCodeで開いてコミットやプルリクエストも行っています。

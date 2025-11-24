@@ -1,21 +1,30 @@
 ---
 sidebar_position: 3
-description: Java20のインスト�Eル
+description: Java20のインストール
 ---
 
-# Java20のインスト�Eル
+# Java20のインストール
 
-Java SE�E�Eava Standard Edition�E��E、JavaプラチE��フォームの標準エチE��ションであり、Javaプログラミング言語�E基本皁E��機�EめE��イブラリが含まれてぁE��す、Eava SEは、デスクトップ、サーバ�E、絁E��込みシスチE��など、さまざまな環墁E��Javaアプリケーションを開発および実行するため�E基盤となる機�Eを提供します、Eava SEには、コアとなるJava言語仕様、Java仮想マシン�E�EVM�E�、Javaクラスライブラリなどが含まれてぁE��す、E
-## インスト�EラーをダウンローチE
-[Java20ダウンロード�Eージ](https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html)
+Java SE（Java Standard Edition）は、Javaプラットフォームの標準エディションであり、Javaプログラミング言語の基本的な機能やライブラリが含まれています。Java SEは、デスクトップ、サーバー、組み込みシステムなど、さまざまな環境でJavaアプリケーションを開発および実行するための基盤となる機能を提供します。Java SEには、コアとなるJava言語仕様、Java仮想マシン（JVM）、Javaクラスライブラリなどが含まれています。
 
-上記�Eリンクへアクセスし、表示されるインスト�Eラーの中で、Windows x64 Installerを探し、右側にあるリンクをクリチE��してください。�E動でダウンロードが始まります、E
-一番上にあるからと言ってLinuxのインスト�Eラーを選んでもセチE��アチE�Eされません、E
-わけわかんなくて焦ってる人のために画像でダウンロード手頁E��説明します、E
-まず、サイトにアクセスするとこ�Eような状態だと思います、E
-上�E方はLinuxのインスト�Eラーなので、下にスクロールしてぁE��ます、E
-![Java20Archive](/img/it-gyoumu-docs/jpg)
+## インストーラーをダウンロード
 
-スクロールしてぁE��と、今回使ぁE0.0.2のひとつ前�Eバ�Eジョンである20.0.1のインスト�Eラーのダウンロード場所が�Eてきます、E
-そ�E上にあるWindows x64 Installerが今回使用するも�Eです。右側にあるリンクをクリチE��し、ダウンロードしてください、E
-![Java20link](/img/it-gyoumu-docs/jpg)
+[Java20ダウンロードページ](https://www.oracle.com/java/technologies/javase/jdk20-archive-downloads.html)
+
+上記のリンクへアクセスし、表示されるインストーラーの中で、Windows x64 Installerを探し、右側にあるリンクをクリックしてください。自動でダウンロードが始まります。
+
+一番上にあるからと言ってLinuxのインストーラーを選んでもセットアップされません。
+
+わけわかんなくて焦ってる人のために画像でダウンロード手順を説明します。
+
+まず、サイトにアクセスするとこのような状態だと思います。
+
+上の方はLinuxのインストーラーなので、下にスクロールしていきます。
+
+![Java20Archive](/img/it-gyoumu-docs/19.jpg)
+
+スクロールしていくと、今回使う20.0.2のひとつ前のバージョンである20.0.1のインストーラーのダウンロード場所が出てきます。
+
+その上にあるWindows x64 Installerが今回使用するものです。右側にあるリンクをクリックし、ダウンロードしてください。
+
+![Java20link](/img/it-gyoumu-docs/20.jpg)

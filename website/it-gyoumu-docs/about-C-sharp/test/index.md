@@ -4,7 +4,8 @@ description: 接続確認を取る
 ---
 
 # MySQLServer側とアプリケーションの接続確認を行う
-まずデータベ�Eスとコネクションを取らなぁE��とにはお話にならなぁE�Eで、とりあえず接続�E確認をしましょぁE下に添付するコードを「Proglam.cs」にコピ�Eしてください
+まずデータベースとコネクションを取らないことにはお話にならないので、とりあえず接続の確認をしましょう
+下に添付するコードを「Proglam.cs」にコピペしてください
 
 ``` Csharp
 using System;
@@ -15,28 +16,32 @@ namespace Testproject
     internal static class Program
     {
         /// <summary>
-        /// アプリケーションのメイン エントリ ポイントです、E        /// </summary>
+        /// アプリケーションのメイン エントリ ポイントです。
+        /// </summary>
         [STAThread]
         static void Main()
         {
-            // MySQLチE�Eタベ�Eスへの接続文字�E 
+            // MySQLデータベースへの接続文字列 
             string connectionString = "server=localhost;database=mydatabase;user=root;password=myPassword;";
-            // MySqlConnectionオブジェクト�E作�E
+            // MySqlConnectionオブジェクトの作成
             MySqlConnection connection = new MySqlConnection(connectionString);
 
             try
             {
-                // チE�Eタベ�Eス接続を開く
+                // データベース接続を開く
                 connection.Open();
-                // 接続が成功した場合、Eok"と出劁E                Console.WriteLine("ok");
+                // 接続が成功した場合、"ok"と出力
+                Console.WriteLine("ok");
             }
             catch (Exception)
             {
-                // 接続が失敗した場合、Eno"と出劁E                Console.WriteLine("no");
+                // 接続が失敗した場合、"no"と出力
+                Console.WriteLine("no");
             }
             finally
             {
-                // 接続が開かれてぁE��場合、接続を閉じめE                if (connection.State == System.Data.ConnectionState.Open)
+                // 接続が開かれている場合、接続を閉じる
+                if (connection.State == System.Data.ConnectionState.Open)
                 {
                     connection.Close();
                 }
@@ -48,9 +53,10 @@ namespace Testproject
 ```
 ## 注意点
 ``` Csharp
-// MySQLチE�Eタベ�Eスへの接続文字�E 
+// MySQLデータベースへの接続文字列 
 string connectionString = "server=localhost;database=mydatabase;user=root;password=myPassword;";
 ```
-ここの部刁E��すが、serverはMySQLServerがある場所、databaseはMySQLWorkBenchでのスキーマ、userはユーザーネ�Eム、passwordはユーザーのパスワードを入れる部刁E��す。あなた�E環墁E��合わせて変更してください、E![VisualStudio 2022](/img/it-gyoumu-docs/jpg)
+ここの部分ですが、serverはMySQLServerがある場所、databaseはMySQLWorkBenchでのスキーマ、userはユーザーネーム、passwordはユーザーのパスワードを入れる部分です。あなたの環境に合わせて変更してください。
+![VisualStudio 2022](./images/1.jpg)
 
-こ�Eように「ok」と表示されれ�E成功
+このように「ok」と表示されれば成功
