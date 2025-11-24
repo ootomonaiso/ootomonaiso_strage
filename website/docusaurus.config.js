@@ -43,36 +43,36 @@ const config = {
     ],
   ],
   plugins: [
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'NetWork',
-        path: 'NetWork',
-        routeBasePath: 'NetWork',
-        sidebarPath: require.resolve('./sidebars.js'),
-        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'IT_gyoumu',
-        path: 'IT_gyoumu',
-        routeBasePath: 'IT_gyoumu',
-        sidebarPath: require.resolve('./sidebars.js'),
-        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
-      },
-    ],
-        [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'yoshinashi',
-        path: 'yoshinashi',
-        routeBasePath: 'yoshinashi',
-        sidebarPath: require.resolve('./sidebars.js'),
-        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
-      },
-    ],
+      [
+        '@docusaurus/plugin-content-docs',
+        {
+          id: 'NetWork_docs',
+          path: 'NetWork_docs',
+          routeBasePath: 'NetWork_docs',
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+        },
+      ],
+      [
+        '@docusaurus/plugin-content-docs',
+        {
+          id: 'IT_gyoumu_docs',
+          path: 'IT_gyoumu_docs',
+          routeBasePath: 'IT_gyoumu_docs',
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+        },
+      ],
+      [
+        '@docusaurus/plugin-content-docs',
+        {
+          id: 'yoshinashi_docs',
+          path: 'yoshinashi_docs',
+          routeBasePath: 'yoshinashi_docs',
+          sidebarPath: require.resolve('./sidebars.js'),
+          editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+        },
+      ],
   ],
 
   themeConfig:
@@ -89,31 +89,31 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-          {
-            to: '/docs/intro',
-            position: 'left',
-            label: '自己紹介',
-          },
-          {
-            to: '/blog',
-            label: 'Blog', 
-            position: 'left'
-          },
-          {
-            to: '/NetWork/intro',
-            position: 'left',
-            label: 'NetWork',
-          },
-          {
-            to: '/IT_gyoumu/intro',
-            position: 'left',
-            label: '業務用ITソフトウェア',
-          },
-          {
-            to: '/yoshinashi/intro',
-            position: 'left',
-            label: 'よしなしこと',
-          },
+            {
+              to: '/docs/intro',
+              position: 'left',
+              label: '自己紹介',
+            },
+            {
+              to: '/blog',
+              label: 'Blog', 
+              position: 'left'
+            },
+            {
+              to: '/NetWork_docs/intro',
+              position: 'left',
+              label: 'NetWork',
+            },
+            {
+              to: '/IT_gyoumu_docs/intro',
+              position: 'left',
+              label: '業務用ITソフトウェア',
+            },
+            {
+              to: '/yoshinashi_docs/intro',
+              position: 'left',
+              label: 'よしなしこと',
+            },
           {
             href: 'https://github.com/ootomonaiso',
             label: 'GitHub',
@@ -135,18 +135,18 @@ const config = {
           {
             title: 'ドキュメント',
             items: [
-              {
-                label: '自己紹介',
-                to: '/docs/intro',
-              },
-              {
-                label: 'NetWork',
-                to: '/NetWork/intro',
-              },
-              {
-                label: '業務用ITソフトウェア',
-                to: '/IT_gyoumu/intro',
-              },
+                {
+                  label: '自己紹介',
+                  to: '/docs/intro',
+                },
+                {
+                  label: 'NetWork',
+                  to: '/NetWork_docs/intro',
+                },
+                {
+                  label: '業務用ITソフトウェア',
+                  to: '/IT_gyoumu_docs/intro',
+                },
             ],
           },
           {
