@@ -57,6 +57,6 @@ namespace Testproject
 string connectionString = "server=localhost;database=mydatabase;user=root;password=myPassword;";
 ```
 ここの部分ですが、serverはMySQLServerがある場所、databaseはMySQLWorkBenchでのスキーマ、userはユーザーネーム、passwordはユーザーのパスワードを入れる部分です。あなたの環境に合わせて変更してください。
-![VisualStudio 2022](./images/1.jpg)
+![VisualStudio 2022](/img/it-gyoumu-docs/1.jpg)
 
 このように「ok」と表示されれば成功

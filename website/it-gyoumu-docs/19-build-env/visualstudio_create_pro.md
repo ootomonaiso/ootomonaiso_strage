@@ -48,16 +48,16 @@ BCryptはとりあえず使っとけな優秀なハッシュ化ライブラリ�
 ![VisualStudio 2022](/img/it-gyoumu-docs/17.jpg)
 先ほどと同じように参照から検索窓に「BCrypt」と入力してください。BCyの時点で有名なライブラリなので出てきます。出てくる「BCrypt.Net-Next」をクリックして、「インストール」を押します。
 
-![VisualStudio 2022](./images/18.jpg)
+![VisualStudio 2022](/img/it-gyoumu-docs/18.jpg)
 
 同意するを押してください。そうすると必要なパッケージを追加してくれます。
 
 ## GitHubへのデータのバックアップ
 万が一うっかりデータが吹き飛ぶのを防止するために、また、複数機能の開発をブランチごとに管理できるようにGitを用いてバージョン管理をしましょう
-![VisualStudio 2022](./images/19.jpg)
+![VisualStudio 2022](/img/it-gyoumu-docs/19.jpg)
 
 「Git変更」から「Gitリポジトリの作成」を選択します。
-![VisualStudio 2022](./images/20.jpg)
+![VisualStudio 2022](/img/it-gyoumu-docs/20.jpg)
 
 「アカウント」は複数アカウントを登録できます。「所有者」は個人のアカウントだけではなく、組織のものを選択することも可能です。「リポジトリ名」には英語でお好みのわかりやすいリポジトリ名を入れてください。必要な項目を埋めたら、「作成とプッシュ」をクリックしてください。
 
