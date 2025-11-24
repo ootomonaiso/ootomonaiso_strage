@@ -5,7 +5,7 @@ description: dinamic NATの構築
 
 # 動的NATの構築
 
-![nat](/./img/1.png)
+![nat](./img/1-1.png)
 
 - R2の`eth0/0`の入力をすべて`100.1.1.10`から`100.1.1.20`までを変換して`eth0/1`へ流す
 

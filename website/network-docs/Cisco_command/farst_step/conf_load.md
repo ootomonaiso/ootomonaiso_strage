@@ -5,7 +5,7 @@ description: コンフィグをロードする
 
 # ルーターのコンフィグをロードする
 
-![Teratarmの起動](/./img/png)
+![Teratarmの起動](./img/41.png)
 
 コンフィグ見たいルーター押してCONFIGからFETCH
 

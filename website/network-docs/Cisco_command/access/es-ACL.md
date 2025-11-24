@@ -6,7 +6,7 @@ description: establishACL
 # establishを使ってv6のACLを組む
 
 ## 状況説明
-![問題](/./img/1.png)
+![問題](./img/3-1.png)
 
 - R-tkyをファイアウォールとする
 - tsvは内部ネットワーク

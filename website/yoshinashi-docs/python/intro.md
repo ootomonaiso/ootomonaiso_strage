@@ -7,7 +7,7 @@ description: pythonを学校のタブレットで使いたーーーい
 管理者権限がない状態のPCではPythonのインストーラーを使ってインストールすることが地味に難しいので、今回はPythonの再頒布可能パッケージを使ってセットアップする方法をまとめます。
 
 ## 1.VSCodeのインストール
-![VScodeinstall](/./img/jpg)
+![VScodeinstall](./img/24.jpg)
 
 Windows版のインストーラーを入手します。日本語の相変わらずインストーラーがダウンロードフォルダにあるので開きます。このインストーラーはちゃんと日本語です。VSCodeはすでにセットアップ済みなので、ここでは簡単に手順だけ説明します。
 
@@ -18,12 +18,12 @@ Windows版のインストーラーを入手します。日本語の相変わら�
 5. 「インストール」を押して、終わったら「完了」をクリックします。
 
 ## 2.VSCodeの日本語化
-![VScodeinstall](/./img/jpg)
+![VScodeinstall](./img/25.jpg)
 
 左側のタイルマークをクリックして拡張機能の画面を開きます。
 その画面の検索ボックスに`Japan`と入力し、赤丸でかこった言語パックを探してください。
 
-![VScodeinstall](/./img/jpg)
+![VScodeinstall](./img/26.jpg)
 
 インストールが終わるとVSCodeの右下にこの通知が来ます。青いボタンを押して、言語パックを適用させましょう
 
@@ -33,27 +33,27 @@ Windows版のインストーラーを入手します。日本語の相変わら�
 
 上のリンクからダウンロードサイトに飛びます。
 
-![VScodeinstall](/./img/jpg)
+![VScodeinstall](./img/27.jpg)
 
 アクセスするとこのような画面が出てくると思います。
 
-![VScodeinstall](/./img/jpg)
+![VScodeinstall](./img/28.jpg)
 
 `Stable Releases`から`Python 3.12.4 - June 6, 2024`というバージョンを探します。`Download Windows embeddable package (64-bit)`というパッケージをダウンロードします。黄色い下線が入っている部分をクリックするとダウンロードが始まります。
 
-![VScodeinstall](/./img/jpg)
+![VScodeinstall](./img/29.jpg)
 ダウンロードできればダウンロードフォルダにあからさまにzipがおいてあります
 
-![VScodeinstall](/./img/jpg)
+![VScodeinstall](./img/30.jpg)
 エクスプローラーのPCから<mark>Local Disk(C:)</mark>を開いてこの中に<mark>Python3.12.4</mark>という名前のフォルダを作成します。
 
-![pythonins](/./img/jpg)
+![pythonins](./img/32.jpg)
 タスクバーにあるエクスプローラを右クリックして、そこに出てくる<mark>エクスプローラ</mark>と書かれた、赤丸でかこったところをクリックすると新しいエクスプローラが開きます。次の手順に進んでください。
 
-![pythonins](/./img/jpg)
+![pythonins](./img/31.jpg)
 新しく開いたエクスプローラで、先ほどダウンロードしたPythonのパッケージのzipファイルをダブルクリックして開き、<mark>Ctrl+A</mark>で全選択してください。
 
-![pythonins](/./img/jpg)
+![pythonins](./img/33.jpg)
 全選択したファイルを左クリックで握って、Python3.12.4フォルダにドラッグアンドドロップしてください。全てコピーされているのを確認したらVSCodeを開いてください。
 
 ## 4.VSCodeにPythonを認識させる
