@@ -12,11 +12,11 @@ Eclipse IDE（Integrated Development Environment）は、Javaをはじめとす�
 
 おそらくこのようなページが開いているはずです。
 
-![eclipseIDEインストーラー](/img/it-gyoumu-docs/15.jpg)
+![eclipseIDEインストーラー](./images/15.jpg)
 
 青い3つのボタンのうち、Eclipse2022をクリックしてください。
 
-![eclipseIDE2022](/img/it-gyoumu-docs/16.jpg)
+![eclipseIDE2022](./images/16.jpg)
 
 このようなページに遷移します。画像中で赤い丸で囲われているインストーラーをクリックします。
 
@@ -30,7 +30,7 @@ Eclipse IDE（Integrated Development Environment）は、Javaをはじめとす�
 遷移先のページに、httpsから始まるリンクが置いてあると思うのでそこをクリックするとダウンロードが始まります。
 下の画像のようにリンクがあるはずです。
 
-![eclipsepopup](/img/it-gyoumu-docs/17.jpg)
+![eclipsepopup](./images/17.jpg)
 
 :::info
 - Windows x86では動かないかもしれませんが、

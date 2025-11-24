@@ -13,7 +13,7 @@ YoutubeやTwitterなどの大規模サービスでも利用されているソフ
 
 ### MySQL Workbench Installer 8.0.35
 
-![MySQL Workbenchインストーラーダウンロードサイト](/img/it-gyoumu-docs/11.png)
+![MySQL Workbenchインストーラーダウンロードサイト](./images/11.png)
 
 [MySQL Workbench公式サイト](https://dev.mysql.com/downloads/windows/installer/8.0.html)にアクセスし、表示されるインストーラーのバージョンなどを確認し、インストーラーをダウンロードしてください。
 
@@ -23,7 +23,7 @@ OS:Microsoft Windows
 インストーラーが2つ存在していますが下のインストーラーの方を選んでください。
 :::
 
-![MySQL Workbenchインストーラー Oracle](/img/it-gyoumu-docs/12.jpg)
+![MySQL Workbenchインストーラー Oracle](./images/12.jpg)
 
 そうするとこのようにOracleのアカウントでログインするかサインアップさせようとするページへ遷移します。Oracleのアカウントがなくてもインストーラーをダウンロードすることができるので、下の`No thanks,just start my download`を選択してください。
 
@@ -33,13 +33,13 @@ OS:Microsoft Windows
 
 ### タイプ設定をする
 
-![MySQL Workbenchインストーラー open](/img/it-gyoumu-docs/13.jpg)
+![MySQL Workbenchインストーラー open](./images/13.jpg)
 
 インストーラーが起動するとこのようなウィンドウが開きます。`Choosing a Setup Type`を**Full**に切り替えてください。
 
 ### Installationの実行
 
-![MySQL Workbenchインストーラー Installation](/img/it-gyoumu-docs/13.jpg)
+![MySQL Workbenchインストーラー Installation](./images/13.jpg)
 
 インストールされるパッケージは以下の通り
 

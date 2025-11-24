@@ -21,10 +21,10 @@ Java SE（Java Standard Edition）は、Javaプラットフォームの標準エ
 
 上の方はLinuxのインストーラーなので、下にスクロールしていきます。
 
-![Java20Archive](/img/it-gyoumu-docs/19.jpg)
+![Java20Archive](./images/19.jpg)
 
 スクロールしていくと、今回使う20.0.2のひとつ前のバージョンである20.0.1のインストーラーのダウンロード場所が出てきます。
 
 その上にあるWindows x64 Installerが今回使用するものです。右側にあるリンクをクリックし、ダウンロードしてください。
 
-![Java20link](/img/it-gyoumu-docs/20.jpg)
+![Java20link](./images/20.jpg)
