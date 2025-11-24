@@ -100,17 +100,17 @@ const config = {
               position: 'left'
             },
             {
-              to: '/network-docs',
+              to: '/network-docs/intro',
               position: 'left',
               label: 'NetWork',
             },
             {
-              to: '/it-gyoumu-docs',
+              to: '/it-gyoumu-docs/intro',
               position: 'left',
               label: '業務用ITソフトウェア',
             },
             {
-              to: '/yoshinashi-docs',
+              to: '/yoshinashi-docs/intro',
               position: 'left',
               label: 'よしなしこと',
             },
@@ -141,11 +141,11 @@ const config = {
                 },
                 {
                   label: 'NetWork',
-                  to: '/network-docs',
+                  to: '/network-docs/intro',
                 },
                 {
                   label: '業務用ITソフトウェア',
-                  to: '/it-gyoumu-docs',
+                  to: '/it-gyoumu-docs/intro',
                 },
             ],
           },

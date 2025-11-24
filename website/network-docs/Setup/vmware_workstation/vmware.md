@@ -14,7 +14,7 @@ description: VMwareのセットアップ
 BROADCOMのアカウント持ってない人は[ここからBROADCOMアカウントを作成](https://profile.broadcom.com/web/registration)してからログイン。アカウント作成画面は別タブで開くと楽
 
 ### 3. インストーラーを探す
-![VMWare MyDounloads](./img/1-0.png)
+![VMWare MyDownloads](./img/1-0.png)
 
 右のサイドメニューから**My Downloads**を選択し、検索ボックス下にある**Free Software Downloads available HERE**をクリック
 下の方にある**VMWare Workstation Pro**を選択
