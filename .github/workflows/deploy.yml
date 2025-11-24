@@ -28,6 +28,8 @@ jobs:
 
       - name: Install dependencies
         working-directory: website
+        env:
+          SHARP_IGNORE_GLOBAL_LIBVIPS: 1
         run: npm ci
 
       - name: Clear Docusaurus cache again
