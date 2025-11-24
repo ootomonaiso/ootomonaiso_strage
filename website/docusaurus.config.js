@@ -46,9 +46,9 @@ const config = {
       [
         '@docusaurus/plugin-content-docs',
         {
-          id: 'NetWork_docs',
-          path: 'NetWork_docs',
-          routeBasePath: 'NetWork_docs',
+          id: 'network-docs',
+          path: 'network-docs',
+          routeBasePath: 'network-docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
         },
@@ -56,9 +56,9 @@ const config = {
       [
         '@docusaurus/plugin-content-docs',
         {
-          id: 'IT_gyoumu_docs',
-          path: 'IT_gyoumu_docs',
-          routeBasePath: 'IT_gyoumu_docs',
+          id: 'it-gyoumu-docs',
+          path: 'it-gyoumu-docs',
+          routeBasePath: 'it-gyoumu-docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
         },
@@ -66,9 +66,9 @@ const config = {
       [
         '@docusaurus/plugin-content-docs',
         {
-          id: 'yoshinashi_docs',
-          path: 'yoshinashi_docs',
-          routeBasePath: 'yoshinashi_docs',
+          id: 'yoshinashi-docs',
+          path: 'yoshinashi-docs',
+          routeBasePath: 'yoshinashi-docs',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
         },
@@ -100,17 +100,17 @@ const config = {
               position: 'left'
             },
             {
-              to: '/NetWork_docs/intro',
+              to: '/network-docs',
               position: 'left',
               label: 'NetWork',
             },
             {
-              to: '/IT_gyoumu_docs/intro',
+              to: '/it-gyoumu-docs',
               position: 'left',
               label: '業務用ITソフトウェア',
             },
             {
-              to: '/yoshinashi_docs/intro',
+              to: '/yoshinashi-docs',
               position: 'left',
               label: 'よしなしこと',
             },
@@ -141,11 +141,11 @@ const config = {
                 },
                 {
                   label: 'NetWork',
-                  to: '/NetWork_docs/intro',
+                  to: '/network-docs',
                 },
                 {
                   label: '業務用ITソフトウェア',
-                  to: '/IT_gyoumu_docs/intro',
+                  to: '/it-gyoumu-docs',
                 },
             ],
           },
