@@ -100,7 +100,7 @@ const config = {
               position: 'left'
             },
             {
-              to: '/network-docs/intro',
+              to: '/network-docs/',
               position: 'left',
               label: 'NetWork',
             },
@@ -110,7 +110,7 @@ const config = {
               label: '業務用ITソフトウェア',
             },
             {
-              to: '/yoshinashi-docs/intro',
+              to: '/yoshinashi-docs/',
               position: 'left',
               label: 'よしなしこと',
             },
@@ -141,7 +141,7 @@ const config = {
                 },
                 {
                   label: 'NetWork',
-                  to: '/network-docs/intro',
+                  to: '/network-docs/',
                 },
                 {
                   label: '業務用ITソフトウェア',
