@@ -14,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "blog/2025-11-21.md",
-                "mode": "source",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -154,34 +154,47 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "blog/2025-11-21.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "アウトライン"
+              "title": "2025-11-21のアウトライン"
+            }
+          },
+          {
+            "id": "e3e9fb6b63d8615c",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
-      "obsidiosaurus:Obsidiosaurus": false,
       "switcher:クイックスイッチャーを開く": false,
       "graph:グラフビューを開く": false,
       "canvas:新規キャンバスを作成": false,
       "daily-notes:今日のデイリーノートを開く": false,
       "templates:テンプレートを挿入": false,
       "command-palette:コマンドパレットを開く": false,
-      "bases:Create new base": false
+      "bases:Create new base": false,
+      "obsidiosaurus:Obsidiosaurus": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "7e39faf9bea016a9",
+  "active": "e3e9fb6b63d8615c",
   "lastOpenFiles": [
     "2025-11-19.md",
     "blog/2025-11-21.md",

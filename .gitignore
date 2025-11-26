@@ -1,4 +1,4 @@
-# Obsidiosaurus変換用JSONファイル（ルートに生成される）
+# Obsidiosaurus変換用JSONファイル
 allSourceAssetsInfo.json
 allFilesInfo.json
 assetInfo.json
@@ -11,8 +11,16 @@ node_modules/
 build/
 
 # IDE
-.vscode/
+.vscode/*.log
+.vscode/.ropeproject
 .idea/
+
+# Obsidian - 個人設定のみ除外
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+vault/.obsidian/workspaces.json
+vault/.obsidian/graph.json
+vault/.obsidian/cache/
 
 # OS
 .DS_Store
