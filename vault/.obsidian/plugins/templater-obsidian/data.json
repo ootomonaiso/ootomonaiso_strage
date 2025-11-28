@@ -1,0 +1,14 @@
+{
+  "template-folder": "templates",
+  "templates": [
+    {
+      "name": "ドキュメント記事",
+      "file": "docusaurus-doc-template"
+    },
+    {
+      "name": "ブログ記事",
+      "file": "docusaurus-blog-template"
+    }
+  ],
+  "trigger_on_file_creation": true
+}

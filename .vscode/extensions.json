@@ -1,0 +1,37 @@
+{
+  "recommendations": [
+    // Markdown執筆
+    "yzhang.markdown-all-in-one",
+    "DavidAnson.vscode-markdownlint",
+    "bierner.markdown-preview-github-styles",
+    "bierner.markdown-mermaid",
+    "bierner.markdown-emoji",
+    
+    // Obsidian連携
+    "dendron.dendron-markdown-shortcuts",
+    "foam.foam-vscode",
+    
+    // Git管理
+    "eamodio.gitlens",
+    "GitHub.vscode-pull-request-github",
+    "mhutchie.git-graph",
+    
+    // プロジェクト管理
+    "Gruntfuggly.todo-tree",
+    "aaron-bond.better-comments",
+    
+    // JavaScript/React開発
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "dsznajder.es7-react-js-snippets",
+    
+    // GitHub Copilot
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    
+    // ユーティリティ
+    "streetsidesoftware.code-spell-checker",
+    "usernamehw.errorlens",
+    "christian-kohler.path-intellisense"
+  ]
+}

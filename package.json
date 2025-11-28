@@ -1,0 +1,15 @@
+{
+  "name": "ootomonaiso_strage",
+  "version": "1.0.0",
+  "description": "Knowledge base with Obsidian + Docusaurus",
+  "scripts": {
+    "dev": "cd website && npm start",
+    "build": "cd website && npm run build",
+    "serve": "cd website && npm run serve",
+    "clear": "cd website && npm run clear",
+    "deploy": "cd website && npm run deploy"
+  },
+  "keywords": ["obsidian", "docusaurus", "documentation"],
+  "author": "ootomonaiso",
+  "license": "MIT"
+}

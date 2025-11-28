@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "blog/2025-11-26.md",
-                "mode": "source",
+                "file": "blog/2025-11-21.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -156,28 +156,27 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "blog/2025-11-26.md",
+                "file": "blog/2025-11-21.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "2025-11-26のアウトライン"
+              "title": "2025-11-21のアウトライン"
             }
           },
           {
-            "id": "9f5d53fc66e61471",
+            "id": "e3e9fb6b63d8615c",
             "type": "leaf",
             "state": {
-              "type": "file-properties",
-              "state": {
-                "file": "blog/2025-11-26.md"
-              },
-              "icon": "lucide-info",
-              "title": "2025-11-26のファイルプロパティ"
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
             }
           }
-        ]
+        ],
+        "currentTab": 5
       }
     ],
     "direction": "horizontal",
@@ -192,10 +191,12 @@
       "templates:テンプレートを挿入": false,
       "command-palette:コマンドパレットを開く": false,
       "bases:Create new base": false,
-      "obsidiosaurus:Obsidiosaurus": false
+      "obsidiosaurus:Obsidiosaurus": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "b6be1752be237848",
+  "active": "e3e9fb6b63d8615c",
   "lastOpenFiles": [
     "無題のファイル 1.canvas",
     "無題のファイル.canvas",
