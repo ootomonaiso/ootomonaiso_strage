@@ -1,0 +1,110 @@
+{
+  // エディタ設定
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.rulers": [80, 120],
+  "editor.wordWrap": "on",
+
+  // ファイル設定
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "**/.docusaurus": true,
+    "**/build": true,
+    "**/*.json": false
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/node_modules/**": true,
+    "**/.docusaurus/**": true,
+    "**/build/**": true
+  },
+  "files.associations": {
+    "*.md": "markdown"
+  },
+
+  // Markdown設定
+  "markdown.preview.breaks": true,
+  "markdown.preview.linkify": true,
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "on",
+      "strings": "on",
+      "other": "on"
+    }
+  },
+
+  // Markdownlint設定
+  "markdownlint.config": {
+    "MD013": false, // 行の長さ制限無効
+    "MD033": false, // HTML許可
+    "MD041": false // 最初の行の見出し必須無効
+  },
+
+  // Prettier設定
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "es5",
+  "prettier.printWidth": 80,
+  "prettier.tabWidth": 2,
+
+  // Git設定
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+
+  // GitLens設定
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.currentLine.enabled": true,
+
+  // TODO Tree設定
+  "todo-tree.general.tags": [
+    "TODO",
+    "FIXME",
+    "NOTE",
+    "HACK",
+    "XXX",
+    "[ ]",
+    "[x]"
+  ],
+  "todo-tree.highlights.defaultHighlight": {
+    "icon": "alert",
+    "type": "text",
+    "foreground": "#fff",
+    "opacity": 50
+  },
+
+  // パス設定
+  "path-intellisense.mappings": {
+    "/": "${workspaceRoot}/vault",
+    "@": "${workspaceRoot}/website/src"
+  },
+
+  // スペルチェック
+  "cSpell.words": [
+    "Docusaurus",
+    "Obsidian",
+    "Obsidiosaurus",
+    "frontmatter",
+    "Supabase",
+    "Gemini"
+  ],
+  "cSpell.enableFiletypes": ["markdown", "mdx"],
+
+  // 検索除外
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.docusaurus": true,
+    "**/build": true,
+    "**/.obsidian/cache": true
+  },
+
+  // ターミナル設定
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.cwd": "${workspaceFolder}/website"
+}

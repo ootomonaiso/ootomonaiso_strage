@@ -1,3 +1,15 @@
 [
-  "obsidiosaurus"
+  "obsidiosaurus",
+  "obsidian-admonition",
+  "attachment-management",
+  "obsidian-diagrams-net",
+  "obsidian-excalidraw-plugin",
+  "obsidian-linter",
+  "obsidian-git",
+  "quickadd",
+  "templater-obsidian",
+  "dataview",
+  "obsidian-kanban",
+  "calendar",
+  "table-editor-obsidian"
 ]
