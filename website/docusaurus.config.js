@@ -1,4 +1,4 @@
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,7 +11,7 @@ const config = {
   baseUrl: '/ootomonaiso_strage/',
 
   organizationName: 'ootomonaiso',
-  projectName: 'ootomonaiso_strage',  
+  projectName: 'ootomonaiso_strage',
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -43,36 +43,46 @@ const config = {
     ],
   ],
   plugins: [
-      [
-        '@docusaurus/plugin-content-docs',
-        {
-          id: 'network-docs',
-          path: 'network-docs',
-          routeBasePath: 'network-docs',
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
-        },
-      ],
-      [
-        '@docusaurus/plugin-content-docs',
-        {
-          id: 'it-gyoumu-docs',
-          path: 'it-gyoumu-docs',
-          routeBasePath: 'it-gyoumu-docs',
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
-        },
-      ],
-      [
-        '@docusaurus/plugin-content-docs',
-        {
-          id: 'yoshinashi-docs',
-          path: 'yoshinashi-docs',
-          routeBasePath: 'yoshinashi-docs',
-          sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
-        },
-      ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'network-docs',
+        path: 'network-docs',
+        routeBasePath: 'network-docs',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'it-gyoumu-docs',
+        path: 'it-gyoumu-docs',
+        routeBasePath: 'it-gyoumu-docs',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'yoshinashi-docs',
+        path: 'yoshinashi-docs',
+        routeBasePath: 'yoshinashi-docs',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'ai-docs',
+        path: 'ai-docs',
+        routeBasePath: 'ai-docs',
+        sidebarPath: require.resolve('./sidebars.js'),
+        editUrl: 'https://github.com/ootomonaiso/ootomonaiso_strage',
+      },
+    ],
   ],
 
   themeConfig:
@@ -80,7 +90,7 @@ const config = {
     ({
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
-        defaultMode: 'dark'
+        defaultMode: 'dark',
       },
       navbar: {
         title: 'ootomonaiso blog',
@@ -89,31 +99,36 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
-            {
-              to: '/docs/intro',
-              position: 'left',
-              label: '自己紹介',
-            },
-            {
-              to: '/blog',
-              label: 'Blog', 
-              position: 'left'
-            },
-            {
-              to: '/network-docs/',
-              position: 'left',
-              label: 'NetWork',
-            },
-            {
-              to: '/it-gyoumu-docs/intro',
-              position: 'left',
-              label: '業務用ITソフトウェア',
-            },
-            {
-              to: '/yoshinashi-docs/',
-              position: 'left',
-              label: 'よしなしこと',
-            },
+          {
+            to: '/docs/intro',
+            position: 'left',
+            label: '自己紹介',
+          },
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left',
+          },
+          {
+            to: '/network-docs/',
+            position: 'left',
+            label: 'NetWork',
+          },
+          {
+            to: '/it-gyoumu-docs/intro',
+            position: 'left',
+            label: '業務用ITソフトウェア',
+          },
+          {
+            to: '/yoshinashi-docs/',
+            position: 'left',
+            label: 'よしなしこと',
+          },
+          {
+            to: '/ai-docs/intro',
+            position: 'left',
+            label: 'AI',
+          },
           {
             href: 'https://github.com/ootomonaiso',
             label: 'GitHub',
@@ -127,7 +142,7 @@ const config = {
       //   indexName: process.env.DOCSEARCH_INDEX_NAME,
       //   insights: true,
       //   debug: false,
-      // },  
+      // },
 
       footer: {
         style: 'dark',
@@ -135,18 +150,22 @@ const config = {
           {
             title: 'ドキュメント',
             items: [
-                {
-                  label: '自己紹介',
-                  to: '/docs/intro',
-                },
-                {
-                  label: 'NetWork',
-                  to: '/network-docs/',
-                },
-                {
-                  label: '業務用ITソフトウェア',
-                  to: '/it-gyoumu-docs/intro',
-                },
+              {
+                label: '自己紹介',
+                to: '/docs/intro',
+              },
+              {
+                label: 'NetWork',
+                to: '/network-docs/',
+              },
+              {
+                label: '業務用ITソフトウェア',
+                to: '/it-gyoumu-docs/intro',
+              },
+              {
+                label: 'AI',
+                to: '/ai-docs/intro',
+              },
             ],
           },
           {
@@ -188,9 +207,7 @@ const config = {
     supabaseUrl: process.env.REACT_APP_SUPABASE_URL,
     supabaseAnonKey: process.env.REACT_APP_SUPABASE_ANON_KEY,
   },
-  clientModules: [
-    require.resolve('./src/clientModules/chatWidget.js'),
-  ],
+  clientModules: [require.resolve('./src/clientModules/chatWidget.js')],
 };
 
 export default config;
