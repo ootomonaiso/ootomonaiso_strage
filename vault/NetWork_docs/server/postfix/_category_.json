@@ -1,8 +1,0 @@
-{
-  "label": "postfix",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "description": "メールサーバーを構築するためのPostfixの設定と運用に関するドキュメント"
-  }
-}
