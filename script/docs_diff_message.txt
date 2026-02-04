@@ -1,1 +1,7 @@
-更新されたドキュメントはありません。
+• [NetWorkに関するドキュメント](https://ootomonaiso.github.io/ootomonaiso_strage/network-docs/index)
+• [はじめに](https://ootomonaiso.github.io/ootomonaiso_strage/network-docs/Setup/intro)
+• [VMware Workstation Proをセットアップする](https://ootomonaiso.github.io/ootomonaiso_strage/network-docs/Setup/vmware_workstation/vmware)
+• [VMware WorkstationにESXiを入れておうちでもネットワークできるマンになりたい](https://ootomonaiso.github.io/ootomonaiso_strage/network-docs/Setup/vmware_workstation/vSphere/intro)
+• [CMLって何?](https://ootomonaiso.github.io/ootomonaiso_strage/network-docs/Setup/cisco/intro)
+
+他 39 件のドキュメントが更新されました
