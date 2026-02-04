@@ -82,8 +82,9 @@ function findCategoryLabels(filePath) {
 }
 
 async function main() {
-  const files = glob.sync('../pro/**/*.{md,mdx}', {
-    ignore: ['../pro/node_modules/**'],
+  // website/network-docs のみを監視（実際に公開されるドキュメント）
+  const files = glob.sync('../website/network-docs/**/*.{md,mdx}', {
+    ignore: ['../website/network-docs/node_modules/**'],
   });
 
   console.log(`📄 対象Markdownファイル数: ${files.length}`);
@@ -151,15 +152,48 @@ async function main() {
     message = updatedFiles
       .map((filePath) => {
         const record = newManifest[filePath];
+        const raw = fs.readFileSync(
+          path.resolve(__dirname, '..', filePath),
+          'utf8'
+        );
+        const { data: frontmatter } = matter(raw);
+
         // Windows のパス区切り文字を / に変換
         const normalizedPath = filePath.replace(/\\/g, '/');
-        const trimmed = normalizedPath
-          .replace(/^pro\//, '')
-          .replace(/\.(md|mdx)$/, '')
-          .replace(/\/?index$/, '');
+
+        // website/network-docs/ を除去してドキュメントパスを取得
+        const docPath = normalizedPath
+          .replace(/^website\/network-docs\//, '')
+          .replace(/\.(md|mdx)$/, '');
+
+        // Docusaurusのルール：
+        // 1. フロントマターに slug があればそれを使用
+        // 2. index.md のみ親ディレクトリのURLになる
+        // 3. その他はファイル名がそのままURLになる
+        let urlPath;
+        if (frontmatter.slug) {
+          // slugは相対パスまたは絶対パス
+          if (frontmatter.slug.startsWith('/')) {
+            urlPath = 'network-docs' + frontmatter.slug;
+          } else {
+            const dir = path.posix.dirname(docPath);
+            urlPath =
+              dir === '.'
+                ? `network-docs/${frontmatter.slug}`
+                : `network-docs/${dir}/${frontmatter.slug}`;
+          }
+        } else {
+          // index.md のみ親ディレクトリのURLになる
+          let finalPath = docPath;
+          if (docPath.endsWith('/index')) {
+            finalPath = docPath.replace(/\/index$/, '');
+          }
+          urlPath = finalPath ? `network-docs/${finalPath}` : 'network-docs';
+        }
+
         const name = record.title;
         const category = record.category;
-        const url = baseUrl + trimmed;
+        const url = baseUrl + urlPath;
         return `- [${category ? category + ' / ' : ''}${name}](${url})`;
       })
       .join('\n');
