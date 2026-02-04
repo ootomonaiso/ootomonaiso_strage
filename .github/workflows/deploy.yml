@@ -97,12 +97,7 @@ jobs:
       - name: Run notify and vectorize script
         working-directory: script
         env:
-          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          REACT_APP_GEMINI_API_KEY: ${{ secrets.REACT_APP_GEMINI_API_KEY }}
-          HUGGINGFACE_TOKEN: ${{ secrets.HF_TOKEN }}
-          SITE_URL: "https://ootomonaiso.github.io/ootomonaiso_strage/"
+          SITE_URL: 'https://ootomonaiso.github.io/ootomonaiso_strage/'
         run: node notify-and-vectorize.mjs
 
       - name: Send Discord notification
