@@ -304,7 +304,7 @@ cc-sddのようなツールが登場したのは、まさにこのニーズが�
 
 **良い例:**
 
-```
+```text
 「Expressで以下の仕様のログイン機能を実装:
 - POST /api/loginでメール・パスワードを受け取る
 - bcryptでパスワード検証
@@ -361,8 +361,12 @@ try {
 ```javascript
 // ❌ O(n²): 遅い
 for (let i = 0; i < arr1.length; i++) {
-  for (let j = 0; j < arr2.length; j++) {
-    if (arr1[i] === arr2[j]) result.push(arr1[i]);
+  {
+    for (let j = 0; j < arr2.length; j++) {
+      {
+        if (arr1[i] === arr2[j]) result.push(arr1[i]);
+      }
+    }
   }
 }
 
@@ -437,7 +441,7 @@ async function getUser(id) {
 
 **良い指示:**
 「usersテーブルからアクティブユーザー（status='active'）を全件取得し、
-{id, name, email}の形式でJSON配列として返すAPIエンドポイントを実装」
+`{id, name, email}`の形式でJSON配列として返すAPIエンドポイントを実装」
 
 ### 失敗例3: 既存コードの無視
 
