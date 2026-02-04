@@ -103,13 +103,16 @@ jobs:
       - name: Send Discord notification
         if: env.DOC_MSG != '' && env.DOC_MSG != '更新されたドキュメントはありません。'
         run: |
-          MESSAGE=$(cat <<EOF
-          {
-            "content": ":tada: **サイトが更新されました！** :tada:\n\n更新されたページ:\n\n${DOC_MSG}\n\nサイト: <https://ootomonaiso.github.io/ootomonaiso_strage/>"
-          }
-          EOF
-          )
           echo "Sending Discord notification..."
+          CONTENT=":tada: **サイトが更新されました！** :tada:
+
+更新されたページ:
+
+${DOC_MSG}
+
+サイト: <https://ootomonaiso.github.io/ootomonaiso_strage/>"
+          
+          jq -n --arg content "$CONTENT" '{content: $content}' | \
           curl -X POST -H "Content-Type: application/json" \
-            -d "$MESSAGE" \
+            -d @- \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
