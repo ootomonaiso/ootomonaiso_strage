@@ -106,12 +106,12 @@ jobs:
           echo "Sending Discord notification..."
           CONTENT=":tada: **サイトが更新されました！** :tada:
 
-更新されたページ:
+          更新されたページ:
 
-${DOC_MSG}
+          ${DOC_MSG}
 
-サイト: <https://ootomonaiso.github.io/ootomonaiso_strage/>"
-          
+          サイト: <https://ootomonaiso.github.io/ootomonaiso_strage/>"
+
           jq -n --arg content "$CONTENT" '{content: $content}' | \
           curl -X POST -H "Content-Type: application/json" \
             -d @- \
