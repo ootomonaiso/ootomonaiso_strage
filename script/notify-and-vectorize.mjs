@@ -5,35 +5,51 @@ import { fileURLToPath } from 'url';
 import { glob } from 'glob';
 import matter from 'gray-matter';
 import crypto from 'crypto';
-import { createClient } from '@supabase/supabase-js';
-import { pipeline } from '@xenova/transformers';
+import yaml from 'js-yaml';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
-
-const baseUrl = process.env.SITE_URL || 'https://ootomonaiso.github.io/ootomonaiso_strage/';
+const baseUrl =
+  process.env.SITE_URL || 'https://ootomonaiso.github.io/ootomonaiso_strage/';
+const MANIFEST_FILE = path.resolve(__dirname, 'docs-manifest.yml');
 
 function computeHash(text) {
   return crypto.createHash('sha256').update(text).digest('hex');
 }
 
-async function getEmbedding(text) {
-  const embedder = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-  const output = await embedder(text, {
-    pooling: 'mean',
-    normalize: true,
-  });
-
-  if (!output || !output.data || !output.data.length) {
-    throw new Error('❌ Invalid embedding tensor structure');
+function loadManifest() {
+  if (fs.existsSync(MANIFEST_FILE)) {
+    try {
+      return yaml.load(fs.readFileSync(MANIFEST_FILE, 'utf8')) || {};
+    } catch (err) {
+      console.warn('⚠️ マニフェストファイルの読み込みに失敗しました:', err);
+      return {};
+    }
   }
+  return {};
+}
 
-  return Array.from(output.data);
+function saveManifest(manifest) {
+  const yamlContent = yaml.dump(manifest, {
+    indent: 2,
+    lineWidth: -1,
+    noRefs: true,
+  });
+  fs.writeFileSync(MANIFEST_FILE, yamlContent, 'utf8');
+  console.log(`💾 マニフェストファイルを保存: ${MANIFEST_FILE}`);
+}
+
+function gitAddManifest() {
+  try {
+    execSync(`git add "${MANIFEST_FILE}"`, {
+      cwd: path.resolve(__dirname, '..'),
+    });
+    console.log('✅ マニフェストファイルをGitステージングに追加しました');
+  } catch (err) {
+    console.warn('⚠️ Git addに失敗:', err.message);
+  }
 }
 
 function extractTitle(content) {
@@ -46,7 +62,12 @@ function findCategoryLabels(filePath) {
   const categories = [];
 
   for (let i = 1; i < parts.length - 1; i++) {
-    const categoryPath = path.resolve(__dirname, '..', ...parts.slice(0, i + 1), '_category_.json');
+    const categoryPath = path.resolve(
+      __dirname,
+      '..',
+      ...parts.slice(0, i + 1),
+      '_category_.json'
+    );
     if (fs.existsSync(categoryPath)) {
       try {
         const data = JSON.parse(fs.readFileSync(categoryPath, 'utf8'));
@@ -62,13 +83,15 @@ function findCategoryLabels(filePath) {
 
 async function main() {
   const files = glob.sync('../pro/**/*.{md,mdx}', {
-    ignore: ['../pro/node_modules/**']
+    ignore: ['../pro/node_modules/**'],
   });
 
   console.log(`📄 対象Markdownファイル数: ${files.length}`);
 
+  const manifest = loadManifest();
   const updatedFiles = [];
   const processedFiles = [];
+  const newManifest = {};
 
   for (const filePath of files) {
     const fullPath = path.resolve(filePath);
@@ -77,37 +100,23 @@ async function main() {
     const { data: meta, content } = matter(raw);
     const cleanedContent = content.trim();
     const hash = computeHash(cleanedContent);
+    const lastModified = fs.statSync(fullPath).mtime.toISOString();
 
-    const { data: record, error } = await supabase
-      .from('documents')
-      .select('hash')
-      .eq('file_path', relativePath)
-      .single();
+    // マニフェストに記録
+    newManifest[relativePath] = {
+      hash,
+      lastModified,
+      title: extractTitle(cleanedContent),
+      category: findCategoryLabels(filePath),
+    };
 
-    const needsInsert = error || !record || record.hash !== hash;
+    // 差分チェック
+    const existingRecord = manifest[relativePath];
+    const needsUpdate = !existingRecord || existingRecord.hash !== hash;
 
-    if (needsInsert) {
+    if (needsUpdate) {
       console.log(`🆕 差分検出: ${relativePath}`);
-      const embeddingArray = await getEmbedding(cleanedContent);
-      const embedding = `[${embeddingArray.map(v => Number(v.toFixed(8))).join(', ')}]`;
-
-      const payload = {
-        file_path: relativePath,
-        meta,
-        content: cleanedContent,
-        embedding,
-        hash,
-      };
-
-      const { error: upsertError } = await supabase
-        .from('documents')
-        .upsert(payload, { onConflict: 'file_path' });
-
-      if (upsertError) {
-        console.error(`❌ DB upsert error for ${relativePath}:`, upsertError);
-      } else {
-        updatedFiles.push(relativePath);
-      }
+      updatedFiles.push(relativePath);
     } else {
       console.log(`✅ 一致: ${relativePath}`);
     }
@@ -115,20 +124,21 @@ async function main() {
     processedFiles.push(relativePath);
   }
 
-  const { data: dbFiles } = await supabase.from('documents').select('file_path');
-  const dbFilePaths = dbFiles.map((item) => item.file_path);
-  const toDelete = dbFilePaths.filter((dbPath) => !processedFiles.includes(dbPath));
+  // 削除されたファイルを検出
+  const deletedFiles = Object.keys(manifest).filter(
+    (manifestPath) => !processedFiles.includes(manifestPath)
+  );
 
-  for (const delPath of toDelete) {
-    const { error: delError } = await supabase
-      .from('documents')
-      .delete()
-      .eq('file_path', delPath);
-    if (delError) {
-      console.error(`❌ Failed to delete ${delPath}:`, delError);
-    } else {
-      console.log(`🗑️ Deleted record for file: ${delPath}`);
-    }
+  for (const delPath of deletedFiles) {
+    console.log(`🗑️ 削除されたファイル: ${delPath}`);
+  }
+
+  // マニフェストを保存
+  saveManifest(newManifest);
+
+  // 差分があればGitにステージング
+  if (updatedFiles.length > 0 || deletedFiles.length > 0) {
+    gitAddManifest();
   }
 
   fs.writeFileSync('updated_docs.txt', updatedFiles.join('\n') + '\n');
@@ -138,13 +148,21 @@ async function main() {
     console.log('🔍 差分なし。通知はスキップされます。');
     message = '更新されたドキュメントはありません。';
   } else {
-    message = updatedFiles.map(filePath => {
-      const trimmed = filePath.replace(/^pro\//, '').replace(/\.(md|mdx)$/, '').replace(/\/?index$/, '');
-      const name = extractTitle(fs.readFileSync(path.resolve(__dirname, '..', filePath), 'utf8'));
-      const category = findCategoryLabels(filePath);
-      const url = baseUrl + trimmed;
-      return `- [${category ? category + ' / ' : ''}${name}](${url})`;
-    }).join('\n');
+    message = updatedFiles
+      .map((filePath) => {
+        const record = newManifest[filePath];
+        // Windows のパス区切り文字を / に変換
+        const normalizedPath = filePath.replace(/\\/g, '/');
+        const trimmed = normalizedPath
+          .replace(/^pro\//, '')
+          .replace(/\.(md|mdx)$/, '')
+          .replace(/\/?index$/, '');
+        const name = record.title;
+        const category = record.category;
+        const url = baseUrl + trimmed;
+        return `- [${category ? category + ' / ' : ''}${name}](${url})`;
+      })
+      .join('\n');
   }
 
   fs.writeFileSync('docs_diff_message.txt', message + '\n');
@@ -164,7 +182,7 @@ async function main() {
   console.log('🎉 全処理完了');
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error('🔥 notify-and-vectorize 処理中にエラー:', err);
   process.exit(1);
 });
