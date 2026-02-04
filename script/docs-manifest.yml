@@ -1,0 +1,25 @@
+pro\NetWork\server\dns\intro.md:
+  hash: 1e025b07fd9887ec4727a4c48f95035050ed8e671948919f2c414511cadaa493
+  lastModified: '2025-11-18T13:23:47.099Z'
+  title: DNS設定の虎の巻
+  category: ''
+pro\NetWork\20\intro.md:
+  hash: 6e00db527a04e5b13f60378ba120d5117f18c0892eece7dc4e60e5bc2d2c706a
+  lastModified: '2026-02-04T11:36:47.849Z'
+  title: 第20回若年者ものづくり競技大会ITネットワーク管理職種の問題といてみた
+  category: ''
+pro\NetWork\20\router\tky.md:
+  hash: a5a1cf693c28983b37655ea34f4bd5331714e9c72bb6257d430495c349e12fbd
+  lastModified: '2025-11-18T13:23:47.098Z'
+  title: R-Tkyの設定
+  category: ''
+pro\NetWork\20\router\kgw1.md:
+  hash: 8ce12ef23631356d05b3db4516fb1521dc5f41a17800698a66d18c1a442acbec
+  lastModified: '2025-11-18T13:23:47.097Z'
+  title: R-Kgw1の設定
+  category: ''
+pro\NetWork\20\router\intro.md:
+  hash: eb95202bf2db66228f50f7fe30181f6b9434e46770248265716e39011c2f9919
+  lastModified: '2025-11-18T13:23:47.096Z'
+  title: ルーターの仕様と設定するべきもの
+  category: ''
