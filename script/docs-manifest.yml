@@ -1,25 +1,220 @@
-pro\NetWork\server\dns\intro.md:
-  hash: 1e025b07fd9887ec4727a4c48f95035050ed8e671948919f2c414511cadaa493
-  lastModified: '2025-11-18T13:23:47.099Z'
-  title: DNS設定の虎の巻
+website\network-docs\index.md:
+  hash: b1722a14849e4f4fd5541c4ce10ebfb6e40771faefdbdbd5e73e0d4130f7e508
+  lastModified: '2025-11-21T10:17:49.954Z'
+  title: NetWorkに関するドキュメント
   category: ''
-pro\NetWork\20\intro.md:
-  hash: 6e00db527a04e5b13f60378ba120d5117f18c0892eece7dc4e60e5bc2d2c706a
-  lastModified: '2026-02-04T11:36:47.849Z'
-  title: 第20回若年者ものづくり競技大会ITネットワーク管理職種の問題といてみた
+website\network-docs\Setup\intro.md:
+  hash: a933bded02da4c97c3d1555bee5e4f91307a93e8cc1cbb0d601e4fcd1c3bf617
+  lastModified: '2025-11-21T10:11:37.142Z'
+  title: はじめに
   category: ''
-pro\NetWork\20\router\tky.md:
-  hash: a5a1cf693c28983b37655ea34f4bd5331714e9c72bb6257d430495c349e12fbd
-  lastModified: '2025-11-18T13:23:47.098Z'
-  title: R-Tkyの設定
+website\network-docs\Setup\vmware_workstation\vmware.md:
+  hash: d6cc3209ffd6d3bd4532da2902692efc73b83b73fb0b6cebe8eddcc92685570c
+  lastModified: '2025-11-24T13:25:33.756Z'
+  title: VMware Workstation Proをセットアップする
   category: ''
-pro\NetWork\20\router\kgw1.md:
-  hash: 8ce12ef23631356d05b3db4516fb1521dc5f41a17800698a66d18c1a442acbec
-  lastModified: '2025-11-18T13:23:47.097Z'
-  title: R-Kgw1の設定
+website\network-docs\Setup\vmware_workstation\vSphere\intro.md:
+  hash: 48a52314a62cea18c844404ee606a7e504706ba7a9fe98de106e2141132eaded
+  lastModified: '2025-11-21T10:11:37.165Z'
+  title: VMware WorkstationにESXiを入れておうちでもネットワークできるマンになりたい
   category: ''
-pro\NetWork\20\router\intro.md:
-  hash: eb95202bf2db66228f50f7fe30181f6b9434e46770248265716e39011c2f9919
-  lastModified: '2025-11-18T13:23:47.096Z'
-  title: ルーターの仕様と設定するべきもの
+website\network-docs\Setup\cisco\intro.md:
+  hash: 771d467ab3e4a242a1282d9ac9cd95b1d0b962ab86d47d71ca95327ad096d88b
+  lastModified: '2025-11-21T10:11:37.142Z'
+  title: CMLって何?
+  category: ''
+website\network-docs\Setup\cisco\cisco_CMS_setup.md:
+  hash: 5bf53d9b7ffc2ad1392dd148e96ae1be826487e520cbae93f6050ab9eea8febd
+  lastModified: '2025-11-21T10:11:37.119Z'
+  title: ciscoのCMLをインストールする方法
+  category: ''
+website\network-docs\server\ssh\index.md:
+  hash: 8fd16eba81ba0b2b8e3328be316efcb4e244aa62a1f8b8c14a04731f408ee910
+  lastModified: '2025-11-21T10:17:49.954Z'
+  title: OpenSSHで公開鍵と秘密鍵を使った通信をしたいしたい
+  category: ''
+website\network-docs\server\postfix\intro.md:
+  hash: 2fde72b2846752aba27685b19996ad3f312b29bb5e103d97e1b57f05337034f1
+  lastModified: '2025-11-21T10:17:49.954Z'
+  title: メールサーバーの設定
+  category: ''
+website\network-docs\server\DHCP\intro.md:
+  hash: 9318e1b66f08e50826307d8e18e36ea4e51879ccd60b234b9e63336ae8e6aa7d
+  lastModified: '2025-11-21T10:17:49.954Z'
+  title: DHCPサーバーの設定
+  category: ''
+website\network-docs\server\apache2\user.md:
+  hash: c5263148b28573a35b79104c38e657617ba34e62f8ae46191a7fe7bdd070bdb5
+  lastModified: '2025-11-21T10:17:49.954Z'
+  title: ユーザーディレクトリの設定
+  category: ''
+website\network-docs\server\apache2\ssl.md:
+  hash: df0772c8c4fe4f813dcf294f25175fd6382dce75941d290858718608d334b48a
+  lastModified: '2025-11-21T10:17:49.954Z'
+  title: httpsで認証を通した状態で通信したい
+  category: ''
+website\network-docs\server\apache2\intro.md:
+  hash: 5f4bec63c33d890afe0ae7f529eca6b55a2b8462eef108e5830c83ac364fea7d
+  lastModified: '2025-11-21T10:17:49.954Z'
+  title: apache2をインストールする
+  category: ''
+website\network-docs\Cisco_command\intro.md:
+  hash: a1b7debdd408ce0c72b5fc348ec21f67de02935c10482284c1ee485a4ce6571d
+  lastModified: '2025-11-21T10:11:37.108Z'
+  title: はじめに
+  category: ''
+website\network-docs\Cisco_command\terminal\intro.md:
+  hash: ddd73517428832355f28f79cb1d6cf063c55b1700cb02a4cfcaa56ea401aae5f
+  lastModified: '2025-11-21T10:11:37.117Z'
+  title: ターミナル設定関連のメモ書き
+  category: ''
+website\network-docs\Cisco_command\terminal\firstsetup.md:
+  hash: da91d1687b5d511121230457d3d811952cdcebae928ed85ce8093b802b7a4511
+  lastModified: '2025-11-21T10:11:37.116Z'
+  title: 大抵要求されてるターミナル初期設定
+  category: ''
+website\network-docs\Cisco_command\terminal\connect_shortcut.md:
+  hash: a6fddbe7e0b308e777636fbb6eea6c9d85d0166f935ab318b61249e57685670f
+  lastModified: '2025-11-21T10:11:37.115Z'
+  title: TeraTermでCML上にあるルーターへアクセスできるようにする
+  category: ''
+website\network-docs\Cisco_command\PPPoE\intro.md:
+  hash: c1a7ef9bed7f6b304cb0717f0ec38c5e3cd8f84cb473d1271c2541278774e42b
+  lastModified: '2025-11-21T10:11:37.091Z'
+  title: PPPoEクライアント設定
+  category: ''
+website\network-docs\Cisco_command\Nat\static_nat.md:
+  hash: f2761c2a6345bb6db5d34c277c5805c2fd398d96635d61e846f2d525cfff2c1a
+  lastModified: '2025-11-21T10:11:37.089Z'
+  title: はじめに
+  category: ''
+website\network-docs\Cisco_command\Nat\something.md:
+  hash: ab35c196213acc0828d019bef2da2f5a2262434ac5c343aa82cdccae4b813acb
+  lastModified: '2025-11-21T10:11:37.088Z'
+  title: NAT構築時の確認用コマンド
+  category: ''
+website\network-docs\Cisco_command\Nat\natdaisuki.md:
+  hash: acdd3a79afc8b37886dcb9a663ea17f8256253df1f5953c887e6623edff71ced
+  lastModified: '2025-11-21T10:11:37.088Z'
+  title: natdaisuki
+  category: ''
+website\network-docs\Cisco_command\Nat\intro.md:
+  hash: 0ee94eec99872b4483bdf25e92c35bd9ead4f185602d548105d9dc8590cb89ad
+  lastModified: '2025-11-21T10:11:37.087Z'
+  title: NATのしくみ
+  category: ''
+website\network-docs\Cisco_command\Nat\dinamicnat.md:
+  hash: 0d8b51a1b9e57caf6c8b4abfbd9704a168b86fe8f159e2747e92e3fb4e30e416
+  lastModified: '2025-11-21T10:11:37.085Z'
+  title: 動的NATの構築
+  category: ''
+website\network-docs\Cisco_command\mondai\router.md:
+  hash: b9107e901a14c77e0cba0dfbb29a2138f6c380791aebb201bda1f437f4cd48f2
+  lastModified: '2025-11-21T10:11:37.112Z'
+  title: ルーターの設定
+  category: ''
+website\network-docs\Cisco_command\mondai\intro.md:
+  hash: 9abbf3f1598eefccec07ae9aacc24025b054787c518b19a39ba374b9cb78c8a6
+  lastModified: '2025-11-21T10:11:37.111Z'
+  title: 19回大会のリスト
+  category: ''
+website\network-docs\Cisco_command\glossary\protocoru.md:
+  hash: 9b62769b9ed8cae88d71bc6c2cd7f157e3db7506ddbcb9aa6b4bfdd03a437199
+  lastModified: '2025-11-21T10:11:37.108Z'
+  title: 偉大なるプロトコルを崇めよ
+  category: ''
+website\network-docs\Cisco_command\glossary\network_devices.md:
+  hash: 59c79803e40d3f73ba0092932bf35c58f3c6d8d6a90376c48986f6e9d4ce99b3
+  lastModified: '2025-11-21T10:11:37.107Z'
+  title: ネットワーク機器について
+  category: ''
+website\network-docs\Cisco_command\glossary\IOL.md:
+  hash: 0195785a7c0cb59b21e92c58efedf1cd25c036ed0ba055afb539a88c90152e22
+  lastModified: '2025-11-21T10:11:37.105Z'
+  title: IOL(IOS on Linux)で動かないコマンドがあるのはなぜ
+  category: ''
+website\network-docs\Cisco_command\glossary\intro.md:
+  hash: 465624a842a4c285bb9b865264847e37869d66d4e6d4c32979cec7577e24e8c7
+  lastModified: '2025-11-21T10:11:37.107Z'
+  title: はじめに
+  category: ''
+website\network-docs\Cisco_command\glossary\class.md:
+  hash: 9e921031bd393f9707693fcd87a8f9e5c3358774452630e7261c13c897e87159
+  lastModified: '2025-11-21T10:11:37.106Z'
+  title: ネットワークのクラスってなーに?
+  category: ''
+website\network-docs\Cisco_command\farst_step\intro.md:
+  hash: 1191f4ff68ea006703eec64a30fc33cfda642b88da82a19267aa1b2c08c6b8f0
+  lastModified: '2025-11-21T10:11:37.104Z'
+  title: 困ったときのメモ書き的なもの
+  category: ''
+website\network-docs\Cisco_command\farst_step\External Connector.md:
+  hash: 8eb45a4c0273056f46849e87a69056e45f5ca41775be6f9dfa28d0734531da0f
+  lastModified: '2025-11-21T10:11:37.096Z'
+  title: External Connectorを使ってESXi上に存在するマシンにpingが通るようにしておく
+  category: ''
+website\network-docs\Cisco_command\farst_step\connect_teraterm.md:
+  hash: cb4b052cef9778e8986db99dcbf591346fb5d03017b39bf4ec20a112f6bfe95c
+  lastModified: '2025-11-21T10:11:37.100Z'
+  title: Teratermを起動
+  category: ''
+website\network-docs\Cisco_command\farst_step\conf_load.md:
+  hash: d5fd72d162a37e53097b28e27970514b01aed0eac51e1e3faf07e25b9f22e661
+  lastModified: '2025-11-21T10:11:37.099Z'
+  title: ルーターのコンフィグをロードする
+  category: ''
+website\network-docs\Cisco_command\DHCP\intro.md:
+  hash: 3612da9118eb80beb6c9f0154e135001ca7abd32b7027d3f64f0431540a9d1ac
+  lastModified: '2025-11-21T10:11:37.083Z'
+  title: DHCPをルーターだけでやる
+  category: ''
+website\network-docs\Cisco_command\access\R-ACL.md:
+  hash: 5fe5819a9dc79141273618390bac935559890bf0e508bf477c0cd689cd380203
+  lastModified: '2025-11-21T10:11:37.092Z'
+  title: インターネット側からLAN内に通信させないぞ
+  category: ''
+website\network-docs\Cisco_command\access\index.md:
+  hash: 3baee2a0094908ef24aa3af996d9f343ac41ba552813593444df3711347b4b35
+  lastModified: '2025-11-21T10:11:37.095Z'
+  title: アクセス制御をするぞー
+  category: ''
+website\network-docs\Cisco_command\access\es-ACL.md:
+  hash: 3bfdedc55b7de64c5fa9cf1f0135b97a2b61080f40f56aad471d39ecfafe6d0f
+  lastModified: '2025-11-21T10:11:37.092Z'
+  title: establishを使ってv6のACLを組む
+  category: ''
+website\network-docs\20NW\事前準備.md:
+  hash: 1a405c316c71515593d95ced38497ee1d9d2e03a380a25cbe0a8bda76d33115f
+  lastModified: '2026-02-04T10:39:19.758Z'
+  title: 事前準備手順書
+  category: ''
+website\network-docs\20NW\readme.md:
+  hash: 1149ca65d694912ba98d6a1282830b2b6338ea1a0ab4bcb397d03d9280476294
+  lastModified: '2026-02-04T10:39:19.757Z'
+  title: このドキュメントを読む前に
+  category: ''
+website\network-docs\20NW\intro.md:
+  hash: 7a6d4d97d56239b6eae1d5e64c6b1d2eeaf7a8b489350e52b884c228e3dad57e
+  lastModified: '2026-02-04T10:39:19.756Z'
+  title: このドキュメントを読む前に
+  category: ''
+website\network-docs\20NW\3_クライアント設定手順書.md:
+  hash: 9e69382cbc7fad4ae7f24bb01f63c991c0f84f3aaeb2cb7d8c1fdf31eee305fc
+  lastModified: '2026-02-04T10:39:19.755Z'
+  title: 3. クライアントPCの設定手順書
+  category: ''
+website\network-docs\20NW\2_サーバ設定手順書.md:
+  hash: c2ea937b53dc5abb4a8d8f65e81eda92f2281998dd0b8ef50cdb2e6dc0b9a6f3
+  lastModified: '2026-02-04T10:39:19.754Z'
+  title: 2. サーバPCの設定手順書
+  category: ''
+website\network-docs\20NW\1_ルータ設定手順書.md:
+  hash: 720cfd7b3d4208463e1b791666c6b14199d2278338fd56a8b92eedb0b206ae10
+  lastModified: '2026-02-04T10:39:19.753Z'
+  title: 1. ルータの設定手順書
+  category: ''
+website\network-docs\20NW\0_まとめ.md:
+  hash: 245394b9927f7cefa27d9865e65648c63d2ffa6e1ceeaec467772e685a545eb7
+  lastModified: '2026-02-04T10:39:19.752Z'
+  title: ネットワークシステム構築 - 設定手順書まとめ
   category: ''
