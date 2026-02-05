@@ -6,8 +6,6 @@ import { glob } from 'glob';
 import matter from 'gray-matter';
 import crypto from 'crypto';
 import yaml from 'js-yaml';
-import { execSync } from 'child_process';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -39,17 +37,6 @@ function saveManifest(manifest) {
   });
   fs.writeFileSync(MANIFEST_FILE, yamlContent, 'utf8');
   console.log(`💾 マニフェストファイルを保存: ${MANIFEST_FILE}`);
-}
-
-function gitAddManifest() {
-  try {
-    execSync(`git add "${MANIFEST_FILE}"`, {
-      cwd: path.resolve(__dirname, '..'),
-    });
-    console.log('✅ マニフェストファイルをGitステージングに追加しました');
-  } catch (err) {
-    console.warn('⚠️ Git addに失敗:', err.message);
-  }
 }
 
 function extractTitle(content) {
@@ -136,11 +123,6 @@ async function main() {
 
   // マニフェストを保存
   saveManifest(newManifest);
-
-  // 差分があればGitにステージング
-  if (updatedFiles.length > 0 || deletedFiles.length > 0) {
-    gitAddManifest();
-  }
 
   fs.writeFileSync('updated_docs.txt', updatedFiles.join('\n') + '\n');
 
